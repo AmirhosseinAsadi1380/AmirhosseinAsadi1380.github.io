@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
+<title>Amirhossein Asadi</title>
+<meta name="description" content="Amirhossein Asadi, graduate student at NC State University working on safe, learning-enabled control for legged robots and lower-limb exoskeletons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap">
+<style>
+/* Layout: al-folio-style single 800px column under a fixed top navbar and above a fixed footer bar; the navbar switches pages in place. */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --text-light: #828282;
+  --theme: #B509AC;
+  --theme-soft: rgba(181, 9, 172, 0.09);
+  --divider: rgba(0, 0, 0, 0.1);
+  --card: #ffffff;
+  --code-bg: rgba(181, 9, 172, 0.05);
+  --footer-bg: #1C1C1D;
+  --footer-text: #e8e8e8;
+  --footer-link: #ffffff;
+  --badge: #CC0000;
+  --shadow-1: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  --shadow-2: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  --f-body: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  /* names used by the drawings and the demo */
+  --accent: var(--theme);
+  --accent-soft: var(--theme-soft);
+  --rule: var(--divider);
+  --ink: var(--text);
+  --muted: var(--text-light);
+  --signal: #D32F2F;
+  --panel: var(--card);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1C1C1D; --text: #e8e8e8; --text-light: #a9a9ad; --theme: #2698BA; --theme-soft: rgba(38, 152, 186, 0.16);
+    --divider: #424246; --card: #212529; --code-bg: #2c3237; --footer-bg: #e8e8e8; --footer-text: #1C1C1D; --footer-link: #000000;
+    --shadow-1: 0 2px 5px 0 rgba(0, 0, 0, 0.5), 0 2px 10px 0 rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 8px 17px 0 rgba(0, 0, 0, 0.55), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+    --signal: #FF6E5A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1C1C1D; --text: #e8e8e8; --text-light: #a9a9ad; --theme: #2698BA; --theme-soft: rgba(38, 152, 186, 0.16);
+  --divider: #424246; --card: #212529; --code-bg: #2c3237; --footer-bg: #e8e8e8; --footer-text: #1C1C1D; --footer-link: #000000;
+  --shadow-1: 0 2px 5px 0 rgba(0, 0, 0, 0.5), 0 2px 10px 0 rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 8px 17px 0 rgba(0, 0, 0, 0.55), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+  --signal: #FF6E5A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.5;
+  padding-top: 56px;
+  padding-bottom: 72px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--theme); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--theme); outline-offset: 2px; }
+b, strong { font-weight: 700; }
+p { margin: 0 0 1rem; }
+h1, h2, h3, h4 { font-weight: 300; margin: 0; text-wrap: balance; }
+.container { max-width: 800px; margin: 0 auto; padding-inline: 16px; }
+
+/* ---------- navbar ---------- */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  opacity: 0.97;
+  border-bottom: 1px solid var(--divider);
+}
+.navbar .container { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; }
+.social { display: flex; align-items: center; gap: 14px; }
+.social a, .icon-btn { color: var(--text); display: inline-flex; line-height: 0; }
+.social a:hover, .icon-btn:hover { color: var(--theme); text-decoration: none; }
+.social svg { width: 25px; height: 25px; }
+.nav-right { display: flex; align-items: center; gap: 4px; }
+.nav-links { display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.nav-links a { color: var(--text); font-weight: 400; padding: 8px 9px; display: block; }
+.nav-links a:hover { color: var(--theme); text-decoration: none; }
+.nav-links a.active { color: var(--theme); font-weight: 700; }
+.icon-btn { background: none; border: 0; padding: 8px; cursor: pointer; }
+.icon-btn svg { width: 19px; height: 19px; }
+.menu-btn { display: none; }
+.progress { position: fixed; left: 0; right: 0; top: calc(56px + env(safe-area-inset-top, 0px)); height: 2px; z-index: 19; pointer-events: none; }
+.progress span { display: block; height: 100%; width: 100%; background: var(--theme); transform-origin: 0 50%; transform: scaleX(0); }
+
+@media (max-width: 600px) {
+  .menu-btn { display: inline-flex; }
+  .nav-links {
+    display: none; position: absolute; top: 56px; right: 0; left: 0;
+    background: var(--bg); border-bottom: 1px solid var(--divider);
+    flex-direction: column; align-items: flex-end; padding: 6px 16px 10px;
+  }
+  .nav-links.open { display: flex; }
+}
+
+/* ---------- page headers ---------- */
+.page { padding-block: 32px 24px; }
+.post-title { font-size: 2.5rem; line-height: 1.2; margin-bottom: 0.5rem; }
+.post-title b { font-weight: 700; }
+.desc { margin-bottom: 1.5rem; }
+.post-description { font-size: 0.875rem; margin-bottom: 2rem; }
+.title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.title-row a { color: var(--text); line-height: 0; }
+.title-row a:hover { color: var(--theme); }
+.title-row svg { width: 26px; height: 26px; }
+h2.sec { font-size: 2rem; margin: 2.2rem 0 1rem; }
+h2.sec a { color: inherit; }
+h2.sec a:hover { text-decoration: none; color: var(--theme); }
+
+/* ---------- about ---------- */
+.profile { float: right; width: 30%; margin: 0 0 1rem 1.5rem; }
+.profile img { width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: var(--shadow-1); }
+.more-info { font-family: var(--f-mono); font-size: 0.82rem; margin-top: 10px; line-height: 1.55; }
+.more-info p { margin: 0; }
+.clearfix::after { content: ""; display: table; clear: both; }
+@media (max-width: 575px) {
+  .profile { float: none; width: 100%; max-width: 300px; margin: 0 0 1.5rem; }
+  .post-title { font-size: 2.1rem; }
+}
+
+/* ---------- news ---------- */
+.news { width: 100%; border-collapse: collapse; }
+.news th, .news td { padding: 0.3rem 0.4rem; vertical-align: top; font-size: 1rem; text-align: left; }
+.news th { width: 20%; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.news th:first-child, .news td:first-child { padding-left: 0; }
+
+/* ---------- publications ---------- */
+h2.bibliography {
+  font-size: 2rem;
+  color: var(--text-light);
+  opacity: 0.55;
+  border-top: 1px solid var(--divider);
+  padding-top: 1rem;
+  margin: 2rem 0 -1.6rem;
+  text-align: right;
+}
+ol.bib { list-style: none; padding: 0; margin: 0; }
+ol.bib > li { margin-bottom: 1.4rem; }
+.pub-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 4fr); gap: 24px; align-items: start; }
+.preview { width: 100%; max-width: 200px; aspect-ratio: 16 / 11; border-radius: 4px; box-shadow: var(--shadow-1); background: var(--card); overflow: hidden; }
+.preview svg { width: 100%; height: 100%; display: block; }
+.abbr { padding-top: 2px; }
+.abbr span {
+  display: inline-block; max-width: 100%; background: var(--theme); color: #ffffff; font-weight: 700; font-size: 0.75rem;
+  line-height: 1; padding: 0.4em 1rem; border-radius: 0.25rem; box-shadow: var(--shadow-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pub-body { min-width: 0; }
+.pub-title { font-weight: 700; }
+.author em { font-style: normal; border-bottom: 1px solid; }
+.periodical em { font-style: italic; }
+.links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.45rem; }
+.links .btn {
+  font-family: var(--f-body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--text); background: transparent; border: 1px solid var(--text); border-radius: 2px;
+  padding: 0.25rem 1rem; cursor: pointer; line-height: 1.5; display: inline-block;
+}
+.links .btn:hover { color: var(--theme); border-color: var(--theme); text-decoration: none; }
+.hidden-box { font-size: 0.875rem; margin-top: 0.6rem; }
+.hidden-box.summary { border: 1px dashed var(--text); padding: 10px 12px; text-align: justify; }
+.hidden-box pre {
+  margin: 0; padding: 10px 12px; background: var(--code-bg); color: var(--theme); border-radius: 6px;
+  font-family: var(--f-mono); font-size: 0.78rem; line-height: 1.45; overflow-x: auto;
+}
+@media (max-width: 575px) {
+  .pub-row { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .preview { max-width: 220px; }
+  h2.bibliography { margin-bottom: 0.6rem; }
+}
+
+/* ---------- cards ---------- */
+.card { background: var(--card); border-radius: 0.25rem; box-shadow: var(--shadow-1); padding: 1.25rem; transition: box-shadow 0.2s ease; }
+.card.hoverable:hover { box-shadow: var(--shadow-2); }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.card-title { font-size: 1.25rem; font-weight: 400; margin-bottom: 0.5rem; line-height: 1.3; }
+.card-tag { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.4rem; display: block; }
+.card p { font-size: 0.95rem; margin: 0; }
+@media (max-width: 600px) { .cards { grid-template-columns: minmax(0, 1fr); } }
+
+/* demo */
+.demo { display: flex; flex-direction: column; gap: 12px; }
+.demo canvas { width: 100%; height: 250px; display: block; cursor: pointer; touch-action: manipulation; }
+.demo-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.demo-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.delay { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+.delay input { width: 130px; accent-color: var(--theme); }
+.delay output { min-width: 4.5em; font-variant-numeric: tabular-nums; font-weight: 400; }
+.readout { font-family: var(--f-mono); font-size: 0.78rem; color: var(--text-light); font-variant-numeric: tabular-nums; display: flex; gap: 6px 16px; flex-wrap: wrap; }
+.readout b { color: var(--text); font-weight: 500; }
+.demo .caption { font-size: 0.875rem; margin: 0; }
+
+/* ---------- cv ---------- */
+.cv-card { margin-bottom: 1.5rem; }
+.cv-card h3 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.6rem; }
+.cv-list { list-style: none; margin: 0; padding: 0; }
+.cv-list > li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 18px; padding: 0.75rem 0; border-top: 1px solid var(--divider); }
+.cv-list > li:first-child { border-top: 0; }
+.badge-red {
+  display: inline-block; background: var(--badge); color: #ffffff; font-weight: 700; font-size: 0.72rem; text-transform: uppercase;
+  padding: 0.35em 0.5em; border-radius: 0.25rem; min-width: 75px; text-align: center; box-shadow: var(--shadow-1); line-height: 1.2;
+}
+.cv-item h4 { font-size: 1rem; font-weight: 700; }
+.cv-item .inst { font-size: 0.95rem; margin: 0; }
+.cv-item .loc { font-size: 0.95rem; font-style: italic; margin: 0; }
+.cv-item ul { margin: 0.35rem 0 0; padding-left: 1.1rem; font-size: 0.95rem; }
+.skills-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.skills-table th { text-align: left; font-weight: 700; width: 34%; padding: 0.4rem 0.8rem 0.4rem 0; vertical-align: top; }
+.skills-table td { padding: 0.4rem 0; }
+@media (max-width: 575px) {
+  .cv-list > li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .skills-table th, .skills-table td { display: block; width: auto; padding: 0.1rem 0; }
+  .skills-table td { padding-bottom: 0.6rem; }
+}
+
+/* ---------- teaching ---------- */
+.teach { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
+.teach th, .teach td { text-align: left; padding: 0.35rem 0.4rem; vertical-align: top; font-size: 1rem; }
+.teach th { width: 30%; font-weight: 700; white-space: nowrap; padding-left: 0; }
+h3.group { font-size: 1.5rem; margin: 1.6rem 0 0.6rem; }
+@media (max-width: 575px) { .teach th { white-space: normal; } }
+
+/* ---------- footer ---------- */
+footer {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
+  background: var(--footer-bg); color: var(--footer-text); font-size: 0.75rem;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+footer .container { padding-block: 9px 8px; }
+footer a { color: var(--footer-link); }
+footer a:hover { color: var(--theme); text-decoration: none; }
+
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+</style>
+</head>
+<body>
+<nav class="navbar" aria-label="Main">
+  <div class="container">
+    <div class="social">
+      <a href="mailto:aasadi@ncsu.edu" title="Email" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.8 6.6 12 12.8l8.2-6.2"/></svg>
+      </a>
+      <a href="cv.pdf" title="CV (PDF)" aria-label="CV">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h6M9.5 15h6M9.5 18h4"/></svg>
+      </a>
+      <a href="http://sharmalabncsu.org" title="Lab website" aria-label="Lab website">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.2L4.6 18.8A1.5 1.5 0 0 0 5.9 21h12.2a1.5 1.5 0 0 0 1.3-2.2L14 9.2V3"/><path d="M7.2 15h9.6"/></svg>
+      </a>
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" data-nav="about">about</a></li>
+        <li><a href="#publications" data-nav="publications">publications</a></li>
+        <li><a href="#projects" data-nav="projects">projects</a></li>
+        <li><a href="#teaching" data-nav="teaching">teaching</a></li>
+        <li><a href="#cv" data-nav="cv">cv</a></li>
+      </ul>
+      <button class="icon-btn" type="button" id="theme-btn" aria-label="Switch to dark mode">
+        <svg id="ic-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+        <svg id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" hidden><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2.2M19.8 12H22M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" type="button" id="menu-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+<main class="container">
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="page" data-page="about" aria-label="About">
+    <header>
+      <h1 class="post-title"><b>Amirhossein</b> Asadi</h1>
+      <p class="desc">Graduate student in Mechanical Engineering @ <a href="https://www.ncsu.edu/">NC State University</a></p>
+    </header>
+
+    <div class="profile">
+      <img src="photo.jpg" alt="Amirhossein Asadi" width="400" height="400">
+      <div class="more-info">
+        <p>Neuromuscular Control and Robotics Lab</p>
+        <p>NC State University, Raleigh, NC</p>
+        <p>aasadi [at] ncsu [dot] edu</p>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <p>I am a graduate student in Mechanical Engineering, with a minor in Electrical and Computer Engineering, at North Carolina State University, supervised by <a href="http://sharmalabncsu.org">Prof. Nitin Sharma</a> in the Neuromuscular Control and Robotics Laboratory. My research focuses on <b>learning-enabled control of nonlinear robotic systems with formal safety guarantees</b>. I combine reinforcement learning and model predictive control with control barrier functions and reachability analysis, with applications to legged robots and human-interactive robots such as lower-limb exoskeletons.</p>
+      <p>Before coming to NC State, I received my B.Sc. in Mechanical Engineering from Iran University of Science and Technology, where I worked in the Intelligent Robotics Laboratory at the intersection of control theory and reinforcement learning, building dynamic models and learning-enabled controllers for wheeled-legged and flexible manipulators.</p>
+    </div>
+
+    <h2 class="sec">news</h2>
+    <table class="news">
+      <tr><th scope="row">2026</th><td>My paper on reduced-order backstepping control for nonlinear mechanical systems with input delay is accepted to <a href="#publications">IEEE CDC 2026</a> 🎉</td></tr>
+      <tr><th scope="row">2026</th><td>SafeShadow, our neural barrier framework for exoskeleton balance recovery, is under review at IEEE RA-L, and safety-aware reduced-order MPC is under review at IEEE L-CSS with the ACC 2027 option.</td></tr>
+      <tr><th scope="row">2024</th><td>Started my M.S. at NC State and joined the Neuromuscular Control and Robotics Laboratory.</td></tr>
+      <tr><th scope="row">2024</th><td>Our paper on vision-based dynamic modeling of a wheeled-legged robot is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</td></tr>
+      <tr><th scope="row">2023</th><td>1st place in the SuperTeam Challenge at RoboCup IranOpen and in the Autonomous Cars League of the FIRA National Competition 🏆</td></tr>
+    </table>
+
+    <h2 class="sec"><a href="#publications">selected publications</a></h2>
+    <ol class="bib" id="selected-pubs"></ol>
+  </section>
+
+  <!-- ===================== PUBLICATIONS ===================== -->
+  <section class="page" data-page="publications" aria-label="Publications" hidden>
+    <header>
+      <h1 class="post-title">publications</h1>
+      <p class="post-description">Publications in reverse chronological order.</p>
+    </header>
+    <div id="all-pubs"></div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="page" data-page="projects" aria-label="Projects" hidden>
+    <header>
+      <h1 class="post-title">projects</h1>
+      <p class="post-description">Research and engineering projects, from exoskeletons to autonomous cars.</p>
+    </header>
+
+    <figure class="card demo" style="margin:0">
+      <h2 class="card-title">Interactive: push recovery under step delay</h2>
+      <canvas id="walker" role="img" aria-label="Interactive balance-recovery simulation. Push the walker with the buttons or by clicking; it takes a recovery step to its capture point after the chosen delay."></canvas>
+      <div class="demo-bar">
+        <div class="demo-btns links" style="margin:0">
+          <button class="btn" type="button" data-push="-1">← push</button>
+          <button class="btn" type="button" data-push="1">push →</button>
+          <button class="btn" type="button" id="reset">reset</button>
+        </div>
+        <label class="delay" for="delay">step delay τ
+          <input type="range" id="delay" min="0" max="300" step="25" value="100">
+          <output id="delay-out" for="delay">100 ms</output>
+        </label>
+      </div>
+      <div class="readout">
+        <span>ξ − p <b id="r-err">0.00 m</b></span>
+        <span>last step <b id="r-step">—</b></span>
+        <span>steps <b id="r-n">0</b></span>
+        <span>phase <b id="r-phase">standing</b></span>
+      </div>
+      <figcaption class="caption">Push recovery on a linear inverted pendulum. A push moves the capture point ξ; while it stays over the foot, ankle torque is enough. Once ξ leaves the foot, the walker has to step, and the longer the delay τ before it can step, the farther it has to reach. This textbook capture-point model is here for intuition; my own work certifies recovery for richer models with delay.</figcaption>
+    </figure>
+
+    <div class="cards">
+      <article class="card hoverable">
+        <span class="card-tag">NC State · 2024–present</span>
+        <h2 class="card-title">Lower-limb exoskeleton balance-recovery platform</h2>
+        <p>An exoskeleton framework for perturbation recovery that brings together rigid-body dynamics, contact constraints, actuator limits and center-of-mass regulation. It pairs robotic actuation with functional electrical stimulation, and I evaluate safety-critical controllers on it in simulation and in experimental balance-recovery trials.</p>
+      </article>
+      <article class="card hoverable">
+        <span class="card-tag">IUST</span>
+        <h2 class="card-title">Learning-based control of a flexible revolute–prismatic manipulator</h2>
+        <p>Dynamic models and MATLAB simulations for end-effector regulation and vibration suppression, comparing PID, fuzzy-PID, Q-learning and multi-agent RL, including RL-based tuning of PID gains and fuzzy rules.</p>
+      </article>
+      <article class="card hoverable">
+        <span class="card-tag">IUST</span>
+        <h2 class="card-title">Reinforcement learning for robot control</h2>
+        <p>SAC and DDPG agents trained in simulation for ball balancing with a 7-DoF manipulator, quadruped locomotion, and adaptive cruise control.</p>
+      </article>
+      <article class="card hoverable">
+        <span class="card-tag">IUST · RoboCup</span>
+        <h2 class="card-title">Autonomous mobile robot</h2>
+        <p>As team leader and programmer, I led the design and build of an autonomous mobile robot for the RoboCup Autonomous Cars League.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== TEACHING ===================== -->
+  <section class="page" data-page="teaching" aria-label="Teaching" hidden>
+    <header>
+      <h1 class="post-title">teaching</h1>
+      <p class="post-description">Courses I have taught or assisted with.</p>
+    </header>
+    <h3 class="group">North Carolina State University</h3>
+    <table class="teach">
+      <tr><th scope="row">Fall 2025, Spring 2026</th><td>MAE 306: Thermal-Fluid Sciences Lab</td></tr>
+      <tr><th scope="row">Spring 2025</th><td>MAE 253: Experimental Aerodynamics Lab</td></tr>
+      <tr><th scope="row">Fall 2024</th><td>MAE 371: Aerospace Vehicle Structures Lab</td></tr>
+    </table>
+    <h3 class="group">Iran University of Science and Technology</h3>
+    <table class="teach">
+      <tr><th scope="row">Winter 2023</th><td>Linear Control Systems, Department of Railway Engineering</td></tr>
+      <tr><th scope="row">Fall 2022</th><td>Dynamics, Department of Mechanical Engineering</td></tr>
+      <tr><th scope="row">Winter 2022</th><td>Mechanical Vibrations, Department of Mechanical Engineering</td></tr>
+      <tr><th scope="row">Workshops</th><td>Instructor, MATLAB/Simulink and SolidWorks courses and workshops</td></tr>
+    </table>
+  </section>
+
+  <!-- ===================== CV ===================== -->
+  <section class="page" data-page="cv" aria-label="CV" hidden>
+    <header class="title-row">
+      <h1 class="post-title">cv</h1>
+      <a href="cv.pdf" title="Download CV (PDF)" aria-label="Download CV as PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M12.5 11v6M10 14.5l2.5 2.5 2.5-2.5"/></svg>
+      </a>
+    </header>
+    <p class="post-description">The full CV is available as a <a href="cv.pdf">PDF</a>.</p>
+
+    <div class="card cv-card">
+      <h3>Education</h3>
+      <ul class="cv-list">
+        <li><div><span class="badge-red">2024 – now</span></div>
+          <div class="cv-item"><h4>M.S. in Mechanical Engineering</h4><p class="inst">North Carolina State University</p><p class="loc">Raleigh, NC</p><ul><li>Minor in Electrical and Computer Engineering</li></ul></div></li>
+        <li><div><span class="badge-red">2019 – 2024</span></div>
+          <div class="cv-item"><h4>B.Sc. in Mechanical Engineering</h4><p class="inst">Iran University of Science and Technology</p><p class="loc">Tehran, Iran</p></div></li>
+      </ul>
+    </div>
+
+    <div class="card cv-card">
+      <h3>Research experience</h3>
+      <ul class="cv-list">
+        <li><div><span class="badge-red">2024 – now</span></div>
+          <div class="cv-item"><h4>Graduate Student Researcher</h4><p class="inst">Neuromuscular Control and Robotics Laboratory, NC State University</p>
+            <ul><li>Develop safety-critical and learning-based controllers for lower-limb exoskeletons, focused on balance recovery after external perturbations.</li><li>Design formal safety certificates that guarantee safe recovery while integrating learned components into the control framework.</li></ul></div></li>
+        <li><div><span class="badge-red">B.Sc.</span></div>
+          <div class="cv-item"><h4>Undergraduate Research Assistant</h4><p class="inst">Intelligent Robotics Laboratory, Iran University of Science and Technology</p>
+            <ul><li>Worked at the intersection of control theory and reinforcement learning, with applications to wheeled-legged and flexible manipulators.</li><li>Built dynamic models and controllers for complex robots, including learning-enabled control of a wheeled-legged manipulator.</li></ul></div></li>
+      </ul>
+    </div>
+
+    <div class="card cv-card">
+      <h3>Honors and awards</h3>
+      <ul class="cv-list">
+        <li><div><span class="badge-red">2023</span></div><div class="cv-item"><h4>1st place, SuperTeam Challenge</h4><p class="inst">RoboCup IranOpen, Tehran</p></div></li>
+        <li><div><span class="badge-red">2023</span></div><div class="cv-item"><h4>1st place, Autonomous Cars League</h4><p class="inst">FIRA National Competition, Iran</p></div></li>
+        <li><div><span class="badge-red">2022 – 2023</span></div><div class="cv-item"><h4>Fellowship</h4><p class="inst">Iran's National Elites Foundation (INEF)</p></div></li>
+        <li><div></div><div class="cv-item"><h4>Exceptional Talents admission</h4><p class="inst">Admitted to M.S. study without the entrance examination</p></div></li>
+        <li><div></div><div class="cv-item"><h4>Top 0.06% nationwide</h4><p class="inst">Iranian University Entrance Examination</p></div></li>
+      </ul>
+    </div>
+
+    <div class="card cv-card">
+      <h3>Service and leadership</h3>
+      <ul class="cv-list">
+        <li><div></div><div class="cv-item"><h4>Reviewer</h4><p class="inst">IEEE Robotics and Automation Letters (RA-L); American Control Conference (ACC)</p></div></li>
+        <li><div></div><div class="cv-item"><h4>President</h4><p class="inst">Robotics and Mechatronics Student Association, Iran University of Science and Technology</p></div></li>
+        <li><div></div><div class="cv-item"><h4>Team leader and programmer</h4><p class="inst">RoboCup Autonomous Cars League</p><ul><li>Led the team in designing and building an autonomous mobile robot for competition.</li></ul></div></li>
+      </ul>
+    </div>
+
+    <div class="card cv-card">
+      <h3>Skills</h3>
+      <table class="skills-table">
+        <tr><th scope="row">Control and theory</th><td>Nonlinear control, MPC, control barrier functions, Lyapunov analysis, reachability analysis, optimization</td></tr>
+        <tr><th scope="row">Learning</th><td>Deep RL (DDPG, SAC), Q-learning, multi-agent RL, neural safety certificates</td></tr>
+        <tr><th scope="row">Programming</th><td>MATLAB, Python, C/C++, Julia</td></tr>
+        <tr><th scope="row">Robotics and simulation</th><td>ROS 2, MuJoCo, Gazebo, Simulink, OpenCV</td></tr>
+        <tr><th scope="row">Tools</th><td>Git, LaTeX, Linux, Docker</td></tr>
+        <tr><th scope="row">Hardware</th><td>Sensors, embedded systems (Raspberry Pi, Arduino), CAN bus, real-time control</td></tr>
+        <tr><th scope="row">Languages</th><td>English, Persian (native)</td></tr>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">© Copyright 2026 Amirhossein Asadi. Design based on the <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Last updated: October 11, 2026.</div>
+</footer>
+
+<script>
+(() => {
+  const root = document.documentElement;
+
+  /* ---------- publications data (edit here to add papers) ---------- */
+  const ME = 'A. H. Asadi';
+  const PUBS = [
+    { group: '2026', selected: true, thumb: 'delay',
+      title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection',
+      authors: ['A. H. Asadi', 'N. Sharma'],
+      venue: '<em>In IEEE Conference on Decision and Control (CDC)</em>, 2026',
+      summary: 'Models actuator delay as a transport PDE, derives a Galerkin reduced-order representation for controller synthesis, and designs a backstepping controller for nonlinear mechanical systems with Lyapunov-proven closed-loop stability and a command-filtered implementation.',
+      bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' },
+    { group: '2026', selected: true, thumb: 'safe',
+      title: 'SafeShadow: A Neural Barrier Safety Framework for Balance Recovery in Exoskeleton Systems',
+      authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'],
+      venue: '<em>IEEE Robotics and Automation Letters (RA-L)</em>, under review, 2026',
+      summary: 'Trains a neural high-order control barrier function to learn posture- and actuation-dependent balance-feasible sets for lower-limb exoskeletons, and embeds it in a CLF–CBF quadratic program for real-time balance preservation and constrained allocation between motor actuation and functional electrical stimulation (FES).' },
+    { group: '2026', selected: true, thumb: 'rank',
+      title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control',
+      authors: ['A. H. Asadi', 'N. Sharma'],
+      venue: '<em>IEEE Control Systems Letters (L-CSS), with the ACC 2027 option</em>, under review',
+      summary: 'An adaptive-order MPC framework combining dynamic active subspaces, reduced-order prediction and discrete-time control barrier functions, with a safety-driven rank-selection rule that raises the prediction dimension only when needed to preserve finite-horizon safety and recursive feasibility.' },
+    { group: 'in preparation', thumb: 'reach',
+      title: 'Reactive Stepping Under Delay: Hybrid Reach–Avoid Recovery for Bipedal Locomotion',
+      authors: ['A. H. Asadi', 'N. Sharma'],
+      venue: '<em>In preparation</em>',
+      summary: 'Formulates perturbation recovery as a delay-aware reach–avoid game, decomposes it into lower-dimensional pendular and swing-leg subproblems, and derives certified walking terminal sets and feasibility conditions for reactive steps under delayed control authority.' },
+    { group: 'in preparation', thumb: 'funnel',
+      title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion',
+      authors: ['A. H. Asadi', 'N. Sharma'],
+      venue: '<em>In preparation</em>',
+      summary: 'Turns transverse contraction geometry and physical safety clearance into phase-dependent recovery funnels around a walking gait, and uses saltation-based impact sensitivity to certify hybrid recovery, trigger reactive steps, and choose footholds by post-impact recovery margin.' },
+    { group: '2024', abbr: 'Robotica',
+      title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation',
+      authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'],
+      venue: '<em>Robotica</em>, 2024',
+      doi: 'https://doi.org/10.1017/S0263574724001644',
+      bib: '@article{korayem2024vision,\n  title   = {Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using {G}ibbs--{A}ppell Formulation},\n  author  = {Korayem, M. H. and Nikseresht, N. and Asadi, A. H.},\n  journal = {Robotica},\n  year    = {2024},\n  doi     = {10.1017/S0263574724001644}\n}' },
+    { group: '2023', abbr: 'ICRoM',
+      title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning',
+      authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'],
+      venue: '<em>In 11th RSI International Conference on Robotics and Mechatronics (ICRoM)</em>, IEEE, 2023, pp. 437–442',
+      summary: 'Uses deep deterministic policy gradient (DDPG) to adapt the gains of a MIMO PID controller for a wheeled-legged manipulator, with wheel slippage incorporated into the inverse-kinematic model for robustness to locomotion uncertainty.',
+      doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351',
+      bib: '@inproceedings{asadi2023adaptive,\n  title     = {Adaptive {MIMO} {PID} Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning},\n  author    = {Asadi, A. H. and Nikseresht, N. and Korayem, A. H.},\n  booktitle = {11th RSI International Conference on Robotics and Mechatronics (ICRoM)},\n  pages     = {437--442},\n  year      = {2023},\n  publisher = {IEEE},\n  doi       = {10.1109/ICRoM60803.2023.10412351}\n}' }
+  ];
+
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  function authorLine(list) {
+    const parts = list.map(a => a === ME ? '<em>' + a + '</em>' : a);
+    if (parts.length <= 1) return parts.join('');
+    return parts.slice(0, -1).join(', ') + (parts.length > 2 ? ',' : '') + ' and ' + parts[parts.length - 1];
+  }
+  function renderPub(p) {
+    const li = el('li');
+    const row = el('div', 'pub-row');
+    const left = el('div', p.thumb ? '' : 'abbr');
+    if (p.thumb) { const pv = el('div', 'preview'); pv.innerHTML = '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>'; left.appendChild(pv); }
+    else left.innerHTML = '<span>' + p.abbr + '</span>';
+    const body = el('div', 'pub-body');
+    body.appendChild(el('div', 'pub-title', p.title));
+    body.appendChild(el('div', 'author', authorLine(p.authors)));
+    body.appendChild(el('div', 'periodical', p.venue));
+    const links = el('div', 'links');
+    const boxes = [];
+    const toggle = (label, box) => {
+      const b = el('button', 'btn', label); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+      b.addEventListener('click', () => {
+        const open = box.hidden;
+        boxes.forEach(x => { x.hidden = true; });
+        links.querySelectorAll('button').forEach(x => x.setAttribute('aria-expanded', 'false'));
+        box.hidden = !open; b.setAttribute('aria-expanded', String(open));
+      });
+      links.appendChild(b); boxes.push(box);
+    };
+    const extra = [];
+    if (p.summary) { const box = el('div', 'hidden-box summary', p.summary); box.hidden = true; toggle('summary', box); extra.push(box); }
+    if (p.bib) {
+      const box = el('div', 'hidden-box'); box.hidden = true;
+      const pre = el('pre'); pre.textContent = p.bib; box.appendChild(pre);
+      toggle('bib', box); extra.push(box);
+    }
+    if (p.doi) { const a = el('a', 'btn', 'doi'); a.href = p.doi; links.appendChild(a); }
+    if (links.children.length) body.appendChild(links);
+    extra.forEach(x => body.appendChild(x));
+    row.appendChild(left); row.appendChild(body);
+    li.appendChild(row);
+    return li;
+  }
+  const sel = document.getElementById('selected-pubs');
+  PUBS.filter(p => p.selected).forEach(p => sel.appendChild(renderPub(p)));
+  const all = document.getElementById('all-pubs');
+  [...new Set(PUBS.map(p => p.group))].forEach(g => {
+    all.appendChild(el('h2', 'bibliography', esc(g)));
+    const ol = el('ol', 'bib');
+    PUBS.filter(p => p.group === g).forEach(p => ol.appendChild(renderPub(p)));
+    all.appendChild(ol);
+  });
+
+  /* ---------- publication previews (drawn) ---------- */
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (svg, tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); svg.appendChild(e); return e; };
+  const path = (fn, n, t0, t1) => { let d = ''; for (let i = 0; i <= n; i++) { const [x, y] = fn(t0 + (t1 - t0) * i / n); d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); } return d; };
+  const label = (svg, x, y, text, anchor) => { const t = mk(svg, 'text', { x, y, fill: 'var(--muted)', 'font-size': 8, 'font-family': 'var(--f-mono)', 'text-anchor': anchor || 'start' }); t.textContent = text; };
+  const thumbs = {
+    delay(svg) {
+      const u = t => 0.55 * Math.sin(t * 1.3) + 0.3 * Math.sin(t * 2.9 + 1);
+      mk(svg, 'line', { x1: 12, y1: 58, x2: 150, y2: 58, stroke: 'var(--rule)' });
+      mk(svg, 'path', { d: path(t => [12 + t * 23, 58 - 34 * u(t)], 120, 0, 5.4), fill: 'none', stroke: 'var(--muted)', 'stroke-width': 1.2, 'stroke-dasharray': '3 3' });
+      mk(svg, 'path', { d: path(t => [42 + t * 23, 58 - 34 * u(t)], 120, 0, 4.7), fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.8, 'stroke-linecap': 'round' });
+      mk(svg, 'line', { x1: 12, y1: 98, x2: 42, y2: 98, stroke: 'var(--ink)' });
+      mk(svg, 'line', { x1: 12, y1: 94, x2: 12, y2: 102, stroke: 'var(--ink)' });
+      mk(svg, 'line', { x1: 42, y1: 94, x2: 42, y2: 102, stroke: 'var(--ink)' });
+      label(svg, 48, 101, 'delay D');
+      label(svg, 150, 16, 'u(t − D)', 'end');
+    },
+    safe(svg) {
+      const r = a => 38 + 7 * Math.sin(3 * a) + 3 * Math.cos(5 * a);
+      mk(svg, 'path', { d: path(a => [80 + 1.35 * r(a) * Math.cos(a), 55 + 0.95 * r(a) * Math.sin(a)], 120, 0, Math.PI * 2) + 'Z', fill: 'var(--accent-soft)', stroke: 'var(--accent)', 'stroke-width': 1.2, 'stroke-dasharray': '4 3' });
+      mk(svg, 'path', { d: path(s => { const a = -2.4 + s * 2.2, k = 0.35 + 0.6 * Math.min(1, s * 1.6); return [80 + 1.35 * r(a) * k * Math.cos(a), 55 + 0.95 * r(a) * k * Math.sin(a)]; }, 80, 0, 1), fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.6, 'stroke-linecap': 'round' });
+      label(svg, 6, 12, 'h(x) ≥ 0');
+    },
+    rank(svg) {
+      const h = t => 0.75 - 0.62 * Math.exp(-Math.pow((t - 0.55) / 0.16, 2));
+      mk(svg, 'line', { x1: 12, y1: 52, x2: 150, y2: 52, stroke: 'var(--signal)', 'stroke-width': 1, 'stroke-dasharray': '3 3' });
+      mk(svg, 'path', { d: path(t => [12 + t * 138, 52 - 38 * h(t)], 100, 0, 1), fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.8 });
+      let d = '', prev = null;
+      for (let i = 0; i <= 20; i++) { const t = i / 20, rk = h(t) < 0.3 ? 3 : h(t) < 0.5 ? 2 : 1, y = 100 - rk * 10, x = (12 + t * 138).toFixed(1); d += prev === null ? 'M' + x + ' ' + y : ' L' + x + ' ' + prev + ' L' + x + ' ' + y; prev = y; }
+      mk(svg, 'path', { d, fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.4 });
+      label(svg, 14, 14, 'h(k)');
+      label(svg, 150, 66, 'rank r(k)', 'end');
+    },
+    reach(svg) {
+      mk(svg, 'rect', { x: 64, y: 30, width: 28, height: 50, rx: 4, fill: 'none', stroke: 'var(--signal)', 'stroke-width': 1.4, 'stroke-dasharray': '3 2' });
+      mk(svg, 'ellipse', { cx: 128, cy: 74, rx: 20, ry: 16, fill: 'var(--accent-soft)', stroke: 'var(--accent)', 'stroke-width': 1.4 });
+      mk(svg, 'path', { d: 'M18 70 C40 0, 110 0, 128 74', fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.6, 'stroke-linecap': 'round' });
+      mk(svg, 'circle', { cx: 18, cy: 70, r: 2.6, fill: 'var(--ink)' });
+      label(svg, 78, 94, 'avoid', 'middle');
+      label(svg, 128, 102, 'reach', 'middle');
+    },
+    funnel(svg) {
+      const y = t => 55 - 22 * Math.sin(t * Math.PI * 2 / 68);
+      const w = t => 6 + 9 * Math.abs(Math.cos(t * Math.PI / 68));
+      const up = path(t => [12 + t, y(t) - w(t)], 70, 0, 136), dn = path(t => [148 - t, y(136 - t) + w(136 - t)], 70, 0, 136).replace('M', 'L');
+      mk(svg, 'path', { d: up + dn + 'Z', fill: 'var(--accent-soft)', stroke: 'none' });
+      [80, 148].forEach(x => mk(svg, 'line', { x1: x, y1: 14, x2: x, y2: 96, stroke: 'var(--muted)', 'stroke-dasharray': '2 3' }));
+      mk(svg, 'path', { d: path(t => [12 + t, y(t)], 120, 0, 136), fill: 'none', stroke: 'var(--accent)', 'stroke-width': 1.8 });
+      label(svg, 80, 106, 'impact', 'middle');
+    }
+  };
+  document.querySelectorAll('svg[data-thumb]').forEach(s => thumbs[s.dataset.thumb] && thumbs[s.dataset.thumb](s));
+
+  /* ---------- theme toggle ---------- */
+  const themeBtn = document.getElementById('theme-btn'), moon = document.getElementById('ic-moon'), sun = document.getElementById('ic-sun');
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : mq.matches;
+  const syncTheme = () => { const d = isDark(); moon.hidden = d; sun.hidden = !d; themeBtn.setAttribute('aria-label', d ? 'Switch to light mode' : 'Switch to dark mode'); };
+  try { const saved = localStorage.getItem('theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+  syncTheme();
+  themeBtn.addEventListener('click', () => {
+    root.dataset.theme = isDark() ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+    syncTheme();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', syncTheme);
+
+  /* ---------- pages ---------- */
+  const pages = [...document.querySelectorAll('[data-page]')];
+  const navLinks = [...document.querySelectorAll('[data-nav]')];
+  const menu = document.getElementById('nav-links'), menuBtn = document.getElementById('menu-btn');
+  let onShow = {};
+  function show(name, scroll) {
+    if (!pages.some(p => p.dataset.page === name)) name = 'about';
+    pages.forEach(p => { p.hidden = p.dataset.page !== name; });
+    navLinks.forEach(a => {
+      const on = a.dataset.nav === name;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+    if (scroll) window.scrollTo(0, 0);
+    if (onShow[name]) onShow[name]();
+    updateProgress();
+  }
+  window.addEventListener('hashchange', () => show(location.hash.slice(1), true));
+  menuBtn.addEventListener('click', () => {
+    const open = !menu.classList.contains('open');
+    menu.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open));
+  });
+
+  /* ---------- scroll progress ---------- */
+  const bar = document.getElementById('progress');
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  /* ---------- push-recovery demo: linear inverted pendulum with capture-point stepping ---------- */
+  const G = 9.81, Z0 = 0.9, OM = Math.sqrt(G / Z0), FOOT = 0.09, LMAX = 0.75, TSWING = 0.24, DT = 0.005, PUSH = 0.6;
+  const canvas = document.getElementById('walker'), ctx = canvas.getContext('2d');
+  const delayIn = document.getElementById('delay'), delayOut = document.getElementById('delay-out');
+  const rErr = document.getElementById('r-err'), rStep = document.getElementById('r-step'), rN = document.getElementById('r-n'), rPhase = document.getElementById('r-phase');
+  let tau = 0.1, st, autoPushed = false;
+  delayIn.addEventListener('input', () => { tau = delayIn.value / 1000; delayOut.textContent = delayIn.value + ' ms'; });
+
+  function reset() {
+    st = { x: 0, xd: 0, p: 0, feet: [0, -0.03], stance: 0, phase: 'standing', t: 0, swingFrom: 0, steps: 0, lastStep: null,
+           settled: 0, join: null, fallen: 0, camX: 0, pushFx: null };
+  }
+  reset();
+  const xi = () => st.x + st.xd / OM;
+  const swingFoot = () => 1 - st.stance;
+  function predictedTarget() {
+    const pf = st.feet[st.stance];
+    const remaining = st.phase === 'delay' ? (tau - st.t) + TSWING : st.phase === 'swing' ? TSWING - st.t : 0;
+    const xiTd = st.p + (xi() - st.p) * Math.exp(OM * Math.max(0, remaining));
+    return pf + Math.max(-LMAX, Math.min(LMAX, xiTd - pf));
+  }
+  function push(dir) {
+    if (st.fallen) return;
+    st.xd += PUSH * dir;
+    st.pushFx = { dir, age: 0 };
+    if (st.join) { st.feet[swingFoot()] = st.join.pos; st.join = null; }
+  }
+  function step() {
+    if (st.fallen) { st.fallen -= DT; if (st.fallen <= 0) reset(); return; }
+    const pf = st.feet[st.stance], c = xi();
+    if (st.phase === 'standing' && Math.abs(c - pf) > FOOT) { st.phase = 'delay'; st.t = 0; }
+    st.p = Math.max(pf - FOOT, Math.min(pf + FOOT, c + 1.0 * (c - pf)));
+    if (st.phase === 'delay' && st.t >= tau) { st.phase = 'swing'; st.t = 0; st.swingFrom = st.feet[swingFoot()]; }
+    if (st.phase === 'swing' && st.t >= TSWING) {
+      const d = Math.max(-LMAX, Math.min(LMAX, c - pf)), sw = swingFoot();
+      st.feet[sw] = pf + d; st.stance = sw;
+      st.steps += 1; st.lastStep = Math.abs(d);
+      st.phase = 'standing'; st.t = 0;
+      if (Math.abs(c - st.feet[st.stance]) > FOOT) st.phase = 'delay';
+    }
+    const xdd = OM * OM * (st.x - st.p);
+    st.x += st.xd * DT; st.xd += xdd * DT; st.t += DT;
+    if (st.pushFx) { st.pushFx.age += DT; if (st.pushFx.age > 0.5) st.pushFx = null; }
+    if (st.phase === 'standing' && Math.abs(xi() - st.feet[st.stance]) < 0.01 && Math.abs(st.xd) < 0.03) st.settled += DT; else st.settled = 0;
+    const sw = swingFoot(), gap = st.feet[st.stance] - 0.03 * Math.sign(st.feet[st.stance] - st.feet[sw] || 1);
+    if (!st.join && st.settled > 0.5 && Math.abs(st.feet[sw] - st.feet[st.stance]) > 0.06) st.join = { from: st.feet[sw], to: gap, t: 0, pos: st.feet[sw] };
+    if (st.join) { st.join.t += DT; const s = Math.min(1, st.join.t / 0.3); st.join.pos = st.join.from + (st.join.to - st.join.from) * s; if (s >= 1) { st.feet[sw] = st.join.to; st.join = null; } }
+    if (Math.abs(st.x - st.feet[st.stance]) > 0.6) { st.fallen = 1.2; st.phase = 'fell'; }
+  }
+
+  const css = n => getComputedStyle(root).getPropertyValue(n).trim();
+  function draw() {
+    const dpr = window.devicePixelRatio || 1, W = canvas.clientWidth, H = canvas.clientHeight;
+    if (!W || !H) return;
+    if (canvas.width !== Math.round(W * dpr) || canvas.height !== Math.round(H * dpr)) { canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const ink = css('--text'), muted = css('--text-light'), rule = css('--divider'), accent = css('--theme'), soft = css('--theme-soft'), signal = css('--signal'), panel = css('--card');
+    ctx.font = '11px ' + css('--f-mono');
+    const groundY = H - 40;
+    const scale = Math.min(W / 3.0, (groundY - 34) / (Z0 + 0.32));
+    st.camX += ((st.x + st.feet[st.stance]) / 2 - st.camX) * 0.06;
+    const X = wx => W / 2 + (wx - st.camX) * scale;
+    const Y = wz => groundY - wz * scale;
+
+    ctx.strokeStyle = rule; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, groundY + 0.5); ctx.lineTo(W, groundY + 0.5); ctx.stroke();
+    ctx.fillStyle = muted; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    const left = st.camX - W / 2 / scale, right = st.camX + W / 2 / scale;
+    for (let m = Math.ceil(left * 2) / 2; m <= right; m += 0.5) {
+      const tx = Math.round(X(m)) + 0.5;
+      ctx.beginPath(); ctx.moveTo(tx, groundY); ctx.lineTo(tx, groundY + (Number.isInteger(m) ? 6 : 3)); ctx.stroke();
+      if (Number.isInteger(m)) ctx.fillText(m + ' m', tx, groundY + 9);
+    }
+
+    const pf = st.feet[st.stance];
+    ctx.fillStyle = soft; ctx.fillRect(X(pf - FOOT), groundY - 5, 2 * FOOT * scale, 5);
+    const c = xi(), outside = Math.abs(c - pf) > FOOT;
+    if (st.phase === 'delay' || st.phase === 'swing') {
+      const tgt = predictedTarget();
+      ctx.strokeStyle = muted; ctx.setLineDash([3, 3]);
+      ctx.strokeRect(X(tgt - FOOT) + 0.5, groundY - 5.5, 2 * FOOT * scale, 5);
+      ctx.setLineDash([]);
+    }
+    const cx = Math.max(4, Math.min(W - 4, X(c)));
+    ctx.fillStyle = outside ? signal : accent;
+    ctx.beginPath(); ctx.moveTo(cx, groundY - 13); ctx.lineTo(cx + 5, groundY - 8); ctx.lineTo(cx, groundY - 3); ctx.lineTo(cx - 5, groundY - 8); ctx.closePath(); ctx.fill();
+    ctx.textBaseline = 'bottom'; ctx.fillText('ξ', cx, groundY - 15);
+
+    const sw = swingFoot();
+    let swPos = st.feet[sw], swLift = 0;
+    if (st.phase === 'swing') {
+      const s = Math.min(1, st.t / TSWING), e = s * s * (3 - 2 * s);
+      swPos = st.swingFrom + (predictedTarget() - st.swingFrom) * e; swLift = 0.09 * Math.sin(Math.PI * s);
+    } else if (st.join) {
+      const s = Math.min(1, st.join.t / 0.3);
+      swPos = st.join.pos; swLift = 0.05 * Math.sin(Math.PI * s);
+    }
+    const fallTilt = st.fallen ? (1.2 - st.fallen) * 0.9 * Math.sign(st.x - pf || 1) : 0;
+    const hipX = X(st.x) + Math.sin(fallTilt) * Z0 * scale * 0.4, hipY = Y(Z0) + (1 - Math.cos(fallTilt)) * Z0 * scale * 0.4;
+    const footY = groundY - 3;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = muted; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(X(swPos), footY - swLift * scale); ctx.stroke();
+    ctx.fillStyle = muted; ctx.fillRect(X(swPos) - 7, footY - swLift * scale - 2, 14, 4);
+    ctx.strokeStyle = ink; ctx.lineWidth = 4;
+    ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(X(pf), footY); ctx.stroke();
+    ctx.fillStyle = ink; ctx.fillRect(X(pf) - 8, footY - 2, 16, 4);
+    const tLen = 0.42 * scale, hx = hipX + Math.sin(fallTilt) * tLen, hy = hipY - Math.cos(fallTilt) * tLen;
+    ctx.strokeStyle = accent; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(hx, hy); ctx.stroke();
+    ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(hx + Math.sin(fallTilt) * 11, hy - Math.cos(fallTilt) * 11, 9, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = panel; ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(hipX, hipY, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+    if (st.pushFx) {
+      const a = 1 - st.pushFx.age / 0.5, d = st.pushFx.dir, ay = hipY - tLen * 0.6;
+      const x0 = hipX - d * (34 + 18 * (1 - a)), x1 = hipX - d * 12;
+      ctx.globalAlpha = Math.max(0, a); ctx.strokeStyle = signal; ctx.fillStyle = signal; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(x0, ay); ctx.lineTo(x1, ay); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x1 + d * 6, ay); ctx.lineTo(x1, ay - 5); ctx.lineTo(x1, ay + 5); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillStyle = muted;
+    const msg = st.fallen ? 'fell over, resetting' : st.phase === 'delay' ? 'ξ left the foot, waiting τ before stepping' : st.phase === 'swing' ? 'stepping to the capture point' : 'standing';
+    ctx.fillText(msg, 4, 4);
+
+    rErr.textContent = (c - pf).toFixed(2) + ' m';
+    rStep.textContent = st.lastStep === null ? '—' : st.lastStep.toFixed(2) + ' m';
+    rN.textContent = st.steps;
+    rPhase.textContent = st.fallen ? 'fell' : st.phase;
+  }
+  document.querySelectorAll('[data-push]').forEach(b => b.addEventListener('click', () => push(+b.dataset.push)));
+  document.getElementById('reset').addEventListener('click', reset);
+  canvas.addEventListener('click', e => { const r = canvas.getBoundingClientRect(); push(e.clientX - r.left < r.width / 2 ? 1 : -1); });
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  onShow.projects = () => {
+    draw();
+    if (!reduce && !autoPushed) { autoPushed = true; setTimeout(() => { if (st.steps === 0 && !st.pushFx) push(1); }, 900); }
+  };
+  let last = null, acc = 0;
+  function frame(t) {
+    if (last === null) last = t;
+    const dt = Math.min(0.1, (t - last) / 1000); last = t;
+    if (canvas.clientWidth) {
+      acc += dt;
+      while (acc >= DT) { step(); acc -= DT; }
+      draw();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  show(location.hash.slice(1) || 'about', false);
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
