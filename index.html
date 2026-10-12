@@ -164,10 +164,11 @@ section { scroll-margin-top: 84px; }
 
 /* ---------- news ---------- */
 .news { display: flex; flex-direction: column; }
-.news li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 20px; padding-block: 12px; border-top: 1px solid var(--line); }
+.news li { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; padding-block: 12px; border-top: 1px solid var(--line); }
 .news li:first-child { border-top: 0; padding-top: 0; }
 .news time { font-family: var(--f-mono); font-size: 13px; color: var(--muted); padding-top: 2px; font-variant-numeric: tabular-nums; }
 .news p { color: var(--text-2); }
+.news em { font-style: italic; color: var(--text); }
 
 /* ---------- publications ---------- */
 .pub-group { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 36px 0 14px; }
@@ -369,10 +370,12 @@ footer .wrap {
   <section id="news" aria-labelledby="news-h">
     <div class="sec-head"><h2 id="news-h">News</h2></div>
     <ul class="news">
-      <li><time datetime="2026">2026</time><p>My paper on reduced-order backstepping control for nonlinear mechanical systems with input delay is accepted to <a href="#publications">IEEE CDC 2026</a>.</p></li>
-      <li><time datetime="2026">2026</time><p>SafeShadow, our neural barrier framework for exoskeleton balance recovery, is under review at IEEE RA-L, and safety-aware reduced-order MPC is under review at IEEE L-CSS with the ACC 2027 option.</p></li>
-      <li><time datetime="2024">2024</time><p>Started graduate school at NC State and joined the Neuromuscular Control and Robotics Laboratory.</p></li>
-      <li><time datetime="2024">2024</time><p>Our paper on vision-based dynamic modeling of a wheeled-legged robot is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</p></li>
+      <li><time datetime="2026-09-11">Sep 11, 2026</time><p>Submitted <em>Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control</em> as a joint submission to IEEE L-CSS and ACC 2027.</p></li>
+      <li><time datetime="2026-07-15">Jul 15, 2026</time><p>My paper on reduced-order backstepping control for nonlinear mechanical systems with input delay is accepted to <a href="#publications">IEEE CDC 2026</a>.</p></li>
+      <li><time datetime="2026">2026</time><p>SafeShadow, our neural barrier framework for exoskeleton balance recovery, is under review at IEEE RA-L.</p></li>
+      <li><time datetime="2025-08-18">Aug 18, 2025</time><p>Joined the Neuromuscular Control and Robotics Laboratory at NC State.</p></li>
+      <li><time datetime="2024-11-07">Nov 7, 2024</time><p>Our paper on vision-based dynamic modeling of a wheeled-legged robot is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</p></li>
+      <li><time datetime="2024-08">Aug 2024</time><p>Started graduate school in Mechanical Engineering at NC State.</p></li>
       <li><time datetime="2023">2023</time><p>1st place in the SuperTeam Challenge at RoboCup IranOpen and in the Autonomous Cars League of the FIRA National Competition.</p></li>
     </ul>
   </section>
@@ -461,7 +464,7 @@ footer .wrap {
         <h3>Research experience</h3>
         <ol class="timeline">
           <li class="tl-item">
-            <span class="tl-when">2024 – present</span>
+            <span class="tl-when">Aug 2025 – present</span>
             <h4>Graduate Student Researcher</h4>
             <p class="tl-where">Neuromuscular Control and Robotics Laboratory, NC State</p>
             <ul>
