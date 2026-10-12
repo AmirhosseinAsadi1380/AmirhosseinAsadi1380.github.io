@@ -87,7 +87,7 @@ img { max-width: 100%; }
   border-bottom: 1px solid var(--line);
 }
 @supports not (background: color-mix(in srgb, red 50%, blue)) { .nav { background: var(--bg); } }
-.nav .wrap { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; }
+.nav .wrap { height: 60px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; position: relative; }
 .nav-mail { color: var(--text-2); display: inline-flex; padding: 6px; margin-left: -6px; border-radius: 8px; }
 .nav-mail:hover { color: var(--accent); background: var(--bg-2); }
 .nav-mail svg { width: 22px; height: 22px; }
@@ -312,7 +312,7 @@ main { padding-block: 36px 8px; gap: 48px; }
 .contact { font-size: 13.5px; line-height: 1.5; }
 .socials a { width: 36px; height: 36px; }
 .socials svg { width: 16px; height: 16px; }
-.news li { padding-block: 6px; gap: 16px; grid-template-columns: 104px minmax(0, 1fr); }
+.news li { padding-block: 6px; gap: 16px; grid-template-columns: 76px minmax(0, 1fr); }
 .news time { font-size: 12.5px; padding-top: 1px; }
 .pub-group { margin: 20px 0 8px; }
 .pubs { gap: 8px; }
@@ -370,9 +370,6 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 
 <nav class="nav" aria-label="Main">
   <div class="wrap">
-    <a class="nav-mail" href="mailto:aasadi@ncsu.edu" title="Email" aria-label="Email">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.8 6.8 12 12.8l8.2-6"/></svg>
-    </a>
     <div class="nav-right">
       <ul class="nav-links" id="nav-links">
         <li><a href="#about" data-nav="about" class="active">About</a></li>
@@ -431,12 +428,12 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   <section id="news" aria-labelledby="news-h">
     <div class="sec-head"><h2 id="news-h">News</h2></div>
     <ul class="news">
-      <li><time datetime="2026-09-11">Sep 11, 2026</time><p>Submitted <strong>Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control</strong> as a joint submission to <strong>IEEE L-CSS and ACC 2027</strong>.</p></li>
-      <li><time datetime="2026-07-15">Jul 15, 2026</time><p>My paper on <strong>reduced-order backstepping control for nonlinear mechanical systems with input delay</strong> is accepted to <a href="#publications">IEEE CDC 2026</a> 🎉</p></li>
-      <li><time datetime="2025-08-18">Aug 18, 2025</time><p>Joined the Neuromuscular Control and Robotics Laboratory at NC State 🤖</p></li>
-      <li><time datetime="2024-11-07">Nov 7, 2024</time><p>Our paper on <strong>vision-based dynamic modeling of a wheeled-legged robot</strong> is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</p></li>
+      <li><time datetime="2026-09">Sep 2026</time><p>Submitted <strong>Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control</strong> as a joint submission to <strong>IEEE L-CSS and ACC 2027</strong>.</p></li>
+      <li><time datetime="2026-07">Jul 2026</time><p>My paper on <strong>reduced-order backstepping control for nonlinear mechanical systems with input delay</strong> is accepted to <a href="#publications">IEEE CDC 2026</a> 🎉</p></li>
+      <li><time datetime="2025-08">Aug 2025</time><p>Joined the Neuromuscular Control and Robotics Laboratory at NC State 🤖</p></li>
+      <li><time datetime="2024-11">Nov 2024</time><p>Our paper on <strong>vision-based dynamic modeling of a wheeled-legged robot</strong> is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</p></li>
       <li><time datetime="2024-08">Aug 2024</time><p>Started graduate school in Mechanical Engineering at NC State 🎓</p></li>
-      <li><time datetime="2023-12-19">Dec 19, 2023</time><p>Presented our paper on <strong>adaptive MIMO PID control of a wheel-leg manipulator with deep reinforcement learning</strong> at <a href="https://doi.org/10.1109/ICRoM60803.2023.10412351">ICRoM 2023</a>.</p></li>
+      <li><time datetime="2023-12">Dec 2023</time><p>Presented our paper on <strong>adaptive MIMO PID control of a wheel-leg manipulator with deep reinforcement learning</strong> at <a href="https://doi.org/10.1109/ICRoM60803.2023.10412351">ICRoM 2023</a>.</p></li>
     </ul>
   </section>
 
