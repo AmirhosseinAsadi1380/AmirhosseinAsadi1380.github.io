@@ -3,312 +3,354 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
 <title>Amirhossein Asadi</title>
 <meta name="description" content="Amirhossein Asadi, graduate student at NC State University working on safe, learning-enabled control for legged robots and lower-limb exoskeletons.">
+<meta property="og:title" content="Amirhossein Asadi">
+<meta property="og:description" content="Safe, learning-enabled control for legged robots and lower-limb exoskeletons. Graduate student, NC State University.">
+<meta property="og:image" content="photo.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E6E7E'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='white'%3EAA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
 <style>
-/* Layout: al-folio-style single 800px column under a fixed top navbar and above a fixed footer bar; the navbar switches pages in place. */
+/* Layout: one 860px reading column; a two-column hero (bio | portrait) that stacks on phones; sections separated by generous whitespace and hairline-ruled serif headings. */
 :root {
-  --bg: #ffffff;
-  --text: #000000;
-  --text-light: #828282;
-  --theme: #B509AC;
-  --theme-soft: rgba(181, 9, 172, 0.09);
-  --divider: rgba(0, 0, 0, 0.1);
-  --card: #ffffff;
-  --code-bg: rgba(181, 9, 172, 0.05);
-  --footer-bg: #1C1C1D;
-  --footer-text: #e8e8e8;
-  --footer-link: #ffffff;
-  --badge: #CC0000;
-  --shadow-1: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  --shadow-2: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  --f-body: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  --f-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-  /* names used by the drawings and the demo */
-  --accent: var(--theme);
-  --accent-soft: var(--theme-soft);
-  --rule: var(--divider);
+  --bg: #FCFCFD;
+  --bg-2: #F4F6F8;
+  --surface: #FFFFFF;
+  --text: #16181D;
+  --text-2: #464D5B;
+  --muted: #7A8190;
+  --line: #E5E8ED;
+  --accent: #0E6E7E;
+  --accent-soft: #E2F0F2;
+  --warn: #8F5A07;
+  --warn-soft: #FBF0DC;
+  --signal: #C2412D;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 4px 16px rgba(16, 24, 40, 0.06);
+  --shadow-lift: 0 2px 4px rgba(16, 24, 40, 0.06), 0 12px 32px rgba(16, 24, 40, 0.10);
+  --f-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* names used by the drawings */
   --ink: var(--text);
-  --muted: var(--text-light);
-  --signal: #D32F2F;
-  --panel: var(--card);
+  --rule: var(--line);
+  --panel: var(--surface);
+  color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1C1C1D; --text: #e8e8e8; --text-light: #a9a9ad; --theme: #2698BA; --theme-soft: rgba(38, 152, 186, 0.16);
-    --divider: #424246; --card: #212529; --code-bg: #2c3237; --footer-bg: #e8e8e8; --footer-text: #1C1C1D; --footer-link: #000000;
-    --shadow-1: 0 2px 5px 0 rgba(0, 0, 0, 0.5), 0 2px 10px 0 rgba(0, 0, 0, 0.4);
-    --shadow-2: 0 8px 17px 0 rgba(0, 0, 0, 0.55), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
-    --signal: #FF6E5A;
+    --bg: #0F1114; --bg-2: #161A1F; --surface: #171A1F; --text: #ECEEF2; --text-2: #B6BDC9; --muted: #8A92A0;
+    --line: #272C34; --accent: #5CC8D6; --accent-soft: #12313A; --warn: #F1B85E; --warn-soft: #33270F; --signal: #FF7A66;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.35);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.45), 0 12px 32px rgba(0, 0, 0, 0.5);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #1C1C1D; --text: #e8e8e8; --text-light: #a9a9ad; --theme: #2698BA; --theme-soft: rgba(38, 152, 186, 0.16);
-  --divider: #424246; --card: #212529; --code-bg: #2c3237; --footer-bg: #e8e8e8; --footer-text: #1C1C1D; --footer-link: #000000;
-  --shadow-1: 0 2px 5px 0 rgba(0, 0, 0, 0.5), 0 2px 10px 0 rgba(0, 0, 0, 0.4);
-  --shadow-2: 0 8px 17px 0 rgba(0, 0, 0, 0.55), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
-  --signal: #FF6E5A;
+  --bg: #0F1114; --bg-2: #161A1F; --surface: #171A1F; --text: #ECEEF2; --text-2: #B6BDC9; --muted: #8A92A0;
+  --line: #272C34; --accent: #5CC8D6; --accent-soft: #12313A; --warn: #F1B85E; --warn-soft: #33270F; --signal: #FF7A66;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.45), 0 12px 32px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--text);
   font-family: var(--f-body);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.5;
-  padding-top: 56px;
-  padding-bottom: 72px;
+  font-size: 16.5px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-a { color: var(--theme); text-decoration: none; }
-a:hover { text-decoration: underline; }
-:focus-visible { outline: 2px solid var(--theme); outline-offset: 2px; }
-b, strong { font-weight: 700; }
-p { margin: 0 0 1rem; }
-h1, h2, h3, h4 { font-weight: 300; margin: 0; text-wrap: balance; }
-.container { max-width: 800px; margin: 0 auto; padding-inline: 16px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+img { max-width: 100%; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 24px; }
 
 /* ---------- navbar ---------- */
-.navbar {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
-  padding-top: env(safe-area-inset-top, 0px);
-  background: var(--bg);
-  border-bottom: 1px solid var(--divider);
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid var(--line);
 }
-.navbar .container { height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; }
-.social { display: flex; align-items: center; gap: 14px; }
-.social a, .icon-btn { color: var(--text); display: inline-flex; line-height: 0; }
-.social a:hover, .icon-btn:hover { color: var(--theme); text-decoration: none; }
-.social svg { width: 25px; height: 25px; }
-.nav-right { display: flex; align-items: center; gap: 4px; }
-.nav-links { display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none; }
-.nav-links a { color: var(--text); font-weight: 400; padding: 8px 9px; display: block; }
-.nav-links a:hover { color: var(--theme); text-decoration: none; }
-.nav-links a.active { color: var(--theme); font-weight: 700; }
-.icon-btn { background: none; border: 0; padding: 8px; cursor: pointer; }
+@supports not (background: color-mix(in srgb, red 50%, blue)) { .nav { background: var(--bg); } }
+.nav .wrap { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; }
+.nav-mail { color: var(--text-2); display: inline-flex; padding: 6px; margin-left: -6px; border-radius: 8px; }
+.nav-mail:hover { color: var(--accent); background: var(--bg-2); }
+.nav-mail svg { width: 22px; height: 22px; }
+.nav-right { display: flex; align-items: center; gap: 6px; }
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-links a {
+  display: block; position: relative; padding: 8px 12px;
+  font-size: 15px; font-weight: 400; color: var(--text-2); border-radius: 8px;
+}
+.nav-links a:hover { color: var(--text); background: var(--bg-2); text-decoration: none; }
+.nav-links a.active { color: var(--text); font-weight: 500; }
+.nav-links a.active::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; border-radius: 2px; background: var(--accent);
+}
+.icon-btn { background: none; border: 0; padding: 8px; border-radius: 8px; cursor: pointer; color: var(--text-2); display: inline-flex; }
+.icon-btn:hover { color: var(--text); background: var(--bg-2); }
 .icon-btn svg { width: 19px; height: 19px; }
 .menu-btn { display: none; }
-.progress { position: fixed; left: 0; right: 0; top: calc(56px + env(safe-area-inset-top, 0px)); height: 2px; z-index: 19; pointer-events: none; }
-.progress span { display: block; height: 100%; width: 100%; background: var(--theme); transform-origin: 0 50%; transform: scaleX(0); }
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+.progress span { display: block; height: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
   .menu-btn { display: inline-flex; }
   .nav-links {
-    display: none; position: absolute; top: 56px; right: 0; left: 0;
-    background: var(--bg); border-bottom: 1px solid var(--divider);
-    flex-direction: column; align-items: flex-end; padding: 6px 16px 10px;
+    display: none; position: absolute; top: 60px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+    padding: 8px 16px 12px;
   }
   .nav-links.open { display: flex; }
+  .nav-links a { padding: 11px 8px; font-size: 16px; }
+  .nav-links a.active::after { left: 8px; right: auto; width: 24px; bottom: 6px; }
 }
 
-/* ---------- page headers ---------- */
-.page { padding-block: 32px 0; }
-.post-title { font-size: 2.5rem; line-height: 1.2; margin-bottom: 0.5rem; }
-.post-title b { font-weight: 700; }
-.desc { margin-bottom: 1.5rem; }
-.post-description { font-size: 0.875rem; margin-bottom: 2rem; }
-.title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.title-row a { color: var(--text); line-height: 0; }
-.title-row a:hover { color: var(--theme); }
-.title-row svg { width: 26px; height: 26px; }
-h2.sec { font-size: 2rem; margin: 2.2rem 0 1rem; }
-h2.sec a { color: inherit; }
-h2.sec a:hover { text-decoration: none; color: var(--theme); }
+/* ---------- sections ---------- */
+main { padding-block: 64px 24px; display: flex; flex-direction: column; gap: 88px; }
+section { scroll-margin-top: 84px; }
+.sec-head { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+.sec-head h2 { font-family: var(--f-display); font-weight: 500; font-size: 30px; letter-spacing: -0.01em; line-height: 1.1; }
+.sec-head::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
-/* ---------- about ---------- */
-.profile { float: right; width: 30%; margin: 0 0 1rem 1.5rem; }
-.profile img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; border-radius: 50%; box-shadow: var(--shadow-1); }
-.more-info { font-family: var(--f-mono); font-size: 0.82rem; margin-top: 10px; line-height: 1.55; }
-.more-info p { margin: 0; }
-.clearfix::after { content: ""; display: table; clear: both; }
-@media (max-width: 575px) {
-  .profile { float: none; width: 100%; max-width: 300px; margin: 0 0 1.5rem; }
-  .post-title { font-size: 2.1rem; }
+/* ---------- hero ---------- */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 232px; gap: 56px; align-items: start; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 14px;
 }
+.hero h1 {
+  font-family: var(--f-display); font-weight: 500; font-size: 56px; line-height: 1.02; letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+.tagline { font-family: var(--f-display); font-size: 22px; line-height: 1.4; color: var(--text-2); margin-bottom: 26px; max-width: 30ch; }
+.bio { display: flex; flex-direction: column; gap: 14px; color: var(--text-2); max-width: 62ch; }
+.bio strong { color: var(--text); font-weight: 500; }
+.topics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.topics li {
+  font-size: 13px; color: var(--text-2); background: var(--bg-2); border: 1px solid var(--line);
+  border-radius: 999px; padding: 4px 12px; line-height: 1.5;
+}
+.portrait { display: flex; flex-direction: column; align-items: center; gap: 16px; padding-top: 6px; }
+.portrait img {
+  width: 232px; height: 232px; max-width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; display: block;
+  box-shadow: 0 0 0 6px var(--surface), 0 0 0 7px var(--line), var(--shadow-lift);
+}
+.contact { text-align: center; font-size: 14px; line-height: 1.6; color: var(--text-2); }
+.contact .mono { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); }
+.socials { display: flex; gap: 10px; }
+.socials a {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text-2);
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); text-decoration: none; }
+.socials svg { width: 18px; height: 18px; }
 
 /* ---------- news ---------- */
-.news { width: 100%; border-collapse: collapse; }
-.news th, .news td { padding: 0.3rem 0.4rem; vertical-align: top; font-size: 1rem; text-align: left; }
-.news th { width: 20%; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.news th:first-child, .news td:first-child { padding-left: 0; }
+.news { display: flex; flex-direction: column; }
+.news li { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 20px; padding-block: 12px; border-top: 1px solid var(--line); }
+.news li:first-child { border-top: 0; padding-top: 0; }
+.news time { font-family: var(--f-mono); font-size: 13px; color: var(--muted); padding-top: 2px; font-variant-numeric: tabular-nums; }
+.news p { color: var(--text-2); }
 
 /* ---------- publications ---------- */
-h2.bibliography {
-  font-size: 2rem;
-  color: var(--text-light);
-  opacity: 0.55;
-  border-top: 1px solid var(--divider);
-  padding-top: 1rem;
-  margin: 2rem 0 0.75rem;
-  text-align: right;
+.pub-group { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 36px 0 14px; }
+.pub-group:first-of-type { margin-top: 0; }
+.pubs { display: flex; flex-direction: column; gap: 14px; }
+.pub {
+  display: grid; grid-template-columns: 176px minmax(0, 1fr); gap: 24px;
+  padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-ol.bib { list-style: none; padding: 0; margin: 0; }
-ol.bib > li { margin-bottom: 1.4rem; }
-.pub-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 4fr); gap: 24px; align-items: start; }
-.preview { width: 100%; max-width: 200px; aspect-ratio: 16 / 11; border-radius: 4px; box-shadow: var(--shadow-1); background: var(--card); overflow: hidden; }
-.preview svg { width: 100%; height: 100%; display: block; }
-.abbr { padding-top: 2px; }
-.abbr span {
-  display: inline-block; max-width: 100%; background: var(--theme); color: #ffffff; font-weight: 700; font-size: 0.75rem;
-  line-height: 1; padding: 0.4em 1rem; border-radius: 0.25rem; box-shadow: var(--shadow-1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+.pub:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: var(--shadow); }
+.pub-media {
+  width: 100%; aspect-ratio: 16 / 11; border-radius: 10px; overflow: hidden;
+  background: var(--bg-2); border: 1px solid var(--line); align-self: start;
 }
-.pub-body { min-width: 0; }
-.pub-title { font-weight: 700; }
-.author em { font-style: normal; border-bottom: 1px solid; }
-.periodical em { font-style: italic; }
-.links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.45rem; }
-.links .btn {
-  font-family: var(--f-body); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase;
-  color: var(--text); background: transparent; border: 1px solid var(--text); border-radius: 2px;
-  padding: 0.25rem 1rem; cursor: pointer; line-height: 1.5; display: inline-block;
+.pub-media svg { width: 100%; height: 100%; display: block; }
+.pub-media.tile { display: grid; place-items: center; text-align: center; padding: 10px; }
+.pub-media.tile span { font-family: var(--f-display); font-size: 21px; font-weight: 500; color: var(--text-2); line-height: 1.15; }
+.pub-media.tile small { display: block; font-family: var(--f-mono); font-size: 11px; color: var(--muted); margin-top: 6px; letter-spacing: 0.04em; }
+.pub-body { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--f-mono); font-size: 11.5px; font-weight: 500; line-height: 1; padding: 6px 9px; border-radius: 6px; letter-spacing: 0.02em; }
+.chip.venue { background: var(--accent-soft); color: var(--accent); }
+.chip.review { background: var(--warn-soft); color: var(--warn); }
+.chip.prep { background: var(--bg-2); color: var(--muted); border: 1px solid var(--line); padding: 5px 8px; }
+.pub-title { font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.005em; color: var(--text); }
+.pub-authors { font-size: 14.5px; color: var(--text-2); }
+.pub-authors .me { color: var(--text); font-weight: 500; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.pub-venue { font-size: 14px; color: var(--muted); font-style: italic; }
+.pub-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pill {
+  font-family: var(--f-body); font-size: 13px; font-weight: 500; line-height: 1;
+  color: var(--text-2); background: transparent; border: 1px solid var(--line); border-radius: 999px;
+  padding: 7px 13px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
 }
-.links .btn:hover { color: var(--theme); border-color: var(--theme); text-decoration: none; }
-.hidden-box { font-size: 0.875rem; margin-top: 0.6rem; }
-.hidden-box.summary { border: 1px dashed var(--text); padding: 10px 12px; text-align: justify; }
-.hidden-box pre {
-  margin: 0; padding: 10px 12px; background: var(--code-bg); color: var(--theme); border-radius: 6px;
-  font-family: var(--f-mono); font-size: 0.78rem; line-height: 1.45; overflow-x: auto;
-}
-@media (max-width: 575px) {
-  .pub-row { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .preview { max-width: 220px; }
-  h2.bibliography { margin-bottom: 0.6rem; }
-}
+.pill:hover, .pill[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+.pill svg { width: 12px; height: 12px; }
+.pub-box { margin-top: 8px; font-size: 14.5px; color: var(--text-2); background: var(--bg-2); border-radius: 10px; padding: 12px 16px; }
+.pub-box pre { margin: 0; font-family: var(--f-mono); font-size: 12px; line-height: 1.55; color: var(--text); overflow-x: auto; white-space: pre; }
+.copy-row { display: flex; justify-content: flex-end; margin-top: 8px; }
 
-/* ---------- cards ---------- */
-.card { background: var(--card); border-radius: 0.25rem; box-shadow: var(--shadow-1); padding: 1.25rem; transition: box-shadow 0.2s ease; }
-.card.hoverable:hover { box-shadow: var(--shadow-2); }
-.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-.card-title { font-size: 1.25rem; font-weight: 400; margin-bottom: 0.5rem; line-height: 1.3; }
-.card-tag { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.4rem; display: block; }
-.card p { font-size: 0.95rem; margin: 0; }
-@media (max-width: 600px) { .cards { grid-template-columns: minmax(0, 1fr); } }
-
-/* demo */
-.demo { display: flex; flex-direction: column; gap: 12px; }
-.demo canvas { width: 100%; height: 250px; display: block; cursor: pointer; touch-action: manipulation; }
-.demo-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+/* ---------- projects ---------- */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.demo { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+.demo-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.demo-head h3 { font-size: 18px; font-weight: 600; }
+.demo-head .eyebrow { margin: 0; font-size: 11.5px; }
+.demo canvas { width: 100%; height: 250px; display: block; cursor: pointer; touch-action: manipulation; background: var(--bg-2); border-radius: 10px; }
+.demo-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
 .demo-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-.delay { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
-.delay input { width: 130px; accent-color: var(--theme); }
-.delay output { min-width: 4.5em; font-variant-numeric: tabular-nums; font-weight: 400; }
-.readout { font-family: var(--f-mono); font-size: 0.78rem; color: var(--text-light); font-variant-numeric: tabular-nums; display: flex; gap: 6px 16px; flex-wrap: wrap; }
+.delay { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-2); }
+.delay input { width: 130px; accent-color: var(--accent); }
+.delay output { min-width: 4.5em; font-family: var(--f-mono); font-size: 13px; color: var(--text); font-variant-numeric: tabular-nums; }
+.readout { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; gap: 6px 18px; flex-wrap: wrap; }
 .readout b { color: var(--text); font-weight: 500; }
-.demo .caption { font-size: 0.875rem; margin: 0; }
+.demo figcaption { font-size: 14.5px; color: var(--text-2); max-width: 75ch; }
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.project { display: flex; flex-direction: column; gap: 8px; transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+.project:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); }
+.project .where { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.project h3 { font-size: 17px; font-weight: 600; line-height: 1.35; }
+.project p { font-size: 14.5px; color: var(--text-2); line-height: 1.6; }
 
 /* ---------- cv ---------- */
-.cv-card { margin-bottom: 1.5rem; }
-.cv-card h3 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.6rem; }
-.cv-list { list-style: none; margin: 0; padding: 0; }
-.cv-list > li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 18px; padding: 0.75rem 0; border-top: 1px solid var(--divider); }
-.cv-list > li:first-child { border-top: 0; }
-.badge-red {
-  display: inline-block; background: var(--badge); color: #ffffff; font-weight: 700; font-size: 0.72rem; text-transform: uppercase;
-  padding: 0.35em 0.5em; border-radius: 0.25rem; min-width: 75px; text-align: center; box-shadow: var(--shadow-1); line-height: 1.2;
+.cv-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.cv-col h3 { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 18px; }
+.timeline { position: relative; padding-left: 22px; display: flex; flex-direction: column; gap: 26px; }
+.timeline::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
+.tl-item { position: relative; }
+.tl-item::before {
+  content: ""; position: absolute; left: -22px; top: 7px; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--accent);
 }
-.cv-item h4 { font-size: 1rem; font-weight: 700; }
-.cv-item .inst { font-size: 0.95rem; margin: 0; }
-.cv-item .loc { font-size: 0.95rem; font-style: italic; margin: 0; }
-.cv-item ul { margin: 0.35rem 0 0; padding-left: 1.1rem; font-size: 0.95rem; }
-.skills-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-.skills-table th { text-align: left; font-weight: 700; width: 34%; padding: 0.4rem 0.8rem 0.4rem 0; vertical-align: top; }
-.skills-table td { padding: 0.4rem 0; }
-@media (max-width: 575px) {
-  .cv-list > li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
-  .skills-table th, .skills-table td { display: block; width: auto; padding: 0.1rem 0; }
-  .skills-table td { padding-bottom: 0.6rem; }
+.tl-item.past::before { border-color: var(--muted); }
+.tl-when { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tl-item h4 { font-size: 16px; font-weight: 600; line-height: 1.4; margin-top: 2px; }
+.tl-where { font-size: 14.5px; color: var(--text-2); }
+.tl-item ul { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+.tl-item ul li { font-size: 14px; color: var(--text-2); line-height: 1.55; padding-left: 14px; position: relative; }
+.tl-item ul li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 5px; height: 1px; background: var(--muted); }
+.cv-note {
+  margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+  padding: 18px 22px; border-radius: 14px; background: var(--bg-2); border: 1px solid var(--line);
 }
-
-/* ---------- teaching ---------- */
-.teach { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
-.teach th, .teach td { text-align: left; padding: 0.35rem 0.4rem; vertical-align: top; font-size: 1rem; }
-.teach th { width: 30%; font-weight: 700; white-space: nowrap; padding-left: 0; }
-h3.group { font-size: 1.5rem; margin: 1.6rem 0 0.6rem; }
-@media (max-width: 575px) { .teach th { white-space: normal; } }
+.cv-note p { color: var(--text-2); font-size: 15px; }
+.cv-note p strong { color: var(--text); font-weight: 500; }
+.cv-note .mono { font-family: var(--f-mono); font-size: 13.5px; color: var(--text); user-select: all; }
 
 /* ---------- footer ---------- */
-footer {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
-  background: var(--footer-bg); color: var(--footer-text); font-size: 0.75rem;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+footer { border-top: 1px solid var(--line); margin-top: 64px; }
+footer .wrap {
+  padding-block: 26px calc(26px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px;
+  font-size: 13px; color: var(--muted);
 }
-footer .container { padding-block: 9px 8px; }
-footer a { color: var(--footer-link); }
-footer a:hover { color: var(--theme); text-decoration: none; }
 
-@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
-
-/* ---------- single-page additions ---------- */
-html { scroll-behavior: smooth; }
-section.page, section.block { scroll-margin-top: 64px; }
-section.block { padding-top: 4px; }
-.more-info { text-align: center; }
-.profile-links { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
-.profile-links a { color: var(--text); line-height: 0; }
-.profile-links a:hover { color: var(--theme); }
-.profile-links svg { width: 24px; height: 24px; }
-.cv-note { margin-top: 0.5rem; }
-main.container { padding-bottom: 24px; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-[hidden] { display: none !important; }
-@media (max-width: 575px) {
-  .profile { max-width: 230px; margin: 0 auto 1.5rem; }
+/* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  main { padding-top: 40px; gap: 68px; }
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .portrait { order: -1; }
+  .portrait img { width: 168px; height: 168px; }
+  .hero-text { text-align: left; }
+  .hero h1 { font-size: 42px; }
+  .tagline { font-size: 19px; }
+  .pub { grid-template-columns: minmax(0, 1fr); gap: 14px; padding: 14px; }
+  .pub-media { max-width: 260px; }
+  .pub-media.tile { aspect-ratio: auto; max-width: none; justify-items: start; text-align: left; padding: 10px 14px; }
+  .projects, .cv-grid { grid-template-columns: minmax(0, 1fr); }
+  .cv-grid { gap: 36px; }
+}
+@media (max-width: 420px) {
+  .wrap { padding-inline: 18px; }
+  .hero h1 { font-size: 36px; }
+  .news li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .sec-head h2 { font-size: 26px; }
+  .demo canvas { height: 220px; }
+  .card { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .project, .socials a, .pub { transition: none; }
+  .project:hover, .socials a:hover { transform: none; }
 }
 </style>
 </head>
 <body>
-<nav class="navbar" aria-label="Main">
-  <div class="container">
-    <div class="social">
-      <a href="mailto:aasadi@ncsu.edu" title="Email" aria-label="Email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.8 6.6 12 12.8l8.2-6.2"/></svg>
-      </a>
-    </div>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="nav-mail" href="mailto:aasadi@ncsu.edu" title="Email" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.8 6.8 12 12.8l8.2-6"/></svg>
+    </a>
     <div class="nav-right">
       <ul class="nav-links" id="nav-links">
-        <li><a href="#about" data-nav="about" class="active">about</a></li>
-        <li><a href="#news" data-nav="news">news</a></li>
-        <li><a href="#publications" data-nav="publications">publications</a></li>
-        <li><a href="#projects" data-nav="projects">projects</a></li>
-        <li><a href="#cv" data-nav="cv">cv</a></li>
+        <li><a href="#about" data-nav="about" class="active">About</a></li>
+        <li><a href="#news" data-nav="news">News</a></li>
+        <li><a href="#publications" data-nav="publications">Publications</a></li>
+        <li><a href="#projects" data-nav="projects">Projects</a></li>
+        <li><a href="#cv" data-nav="cv">CV</a></li>
       </ul>
       <button class="icon-btn" type="button" id="theme-btn" aria-label="Switch to dark mode">
-        <svg id="ic-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
-        <svg id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" hidden><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2.2M19.8 12H22M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg>
+        <svg id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+        <svg id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" hidden><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2 12h2.2M19.8 12H22M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"/></svg>
       </button>
-      <button class="icon-btn menu-btn" type="button" id="menu-btn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <button class="icon-btn menu-btn" type="button" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
+    <div class="progress" aria-hidden="true"><span id="progress"></span></div>
   </div>
 </nav>
-<div class="progress" aria-hidden="true"><span id="progress"></span></div>
 
-<main class="container">
+<main class="wrap">
 
   <!-- ===================== ABOUT ===================== -->
-  <section id="about" class="page" aria-label="About">
-    <header>
-      <h1 class="post-title"><b>Amirhossein</b> Asadi</h1>
-      <p class="desc">Graduate student in Mechanical Engineering @ <a href="https://www.ncsu.edu/">NC State University</a></p>
-    </header>
+  <section id="about" class="hero" aria-label="About">
+    <div class="hero-text">
+      <p class="eyebrow">Graduate student · NC State University</p>
+      <h1>Amirhossein Asadi</h1>
+      <p class="tagline">Safe, learning-enabled control for legged robots and lower-limb exoskeletons.</p>
+      <div class="bio">
+        <p>I am a graduate student in Mechanical Engineering, with a minor in Electrical and Computer Engineering, at North Carolina State University, supervised by <a href="http://sharmalabncsu.org">Prof. Nitin Sharma</a> in the Neuromuscular Control and Robotics Laboratory. My research focuses on <strong>learning-enabled control of nonlinear robotic systems with formal safety guarantees</strong>. I combine reinforcement learning and model predictive control with control barrier functions and reachability analysis, with applications to legged robots and human-interactive robots such as lower-limb exoskeletons.</p>
+        <p>Before coming to NC State, I received my B.Sc. in Mechanical Engineering from Iran University of Science and Technology, where I worked in the Intelligent Robotics Laboratory at the intersection of control theory and reinforcement learning, building dynamic models and learning-enabled controllers for wheeled-legged and flexible manipulators.</p>
+      </div>
+      <ul class="topics" aria-label="Research topics">
+        <li>Control barrier functions</li>
+        <li>Reachability analysis</li>
+        <li>Model predictive control</li>
+        <li>Reinforcement learning</li>
+        <li>Legged locomotion</li>
+        <li>Exoskeletons</li>
+      </ul>
+    </div>
 
-    <div class="profile">
+    <div class="portrait">
       <img src="photo.jpg" alt="Amirhossein Asadi" width="400" height="400">
-      <div class="more-info">
+      <div class="contact">
         <p>NC State University</p>
         <p>Raleigh, NC</p>
-        <p>aasadi [at] ncsu [dot] edu</p>
+        <p class="mono">aasadi [at] ncsu [dot] edu</p>
       </div>
-      <div class="profile-links">
+      <div class="socials">
         <a href="https://github.com/AmirhosseinAsadi1380" title="GitHub" aria-label="GitHub">
           <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
         </a>
@@ -321,45 +363,43 @@ main.container { padding-bottom: 24px; }
         </a>
       </div>
     </div>
-
-    <div class="clearfix">
-      <p>I am a graduate student in Mechanical Engineering, with a minor in Electrical and Computer Engineering, at North Carolina State University, supervised by <a href="http://sharmalabncsu.org">Prof. Nitin Sharma</a> in the Neuromuscular Control and Robotics Laboratory. My research focuses on <b>learning-enabled control of nonlinear robotic systems with formal safety guarantees</b>. I combine reinforcement learning and model predictive control with control barrier functions and reachability analysis, with applications to legged robots and human-interactive robots such as lower-limb exoskeletons.</p>
-      <p>Before coming to NC State, I received my B.Sc. in Mechanical Engineering from Iran University of Science and Technology, where I worked in the Intelligent Robotics Laboratory at the intersection of control theory and reinforcement learning, building dynamic models and learning-enabled controllers for wheeled-legged and flexible manipulators.</p>
-    </div>
   </section>
 
   <!-- ===================== NEWS ===================== -->
-  <section id="news" class="block" aria-labelledby="news-h">
-    <h2 class="sec" id="news-h">news</h2>
-    <table class="news">
-      <tr><th scope="row">2026</th><td>My paper on reduced-order backstepping control for nonlinear mechanical systems with input delay is accepted to <a href="#publications">IEEE CDC 2026</a> 🎉</td></tr>
-      <tr><th scope="row">2026</th><td>SafeShadow, our neural barrier framework for exoskeleton balance recovery, is under review at IEEE RA-L, and safety-aware reduced-order MPC is under review at IEEE L-CSS with the ACC 2027 option.</td></tr>
-      <tr><th scope="row">2024</th><td>Started graduate school at NC State and joined the Neuromuscular Control and Robotics Laboratory.</td></tr>
-      <tr><th scope="row">2024</th><td>Our paper on vision-based dynamic modeling of a wheeled-legged robot is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</td></tr>
-      <tr><th scope="row">2023</th><td>1st place in the SuperTeam Challenge at RoboCup IranOpen and in the Autonomous Cars League of the FIRA National Competition 🏆</td></tr>
-    </table>
+  <section id="news" aria-labelledby="news-h">
+    <div class="sec-head"><h2 id="news-h">News</h2></div>
+    <ul class="news">
+      <li><time datetime="2026">2026</time><p>My paper on reduced-order backstepping control for nonlinear mechanical systems with input delay is accepted to <a href="#publications">IEEE CDC 2026</a>.</p></li>
+      <li><time datetime="2026">2026</time><p>SafeShadow, our neural barrier framework for exoskeleton balance recovery, is under review at IEEE RA-L, and safety-aware reduced-order MPC is under review at IEEE L-CSS with the ACC 2027 option.</p></li>
+      <li><time datetime="2024">2024</time><p>Started graduate school at NC State and joined the Neuromuscular Control and Robotics Laboratory.</p></li>
+      <li><time datetime="2024">2024</time><p>Our paper on vision-based dynamic modeling of a wheeled-legged robot is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</p></li>
+      <li><time datetime="2023">2023</time><p>1st place in the SuperTeam Challenge at RoboCup IranOpen and in the Autonomous Cars League of the FIRA National Competition.</p></li>
+    </ul>
   </section>
 
   <!-- ===================== PUBLICATIONS ===================== -->
-  <section id="publications" class="block" aria-labelledby="pubs-h">
-    <h2 class="sec" id="pubs-h">publications</h2>
+  <section id="publications" aria-labelledby="pubs-h">
+    <div class="sec-head"><h2 id="pubs-h">Publications</h2></div>
     <div id="all-pubs"></div>
   </section>
 
   <!-- ===================== PROJECTS ===================== -->
-  <section id="projects" class="block" aria-labelledby="proj-h">
-    <h2 class="sec" id="proj-h">projects</h2>
+  <section id="projects" aria-labelledby="proj-h">
+    <div class="sec-head"><h2 id="proj-h">Projects</h2></div>
 
-    <figure class="card demo" style="margin:0">
-      <h3 class="card-title">Interactive: push recovery under step delay</h3>
+    <figure class="card demo">
+      <div class="demo-head">
+        <h3>Push recovery under step delay</h3>
+        <p class="eyebrow">Interactive · try it</p>
+      </div>
       <canvas id="walker" role="img" aria-label="Interactive balance-recovery simulation. Push the walker with the buttons or by clicking; it takes a recovery step to its capture point after the chosen delay."></canvas>
       <div class="demo-bar">
-        <div class="demo-btns links" style="margin:0">
-          <button class="btn" type="button" data-push="-1">← push</button>
-          <button class="btn" type="button" data-push="1">push →</button>
-          <button class="btn" type="button" id="reset">reset</button>
+        <div class="demo-btns">
+          <button class="pill" type="button" data-push="-1">← Push</button>
+          <button class="pill" type="button" data-push="1">Push →</button>
+          <button class="pill" type="button" id="reset">Reset</button>
         </div>
-        <label class="delay" for="delay">step delay τ
+        <label class="delay" for="delay">Step delay τ
           <input type="range" id="delay" min="0" max="300" step="25" value="100">
           <output id="delay-out" for="delay">100 ms</output>
         </label>
@@ -370,167 +410,202 @@ main.container { padding-bottom: 24px; }
         <span>steps <b id="r-n">0</b></span>
         <span>phase <b id="r-phase">standing</b></span>
       </div>
-      <figcaption class="caption">Push recovery on a linear inverted pendulum. A push moves the capture point ξ; while it stays over the foot, ankle torque is enough. Once ξ leaves the foot, the walker has to step, and the longer the delay τ before it can step, the farther it has to reach. This textbook capture-point model is here for intuition; my own work certifies recovery for richer models with delay.</figcaption>
+      <figcaption>Push recovery on a linear inverted pendulum. A push moves the capture point ξ; while it stays over the foot, ankle torque is enough. Once ξ leaves the foot, the walker has to step, and the longer the delay τ before it can step, the farther it has to reach. This textbook capture-point model is here for intuition; my own work certifies recovery for richer models with delay.</figcaption>
     </figure>
 
-    <div class="cards">
-      <article class="card hoverable">
-        <span class="card-tag">NC State · 2024–present</span>
-        <h3 class="card-title">Lower-limb exoskeleton balance-recovery platform</h3>
+    <div class="projects">
+      <article class="card project">
+        <span class="where">NC State · 2024–present</span>
+        <h3>Lower-limb exoskeleton balance-recovery platform</h3>
         <p>An exoskeleton framework for perturbation recovery that brings together rigid-body dynamics, contact constraints, actuator limits and center-of-mass regulation. It pairs robotic actuation with functional electrical stimulation, and I evaluate safety-critical controllers on it in simulation and in experimental balance-recovery trials.</p>
       </article>
-      <article class="card hoverable">
-        <span class="card-tag">IUST</span>
-        <h3 class="card-title">Learning-based control of a flexible revolute–prismatic manipulator</h3>
+      <article class="card project">
+        <span class="where">IUST</span>
+        <h3>Learning-based control of a flexible revolute–prismatic manipulator</h3>
         <p>Dynamic models and MATLAB simulations for end-effector regulation and vibration suppression, comparing PID, fuzzy-PID, Q-learning and multi-agent RL, including RL-based tuning of PID gains and fuzzy rules.</p>
       </article>
-      <article class="card hoverable">
-        <span class="card-tag">IUST</span>
-        <h3 class="card-title">Reinforcement learning for robot control</h3>
+      <article class="card project">
+        <span class="where">IUST</span>
+        <h3>Reinforcement learning for robot control</h3>
         <p>SAC and DDPG agents trained in simulation for ball balancing with a 7-DoF manipulator, quadruped locomotion, and adaptive cruise control.</p>
       </article>
-      <article class="card hoverable">
-        <span class="card-tag">IUST · RoboCup</span>
-        <h3 class="card-title">Autonomous mobile robot</h3>
+      <article class="card project">
+        <span class="where">IUST · RoboCup</span>
+        <h3>Autonomous mobile robot</h3>
         <p>As team leader and programmer, I led the design and build of an autonomous mobile robot for the RoboCup Autonomous Cars League.</p>
       </article>
     </div>
   </section>
 
   <!-- ===================== CV ===================== -->
-  <section id="cv" class="block" aria-labelledby="cv-h">
-    <h2 class="sec" id="cv-h">cv</h2>
-
-    <div class="card cv-card">
-      <h3>Education</h3>
-      <ul class="cv-list">
-        <li><div><span class="badge-red">2024 – now</span></div>
-          <div class="cv-item"><h4>M.S. in Mechanical Engineering</h4><p class="inst">North Carolina State University</p><p class="loc">Raleigh, NC</p><ul><li>Minor in Electrical and Computer Engineering</li></ul></div></li>
-        <li><div><span class="badge-red">2019 – 2024</span></div>
-          <div class="cv-item"><h4>B.Sc. in Mechanical Engineering</h4><p class="inst">Iran University of Science and Technology</p><p class="loc">Tehran, Iran</p></div></li>
-      </ul>
+  <section id="cv" aria-labelledby="cv-h">
+    <div class="sec-head"><h2 id="cv-h">CV</h2></div>
+    <div class="cv-grid">
+      <div class="cv-col">
+        <h3>Education</h3>
+        <ol class="timeline">
+          <li class="tl-item">
+            <span class="tl-when">2024 – present</span>
+            <h4>M.S. in Mechanical Engineering</h4>
+            <p class="tl-where">North Carolina State University · Raleigh, NC</p>
+            <ul><li>Minor in Electrical and Computer Engineering</li></ul>
+          </li>
+          <li class="tl-item past">
+            <span class="tl-when">2019 – 2024</span>
+            <h4>B.Sc. in Mechanical Engineering</h4>
+            <p class="tl-where">Iran University of Science and Technology · Tehran</p>
+          </li>
+        </ol>
+      </div>
+      <div class="cv-col">
+        <h3>Research experience</h3>
+        <ol class="timeline">
+          <li class="tl-item">
+            <span class="tl-when">2024 – present</span>
+            <h4>Graduate Student Researcher</h4>
+            <p class="tl-where">Neuromuscular Control and Robotics Laboratory, NC State</p>
+            <ul>
+              <li>Develop safety-critical and learning-based controllers for lower-limb exoskeletons, focused on balance recovery after external perturbations.</li>
+              <li>Design formal safety certificates that guarantee safe recovery while integrating learned components into the control framework.</li>
+            </ul>
+          </li>
+          <li class="tl-item past">
+            <span class="tl-when">Undergraduate</span>
+            <h4>Undergraduate Research Assistant</h4>
+            <p class="tl-where">Intelligent Robotics Laboratory, IUST</p>
+            <ul>
+              <li>Worked at the intersection of control theory and reinforcement learning, with applications to wheeled-legged and flexible manipulators.</li>
+              <li>Built dynamic models and controllers for complex robots, including learning-enabled control of a wheeled-legged manipulator.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
     </div>
-
-    <div class="card cv-card">
-      <h3>Research experience</h3>
-      <ul class="cv-list">
-        <li><div><span class="badge-red">2024 – now</span></div>
-          <div class="cv-item"><h4>Graduate Student Researcher</h4><p class="inst">Neuromuscular Control and Robotics Laboratory, NC State University</p>
-            <ul><li>Develop safety-critical and learning-based controllers for lower-limb exoskeletons, focused on balance recovery after external perturbations.</li><li>Design formal safety certificates that guarantee safe recovery while integrating learned components into the control framework.</li></ul></div></li>
-        <li><div><span class="badge-red">Undergrad</span></div>
-          <div class="cv-item"><h4>Undergraduate Research Assistant</h4><p class="inst">Intelligent Robotics Laboratory, Iran University of Science and Technology</p>
-            <ul><li>Worked at the intersection of control theory and reinforcement learning, with applications to wheeled-legged and flexible manipulators.</li><li>Built dynamic models and controllers for complex robots, including learning-enabled control of a wheeled-legged manipulator.</li></ul></div></li>
-      </ul>
+    <div class="cv-note">
+      <p><strong>Full CV available on request.</strong> Email me and I'll send it over.</p>
+      <span class="mono">aasadi [at] ncsu [dot] edu</span>
     </div>
-
-    <p class="cv-note">My full CV is available on request. Please email me at <b>aasadi [at] ncsu [dot] edu</b>.</p>
   </section>
 </main>
 
 <footer>
-  <div class="container">© Copyright 2026 Amirhossein Asadi. Design based on the <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Last updated: October 11, 2026.</div>
+  <div class="wrap">
+    <span>© 2026 Amirhossein Asadi</span>
+    <span>Last updated October 2026</span>
+  </div>
 </footer>
 
 <script>
 (() => {
   const root = document.documentElement;
 
-  /* ---------- publications data (edit here to add papers) ---------- */
+  /* ---------- publications data (edit here to add papers) ----------
+     status: 'published' | 'review' | 'prep'. thumb: a drawing name, or omit and set tile. */
   const ME = 'A. H. Asadi';
   const PUBS = [
-    { group: '2026', selected: true, thumb: 'delay',
+    { group: '2026', status: 'published', short: 'CDC 2026', thumb: 'delay',
       title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection',
       authors: ['A. H. Asadi', 'N. Sharma'],
-      venue: '<em>In IEEE Conference on Decision and Control (CDC)</em>, 2026',
+      venue: 'IEEE Conference on Decision and Control (CDC), 2026',
       summary: 'Models actuator delay as a transport PDE, derives a Galerkin reduced-order representation for controller synthesis, and designs a backstepping controller for nonlinear mechanical systems with Lyapunov-proven closed-loop stability and a command-filtered implementation.',
       bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' },
-    { group: '2026', selected: true, thumb: 'safe',
+    { group: '2026', status: 'review', short: 'RA-L', thumb: 'safe',
       title: 'SafeShadow: A Neural Barrier Safety Framework for Balance Recovery in Exoskeleton Systems',
       authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'],
-      venue: '<em>IEEE Robotics and Automation Letters (RA-L)</em>, under review, 2026',
+      venue: 'IEEE Robotics and Automation Letters (RA-L), 2026',
       summary: 'Trains a neural high-order control barrier function to learn posture- and actuation-dependent balance-feasible sets for lower-limb exoskeletons, and embeds it in a CLF–CBF quadratic program for real-time balance preservation and constrained allocation between motor actuation and functional electrical stimulation (FES).' },
-    { group: '2026', selected: true, thumb: 'rank',
+    { group: '2026', status: 'review', short: 'L-CSS + ACC 2027', thumb: 'rank',
       title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control',
       authors: ['A. H. Asadi', 'N. Sharma'],
-      venue: '<em>IEEE Control Systems Letters (L-CSS), with the ACC 2027 option</em>, under review',
+      venue: 'IEEE Control Systems Letters (L-CSS), with the ACC 2027 option',
       summary: 'An adaptive-order MPC framework combining dynamic active subspaces, reduced-order prediction and discrete-time control barrier functions, with a safety-driven rank-selection rule that raises the prediction dimension only when needed to preserve finite-horizon safety and recursive feasibility.' },
-    { group: 'in preparation', thumb: 'reach',
+    { group: 'In preparation', status: 'prep', thumb: 'reach',
       title: 'Reactive Stepping Under Delay: Hybrid Reach–Avoid Recovery for Bipedal Locomotion',
       authors: ['A. H. Asadi', 'N. Sharma'],
-      venue: '<em>In preparation</em>',
       summary: 'Formulates perturbation recovery as a delay-aware reach–avoid game, decomposes it into lower-dimensional pendular and swing-leg subproblems, and derives certified walking terminal sets and feasibility conditions for reactive steps under delayed control authority.' },
-    { group: 'in preparation', thumb: 'funnel',
+    { group: 'In preparation', status: 'prep', thumb: 'funnel',
       title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion',
       authors: ['A. H. Asadi', 'N. Sharma'],
-      venue: '<em>In preparation</em>',
       summary: 'Turns transverse contraction geometry and physical safety clearance into phase-dependent recovery funnels around a walking gait, and uses saltation-based impact sensitivity to certify hybrid recovery, trigger reactive steps, and choose footholds by post-impact recovery margin.' },
-    { group: '2024', abbr: 'Robotica',
+    { group: 'Earlier work', status: 'published', short: 'Robotica 2024', tile: ['Robotica', 'Journal · 2024'],
       title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation',
       authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'],
-      venue: '<em>Robotica</em>, 2024',
+      venue: 'Robotica, 2024',
       doi: 'https://doi.org/10.1017/S0263574724001644',
       bib: '@article{korayem2024vision,\n  title   = {Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using {G}ibbs--{A}ppell Formulation},\n  author  = {Korayem, M. H. and Nikseresht, N. and Asadi, A. H.},\n  journal = {Robotica},\n  year    = {2024},\n  doi     = {10.1017/S0263574724001644}\n}' },
-    { group: '2023', abbr: 'ICRoM',
+    { group: 'Earlier work', status: 'published', short: 'ICRoM 2023', tile: ['ICRoM', 'Conference · 2023'],
       title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning',
       authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'],
-      venue: '<em>In 11th RSI International Conference on Robotics and Mechatronics (ICRoM)</em>, IEEE, 2023, pp. 437–442',
+      venue: '11th RSI International Conference on Robotics and Mechatronics (ICRoM), IEEE, 2023, pp. 437–442',
       summary: 'Uses deep deterministic policy gradient (DDPG) to adapt the gains of a MIMO PID controller for a wheeled-legged manipulator, with wheel slippage incorporated into the inverse-kinematic model for robustness to locomotion uncertainty.',
       doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351',
       bib: '@inproceedings{asadi2023adaptive,\n  title     = {Adaptive {MIMO} {PID} Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning},\n  author    = {Asadi, A. H. and Nikseresht, N. and Korayem, A. H.},\n  booktitle = {11th RSI International Conference on Robotics and Mechatronics (ICRoM)},\n  pages     = {437--442},\n  year      = {2023},\n  publisher = {IEEE},\n  doi       = {10.1109/ICRoM60803.2023.10412351}\n}' }
   ];
 
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
-  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   function authorLine(list) {
-    const parts = list.map(a => a === ME ? '<em>' + a + '</em>' : a);
+    const parts = list.map(a => a === ME ? '<span class="me">' + a + '</span>' : a);
     if (parts.length <= 1) return parts.join('');
     return parts.slice(0, -1).join(', ') + (parts.length > 2 ? ',' : '') + ' and ' + parts[parts.length - 1];
   }
+  function copyText(text, el, btn) {
+    const label = btn.textContent;
+    const done = () => { btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = label; }, 1400); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected · press Ctrl+C'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
   function renderPub(p) {
-    const li = el('li');
-    const row = el('div', 'pub-row');
-    const left = el('div', p.thumb ? '' : 'abbr');
-    if (p.thumb) { const pv = el('div', 'preview'); pv.innerHTML = '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>'; left.appendChild(pv); }
-    else left.innerHTML = '<span>' + p.abbr + '</span>';
+    const li = el('li', 'pub');
+    const media = el('div', 'pub-media' + (p.thumb ? '' : ' tile'));
+    if (p.thumb) media.innerHTML = '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
+    else media.innerHTML = '<div><span>' + p.tile[0] + '</span><small>' + p.tile[1] + '</small></div>';
     const body = el('div', 'pub-body');
-    body.appendChild(el('div', 'pub-title', p.title));
-    body.appendChild(el('div', 'author', authorLine(p.authors)));
-    body.appendChild(el('div', 'periodical', p.venue));
-    const links = el('div', 'links');
+    const chips = el('div', 'chips');
+    if (p.status === 'published' && p.short) chips.appendChild(el('span', 'chip venue', p.short));
+    if (p.status === 'review') { chips.appendChild(el('span', 'chip review', 'Under review')); chips.appendChild(el('span', 'chip prep', p.short)); }
+    if (p.status === 'prep') chips.appendChild(el('span', 'chip prep', 'In preparation'));
+    body.appendChild(chips);
+    body.appendChild(el('h3', 'pub-title', p.title));
+    body.appendChild(el('p', 'pub-authors', authorLine(p.authors)));
+    if (p.venue) body.appendChild(el('p', 'pub-venue', p.venue));
+    const actions = el('div', 'pub-actions');
     const boxes = [];
     const toggle = (label, box) => {
-      const b = el('button', 'btn', label); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+      const b = el('button', 'pill', label); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
       b.addEventListener('click', () => {
         const open = box.hidden;
         boxes.forEach(x => { x.hidden = true; });
-        links.querySelectorAll('button').forEach(x => x.setAttribute('aria-expanded', 'false'));
+        actions.querySelectorAll('button').forEach(x => x.setAttribute('aria-expanded', 'false'));
         box.hidden = !open; b.setAttribute('aria-expanded', String(open));
       });
-      links.appendChild(b); boxes.push(box);
+      actions.appendChild(b); boxes.push(box);
     };
-    const extra = [];
-    if (p.summary) { const box = el('div', 'hidden-box summary', p.summary); box.hidden = true; toggle('summary', box); extra.push(box); }
+    if (p.summary) { const box = el('div', 'pub-box', p.summary); box.hidden = true; toggle('Summary', box); }
     if (p.bib) {
-      const box = el('div', 'hidden-box'); box.hidden = true;
+      const box = el('div', 'pub-box'); box.hidden = true;
       const pre = el('pre'); pre.textContent = p.bib; box.appendChild(pre);
-      toggle('bib', box); extra.push(box);
+      const row = el('div', 'copy-row'); const cb = el('button', 'pill', 'Copy'); cb.type = 'button';
+      cb.addEventListener('click', () => copyText(p.bib, pre, cb)); row.appendChild(cb); box.appendChild(row);
+      toggle('BibTeX', box);
     }
-    if (p.doi) { const a = el('a', 'btn', 'doi'); a.href = p.doi; links.appendChild(a); }
-    if (links.children.length) body.appendChild(links);
-    extra.forEach(x => body.appendChild(x));
-    row.appendChild(left); row.appendChild(body);
-    li.appendChild(row);
+    if (p.doi) {
+      const a = el('a', 'pill', 'DOI <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2h6v6M10 2 3 9"/></svg>');
+      a.href = p.doi; actions.appendChild(a);
+    }
+    if (actions.children.length) body.appendChild(actions);
+    boxes.forEach(x => body.appendChild(x));
+    li.appendChild(media); li.appendChild(body);
     return li;
   }
   const all = document.getElementById('all-pubs');
   [...new Set(PUBS.map(p => p.group))].forEach(g => {
-    all.appendChild(el('h2', 'bibliography', esc(g)));
-    const ol = el('ol', 'bib');
+    all.appendChild(el('h3', 'pub-group', g));
+    const ol = el('ol', 'pubs');
     PUBS.filter(p => p.group === g).forEach(p => ol.appendChild(renderPub(p)));
     all.appendChild(ol);
   });
 
-  /* ---------- publication previews (drawn) ---------- */
+  /* ---------- publication drawings ---------- */
   const NS = 'http://www.w3.org/2000/svg';
   const mk = (svg, tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); svg.appendChild(e); return e; };
   const path = (fn, n, t0, t1) => { let d = ''; for (let i = 0; i <= n; i++) { const [x, y] = fn(t0 + (t1 - t0) * i / n); d += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); } return d; };
@@ -607,23 +682,19 @@ main.container { padding-bottom: 24px; }
     menu.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open));
   });
   function spy() {
-    const y = window.scrollY + 100;
+    const y = window.scrollY + 120;
     let cur = navLinks[0].dataset.nav;
     navLinks.forEach(a => { const sec = document.getElementById(a.dataset.nav); if (sec && sec.getBoundingClientRect().top + window.scrollY <= y) cur = a.dataset.nav; });
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = navLinks[navLinks.length - 1].dataset.nav;
     navLinks.forEach(a => { const on = a.dataset.nav === cur; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
   }
-  window.addEventListener('scroll', spy, { passive: true });
-  window.addEventListener('resize', spy);
-
-  /* ---------- scroll progress ---------- */
   const bar = document.getElementById('progress');
   function updateProgress() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
   }
-  window.addEventListener('scroll', updateProgress, { passive: true });
-  window.addEventListener('resize', updateProgress);
+  window.addEventListener('scroll', () => { spy(); updateProgress(); }, { passive: true });
+  window.addEventListener('resize', () => { spy(); updateProgress(); });
 
   /* ---------- push-recovery demo: linear inverted pendulum with capture-point stepping ---------- */
   const G = 9.81, Z0 = 0.9, OM = Math.sqrt(G / Z0), FOOT = 0.09, LMAX = 0.75, TSWING = 0.24, DT = 0.005, PUSH = 0.6;
@@ -682,7 +753,7 @@ main.container { padding-bottom: 24px; }
     if (canvas.width !== Math.round(W * dpr) || canvas.height !== Math.round(H * dpr)) { canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
-    const ink = css('--text'), muted = css('--text-light'), rule = css('--divider'), accent = css('--theme'), soft = css('--theme-soft'), signal = css('--signal'), panel = css('--card');
+    const ink = css('--text'), muted = css('--muted'), rule = css('--line'), accent = css('--accent'), soft = css('--accent-soft'), signal = css('--signal'), panel = css('--surface');
     ctx.font = '11px ' + css('--f-mono');
     const groundY = H - 40;
     const scale = Math.min(W / 3.0, (groundY - 34) / (Z0 + 0.32));
@@ -750,7 +821,7 @@ main.container { padding-bottom: 24px; }
     }
     ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillStyle = muted;
     const msg = st.fallen ? 'fell over, resetting' : st.phase === 'delay' ? 'ξ left the foot, waiting τ before stepping' : st.phase === 'swing' ? 'stepping to the capture point' : 'standing';
-    ctx.fillText(msg, 4, 4);
+    ctx.fillText(msg, 10, 10);
 
     rErr.textContent = (c - pf).toFixed(2) + ' m';
     rStep.textContent = st.lastStep === null ? '—' : st.lastStep.toFixed(2) + ' m';
@@ -772,14 +843,11 @@ main.container { padding-bottom: 24px; }
   function frame(t) {
     if (last === null) last = t;
     const dt = Math.min(0.1, (t - last) / 1000); last = t;
-    if (canvas.clientWidth) {
-      acc += dt;
-      while (acc >= DT) { step(); acc -= DT; }
-      draw();
-    }
+    acc += dt;
+    while (acc >= DT) { step(); acc -= DT; }
+    draw();
     requestAnimationFrame(frame);
   }
-
   spy(); updateProgress();
   requestAnimationFrame(frame);
 })();
