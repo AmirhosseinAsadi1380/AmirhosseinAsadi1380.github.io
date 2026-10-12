@@ -126,7 +126,7 @@ h2.sec a:hover { text-decoration: none; color: var(--theme); }
 
 /* ---------- about ---------- */
 .profile { float: right; width: 30%; margin: 0 0 1rem 1.5rem; }
-.profile img { width: 100%; height: auto; display: block; border-radius: 4px; box-shadow: var(--shadow-1); }
+.profile img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; border-radius: 50%; box-shadow: var(--shadow-1); }
 .more-info { font-family: var(--f-mono); font-size: 0.82rem; margin-top: 10px; line-height: 1.55; }
 .more-info p { margin: 0; }
 .clearfix::after { content: ""; display: table; clear: both; }
@@ -246,6 +246,19 @@ footer a { color: var(--footer-link); }
 footer a:hover { color: var(--theme); text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+
+/* ---------- single-page additions ---------- */
+html { scroll-behavior: smooth; }
+section.page, section.block { scroll-margin-top: 64px; }
+section.block { padding-top: 4px; }
+.more-info { text-align: center; }
+.profile-links { display: flex; justify-content: center; gap: 16px; margin-top: 10px; }
+.profile-links a { color: var(--text); line-height: 0; }
+.profile-links a:hover { color: var(--theme); }
+.profile-links svg { width: 24px; height: 24px; }
+.cv-note { margin-top: 0.5rem; }
+main.container { padding-bottom: 24px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
@@ -255,19 +268,13 @@ footer a:hover { color: var(--theme); text-decoration: none; }
       <a href="mailto:aasadi@ncsu.edu" title="Email" aria-label="Email">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.8 6.6 12 12.8l8.2-6.2"/></svg>
       </a>
-      <a href="cv.pdf" title="CV (PDF)" aria-label="CV">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M9.5 12h6M9.5 15h6M9.5 18h4"/></svg>
-      </a>
-      <a href="http://sharmalabncsu.org" title="Lab website" aria-label="Lab website">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.2L4.6 18.8A1.5 1.5 0 0 0 5.9 21h12.2a1.5 1.5 0 0 0 1.3-2.2L14 9.2V3"/><path d="M7.2 15h9.6"/></svg>
-      </a>
     </div>
     <div class="nav-right">
       <ul class="nav-links" id="nav-links">
-        <li><a href="#about" data-nav="about">about</a></li>
+        <li><a href="#about" data-nav="about" class="active">about</a></li>
+        <li><a href="#news" data-nav="news">news</a></li>
         <li><a href="#publications" data-nav="publications">publications</a></li>
         <li><a href="#projects" data-nav="projects">projects</a></li>
-        <li><a href="#teaching" data-nav="teaching">teaching</a></li>
         <li><a href="#cv" data-nav="cv">cv</a></li>
       </ul>
       <button class="icon-btn" type="button" id="theme-btn" aria-label="Switch to dark mode">
@@ -285,7 +292,7 @@ footer a:hover { color: var(--theme); text-decoration: none; }
 <main class="container">
 
   <!-- ===================== ABOUT ===================== -->
-  <section class="page" data-page="about" aria-label="About">
+  <section id="about" class="page" aria-label="About">
     <header>
       <h1 class="post-title"><b>Amirhossein</b> Asadi</h1>
       <p class="desc">Graduate student in Mechanical Engineering @ <a href="https://www.ncsu.edu/">NC State University</a></p>
@@ -298,44 +305,53 @@ footer a:hover { color: var(--theme); text-decoration: none; }
         <p>NC State University, Raleigh, NC</p>
         <p>aasadi [at] ncsu [dot] edu</p>
       </div>
+      <div class="profile-links">
+        <a href="https://github.com/AmirhosseinAsadi1380" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <!-- LinkedIn: replace the href and remove the comment markers
+        <a href="https://www.linkedin.com/in/YOUR-PROFILE" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        -->
+        <!-- Google Scholar: replace the href and remove the comment markers
+        <a href="https://scholar.google.com/citations?user=YOUR-ID" title="Google Scholar" aria-label="Google Scholar">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.84 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.16 4.44L24 9.5z"/></svg>
+        </a>
+        -->
+      </div>
     </div>
 
     <div class="clearfix">
       <p>I am a graduate student in Mechanical Engineering, with a minor in Electrical and Computer Engineering, at North Carolina State University, supervised by <a href="http://sharmalabncsu.org">Prof. Nitin Sharma</a> in the Neuromuscular Control and Robotics Laboratory. My research focuses on <b>learning-enabled control of nonlinear robotic systems with formal safety guarantees</b>. I combine reinforcement learning and model predictive control with control barrier functions and reachability analysis, with applications to legged robots and human-interactive robots such as lower-limb exoskeletons.</p>
       <p>Before coming to NC State, I received my B.Sc. in Mechanical Engineering from Iran University of Science and Technology, where I worked in the Intelligent Robotics Laboratory at the intersection of control theory and reinforcement learning, building dynamic models and learning-enabled controllers for wheeled-legged and flexible manipulators.</p>
     </div>
+  </section>
 
-    <h2 class="sec">news</h2>
+  <!-- ===================== NEWS ===================== -->
+  <section id="news" class="block" aria-labelledby="news-h">
+    <h2 class="sec" id="news-h">news</h2>
     <table class="news">
       <tr><th scope="row">2026</th><td>My paper on reduced-order backstepping control for nonlinear mechanical systems with input delay is accepted to <a href="#publications">IEEE CDC 2026</a> 🎉</td></tr>
       <tr><th scope="row">2026</th><td>SafeShadow, our neural barrier framework for exoskeleton balance recovery, is under review at IEEE RA-L, and safety-aware reduced-order MPC is under review at IEEE L-CSS with the ACC 2027 option.</td></tr>
-      <tr><th scope="row">2024</th><td>Started my M.S. at NC State and joined the Neuromuscular Control and Robotics Laboratory.</td></tr>
+      <tr><th scope="row">2024</th><td>Started graduate school at NC State and joined the Neuromuscular Control and Robotics Laboratory.</td></tr>
       <tr><th scope="row">2024</th><td>Our paper on vision-based dynamic modeling of a wheeled-legged robot is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</td></tr>
       <tr><th scope="row">2023</th><td>1st place in the SuperTeam Challenge at RoboCup IranOpen and in the Autonomous Cars League of the FIRA National Competition 🏆</td></tr>
     </table>
-
-    <h2 class="sec"><a href="#publications">selected publications</a></h2>
-    <ol class="bib" id="selected-pubs"></ol>
   </section>
 
   <!-- ===================== PUBLICATIONS ===================== -->
-  <section class="page" data-page="publications" aria-label="Publications" hidden>
-    <header>
-      <h1 class="post-title">publications</h1>
-      <p class="post-description">Publications in reverse chronological order.</p>
-    </header>
+  <section id="publications" class="block" aria-labelledby="pubs-h">
+    <h2 class="sec" id="pubs-h">publications</h2>
     <div id="all-pubs"></div>
   </section>
 
   <!-- ===================== PROJECTS ===================== -->
-  <section class="page" data-page="projects" aria-label="Projects" hidden>
-    <header>
-      <h1 class="post-title">projects</h1>
-      <p class="post-description">Research and engineering projects, from exoskeletons to autonomous cars.</p>
-    </header>
+  <section id="projects" class="block" aria-labelledby="proj-h">
+    <h2 class="sec" id="proj-h">projects</h2>
 
     <figure class="card demo" style="margin:0">
-      <h2 class="card-title">Interactive: push recovery under step delay</h2>
+      <h3 class="card-title">Interactive: push recovery under step delay</h3>
       <canvas id="walker" role="img" aria-label="Interactive balance-recovery simulation. Push the walker with the buttons or by clicking; it takes a recovery step to its capture point after the chosen delay."></canvas>
       <div class="demo-bar">
         <div class="demo-btns links" style="margin:0">
@@ -360,57 +376,30 @@ footer a:hover { color: var(--theme); text-decoration: none; }
     <div class="cards">
       <article class="card hoverable">
         <span class="card-tag">NC State · 2024–present</span>
-        <h2 class="card-title">Lower-limb exoskeleton balance-recovery platform</h2>
+        <h3 class="card-title">Lower-limb exoskeleton balance-recovery platform</h3>
         <p>An exoskeleton framework for perturbation recovery that brings together rigid-body dynamics, contact constraints, actuator limits and center-of-mass regulation. It pairs robotic actuation with functional electrical stimulation, and I evaluate safety-critical controllers on it in simulation and in experimental balance-recovery trials.</p>
       </article>
       <article class="card hoverable">
         <span class="card-tag">IUST</span>
-        <h2 class="card-title">Learning-based control of a flexible revolute–prismatic manipulator</h2>
+        <h3 class="card-title">Learning-based control of a flexible revolute–prismatic manipulator</h3>
         <p>Dynamic models and MATLAB simulations for end-effector regulation and vibration suppression, comparing PID, fuzzy-PID, Q-learning and multi-agent RL, including RL-based tuning of PID gains and fuzzy rules.</p>
       </article>
       <article class="card hoverable">
         <span class="card-tag">IUST</span>
-        <h2 class="card-title">Reinforcement learning for robot control</h2>
+        <h3 class="card-title">Reinforcement learning for robot control</h3>
         <p>SAC and DDPG agents trained in simulation for ball balancing with a 7-DoF manipulator, quadruped locomotion, and adaptive cruise control.</p>
       </article>
       <article class="card hoverable">
         <span class="card-tag">IUST · RoboCup</span>
-        <h2 class="card-title">Autonomous mobile robot</h2>
+        <h3 class="card-title">Autonomous mobile robot</h3>
         <p>As team leader and programmer, I led the design and build of an autonomous mobile robot for the RoboCup Autonomous Cars League.</p>
       </article>
     </div>
   </section>
 
-  <!-- ===================== TEACHING ===================== -->
-  <section class="page" data-page="teaching" aria-label="Teaching" hidden>
-    <header>
-      <h1 class="post-title">teaching</h1>
-      <p class="post-description">Courses I have taught or assisted with.</p>
-    </header>
-    <h3 class="group">North Carolina State University</h3>
-    <table class="teach">
-      <tr><th scope="row">Fall 2025, Spring 2026</th><td>MAE 306: Thermal-Fluid Sciences Lab</td></tr>
-      <tr><th scope="row">Spring 2025</th><td>MAE 253: Experimental Aerodynamics Lab</td></tr>
-      <tr><th scope="row">Fall 2024</th><td>MAE 371: Aerospace Vehicle Structures Lab</td></tr>
-    </table>
-    <h3 class="group">Iran University of Science and Technology</h3>
-    <table class="teach">
-      <tr><th scope="row">Winter 2023</th><td>Linear Control Systems, Department of Railway Engineering</td></tr>
-      <tr><th scope="row">Fall 2022</th><td>Dynamics, Department of Mechanical Engineering</td></tr>
-      <tr><th scope="row">Winter 2022</th><td>Mechanical Vibrations, Department of Mechanical Engineering</td></tr>
-      <tr><th scope="row">Workshops</th><td>Instructor, MATLAB/Simulink and SolidWorks courses and workshops</td></tr>
-    </table>
-  </section>
-
   <!-- ===================== CV ===================== -->
-  <section class="page" data-page="cv" aria-label="CV" hidden>
-    <header class="title-row">
-      <h1 class="post-title">cv</h1>
-      <a href="cv.pdf" title="Download CV (PDF)" aria-label="Download CV as PDF">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M12.5 11v6M10 14.5l2.5 2.5 2.5-2.5"/></svg>
-      </a>
-    </header>
-    <p class="post-description">The full CV is available as a <a href="cv.pdf">PDF</a>.</p>
+  <section id="cv" class="block" aria-labelledby="cv-h">
+    <h2 class="sec" id="cv-h">cv</h2>
 
     <div class="card cv-card">
       <h3>Education</h3>
@@ -434,38 +423,7 @@ footer a:hover { color: var(--theme); text-decoration: none; }
       </ul>
     </div>
 
-    <div class="card cv-card">
-      <h3>Honors and awards</h3>
-      <ul class="cv-list">
-        <li><div><span class="badge-red">2023</span></div><div class="cv-item"><h4>1st place, SuperTeam Challenge</h4><p class="inst">RoboCup IranOpen, Tehran</p></div></li>
-        <li><div><span class="badge-red">2023</span></div><div class="cv-item"><h4>1st place, Autonomous Cars League</h4><p class="inst">FIRA National Competition, Iran</p></div></li>
-        <li><div><span class="badge-red">2022 – 2023</span></div><div class="cv-item"><h4>Fellowship</h4><p class="inst">Iran's National Elites Foundation (INEF)</p></div></li>
-        <li><div></div><div class="cv-item"><h4>Exceptional Talents admission</h4><p class="inst">Admitted to M.S. study without the entrance examination</p></div></li>
-        <li><div></div><div class="cv-item"><h4>Top 0.06% nationwide</h4><p class="inst">Iranian University Entrance Examination</p></div></li>
-      </ul>
-    </div>
-
-    <div class="card cv-card">
-      <h3>Service and leadership</h3>
-      <ul class="cv-list">
-        <li><div></div><div class="cv-item"><h4>Reviewer</h4><p class="inst">IEEE Robotics and Automation Letters (RA-L); American Control Conference (ACC)</p></div></li>
-        <li><div></div><div class="cv-item"><h4>President</h4><p class="inst">Robotics and Mechatronics Student Association, Iran University of Science and Technology</p></div></li>
-        <li><div></div><div class="cv-item"><h4>Team leader and programmer</h4><p class="inst">RoboCup Autonomous Cars League</p><ul><li>Led the team in designing and building an autonomous mobile robot for competition.</li></ul></div></li>
-      </ul>
-    </div>
-
-    <div class="card cv-card">
-      <h3>Skills</h3>
-      <table class="skills-table">
-        <tr><th scope="row">Control and theory</th><td>Nonlinear control, MPC, control barrier functions, Lyapunov analysis, reachability analysis, optimization</td></tr>
-        <tr><th scope="row">Learning</th><td>Deep RL (DDPG, SAC), Q-learning, multi-agent RL, neural safety certificates</td></tr>
-        <tr><th scope="row">Programming</th><td>MATLAB, Python, C/C++, Julia</td></tr>
-        <tr><th scope="row">Robotics and simulation</th><td>ROS 2, MuJoCo, Gazebo, Simulink, OpenCV</td></tr>
-        <tr><th scope="row">Tools</th><td>Git, LaTeX, Linux, Docker</td></tr>
-        <tr><th scope="row">Hardware</th><td>Sensors, embedded systems (Raspberry Pi, Arduino), CAN bus, real-time control</td></tr>
-        <tr><th scope="row">Languages</th><td>English, Persian (native)</td></tr>
-      </table>
-    </div>
+    <p class="cv-note">My full CV is available on request. Please email me at <b>aasadi [at] ncsu [dot] edu</b>.</p>
   </section>
 </main>
 
@@ -564,8 +522,6 @@ footer a:hover { color: var(--theme); text-decoration: none; }
     li.appendChild(row);
     return li;
   }
-  const sel = document.getElementById('selected-pubs');
-  PUBS.filter(p => p.selected).forEach(p => sel.appendChild(renderPub(p)));
   const all = document.getElementById('all-pubs');
   [...new Set(PUBS.map(p => p.group))].forEach(g => {
     all.appendChild(el('h2', 'bibliography', esc(g)));
@@ -641,29 +597,24 @@ footer a:hover { color: var(--theme); text-decoration: none; }
   });
   if (mq.addEventListener) mq.addEventListener('change', syncTheme);
 
-  /* ---------- pages ---------- */
-  const pages = [...document.querySelectorAll('[data-page]')];
+  /* ---------- navbar: smooth scroll + active section ---------- */
   const navLinks = [...document.querySelectorAll('[data-nav]')];
   const menu = document.getElementById('nav-links'), menuBtn = document.getElementById('menu-btn');
-  let onShow = {};
-  function show(name, scroll) {
-    if (!pages.some(p => p.dataset.page === name)) name = 'about';
-    pages.forEach(p => { p.hidden = p.dataset.page !== name; });
-    navLinks.forEach(a => {
-      const on = a.dataset.nav === name;
-      a.classList.toggle('active', on);
-      if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-    });
-    menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
-    if (scroll) window.scrollTo(0, 0);
-    if (onShow[name]) onShow[name]();
-    updateProgress();
-  }
-  window.addEventListener('hashchange', () => show(location.hash.slice(1), true));
+  const closeMenu = () => { menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); };
+  navLinks.forEach(a => a.addEventListener('click', closeMenu));
   menuBtn.addEventListener('click', () => {
     const open = !menu.classList.contains('open');
     menu.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open));
   });
+  function spy() {
+    const y = window.scrollY + 100;
+    let cur = navLinks[0].dataset.nav;
+    navLinks.forEach(a => { const sec = document.getElementById(a.dataset.nav); if (sec && sec.getBoundingClientRect().top + window.scrollY <= y) cur = a.dataset.nav; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = navLinks[navLinks.length - 1].dataset.nav;
+    navLinks.forEach(a => { const on = a.dataset.nav === cur; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  window.addEventListener('resize', spy);
 
   /* ---------- scroll progress ---------- */
   const bar = document.getElementById('progress');
@@ -811,10 +762,12 @@ footer a:hover { color: var(--theme); text-decoration: none; }
   canvas.addEventListener('click', e => { const r = canvas.getBoundingClientRect(); push(e.clientX - r.left < r.width / 2 ? 1 : -1); });
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  onShow.projects = () => {
-    draw();
-    if (!reduce && !autoPushed) { autoPushed = true; setTimeout(() => { if (st.steps === 0 && !st.pushFx) push(1); }, 900); }
-  };
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => {
+      if (es.some(e => e.isIntersecting) && !autoPushed) { autoPushed = true; io.disconnect(); setTimeout(() => { if (st.steps === 0 && !st.pushFx) push(1); }, 700); }
+    }, { threshold: 0.5 });
+    io.observe(canvas);
+  }
   let last = null, acc = 0;
   function frame(t) {
     if (last === null) last = t;
@@ -827,7 +780,7 @@ footer a:hover { color: var(--theme); text-decoration: none; }
     requestAnimationFrame(frame);
   }
 
-  show(location.hash.slice(1) || 'about', false);
+  spy(); updateProgress();
   requestAnimationFrame(frame);
 })();
 </script>
