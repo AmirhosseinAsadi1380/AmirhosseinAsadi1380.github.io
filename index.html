@@ -562,10 +562,9 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
      or video: 'images/clip.mp4' (with poster: 'images/frame.jpg') for a looping clip.
      Paper links appear as icons next to the title; opening a card shows only the 'more' points. */
   const ME = 'A. H. Asadi';
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PROJECTS = [
     { thumb: 'reach', dark: true,
-      video: 'images/reactive-stepping-loop.mp4', poster: 'images/reactive-stepping-poster.jpg',
+      video: 'images/reactive-stepping-loop.mp4', anim: 'images/reactive-stepping-loop.webp', poster: 'images/reactive-stepping-poster.jpg',
       figAlt: 'Simulation of a bipedal robot recovering from pushes while walking, with a plot of how deep the state stays inside the safe set over time.',
       title: 'Push recovery under delay for bipedal walking',
       short: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking.',
@@ -657,13 +656,23 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     const li = el('li', 'proj');
     const media = el('div', 'proj-media' + (p.img || p.video ? ' photo' : '') + (p.dark ? ' dark-img' : ''));
     if (p.video) {
+      // Muted looping clip that always plays. If the browser blocks video autoplay
+      // (e.g. phone battery saver), swap in the animated WebP version instead.
       const v = el('video'); if (p.poster) v.poster = p.poster;
-      const srcs = (vid) => [['webm', vid.replace(/\.mp4$/, '.webm')], ['mp4', vid]].map(([t, u]) => '<source src="' + u + '" type="video/' + t + '">').join('');
-      v.innerHTML = srcs(p.video);
-      v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.setAttribute('aria-label', p.figAlt || '');
-      v.preload = 'auto';
-      if (!reduceMotion) { v.autoplay = true; v.setAttribute('autoplay', ''); }
+      ['muted', 'loop', 'autoplay', 'playsinline'].forEach(a => v.setAttribute(a, ''));
+      v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
+      v.setAttribute('aria-label', p.figAlt || '');
+      v.innerHTML = '<source src="' + p.video.replace(/\.mp4$/, '.webm') + '" type="video/webm"><source src="' + p.video + '" type="video/mp4">';
       media.appendChild(v);
+      let swapped = false;
+      const fallback = () => {
+        if (swapped || !p.anim) return; swapped = true;
+        const im = el('img'); im.src = p.anim; im.alt = p.figAlt || ''; v.replaceWith(im);
+      };
+      const tryPlay = () => { const r = v.play(); if (r && r.catch) r.catch(fallback); };
+      v.addEventListener('loadeddata', tryPlay, { once: true });
+      v.addEventListener('error', fallback, true);
+      setTimeout(() => { if (!swapped && (v.paused || v.currentTime === 0)) { tryPlay(); setTimeout(() => { if (v.paused || v.currentTime === 0) fallback(); }, 1500); } }, 2500);
     } else media.innerHTML = p.img ? '<img src="' + p.img + '" alt="" loading="lazy">' : '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
     const body = el('div', 'proj-body');
 
