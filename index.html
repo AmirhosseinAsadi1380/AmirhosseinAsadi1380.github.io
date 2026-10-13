@@ -563,6 +563,9 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
      or video: 'images/clip.mp4' (with poster: 'images/frame.jpg' and size: [width, height]) for a looping clip shown uncropped.
      Paper links appear as icons next to the title; opening a card shows only the 'more' points. */
   const ME = 'A. H. Asadi';
+  // Bump this whenever an image or video file is replaced, so browsers fetch the new copy.
+  const ASSET_V = '2026-10-13c';
+  const asset = u => u + (u.includes('?') ? '&' : '?') + 'v=' + ASSET_V;
   const PROJECTS = [
     { thumb: 'reach', dark: true,
       video: 'images/reactive-stepping-loop.mp4', anim: 'images/reactive-stepping-loop.webp', poster: 'images/reactive-stepping-poster.jpg', size: [480, 384],
@@ -662,23 +665,23 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     if (p.video) {
       // Muted looping clip that always plays. If the browser blocks video autoplay
       // (e.g. phone battery saver), swap in the animated WebP version instead.
-      const v = el('video'); if (p.poster) v.poster = p.poster;
+      const v = el('video'); if (p.poster) v.poster = asset(p.poster);
       if (p.size) { v.width = p.size[0]; v.height = p.size[1]; }
       ['muted', 'loop', 'autoplay', 'playsinline'].forEach(a => v.setAttribute(a, ''));
       v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
       v.setAttribute('aria-label', p.figAlt || '');
-      v.innerHTML = '<source src="' + p.video.replace(/\.mp4$/, '.webm') + '" type="video/webm"><source src="' + p.video + '" type="video/mp4">';
+      v.innerHTML = '<source src="' + asset(p.video.replace(/\.mp4$/, '.webm')) + '" type="video/webm"><source src="' + asset(p.video) + '" type="video/mp4">';
       media.appendChild(v);
       let swapped = false;
       const fallback = () => {
         if (swapped || !p.anim) return; swapped = true;
-        const im = el('img'); im.src = p.anim; im.alt = p.figAlt || ''; if (p.size) { im.width = p.size[0]; im.height = p.size[1]; } v.replaceWith(im);
+        const im = el('img'); im.src = asset(p.anim); im.alt = p.figAlt || ''; if (p.size) { im.width = p.size[0]; im.height = p.size[1]; } v.replaceWith(im);
       };
       const tryPlay = () => { const r = v.play(); if (r && r.catch) r.catch(fallback); };
       v.addEventListener('loadeddata', tryPlay, { once: true });
       v.addEventListener('error', fallback, true);
       setTimeout(() => { if (!swapped && (v.paused || v.currentTime === 0)) { tryPlay(); setTimeout(() => { if (v.paused || v.currentTime === 0) fallback(); }, 1500); } }, 2500);
-    } else media.innerHTML = p.img ? '<img src="' + p.img + '" alt="" loading="lazy">' : '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
+    } else media.innerHTML = p.img ? '<img src="' + asset(p.img) + '" alt="" loading="lazy">' : '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
     const body = el('div', 'proj-body');
 
     const head = el('div', 'proj-head');
