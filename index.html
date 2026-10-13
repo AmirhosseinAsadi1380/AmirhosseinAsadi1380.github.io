@@ -384,13 +384,9 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
 .tag.soon svg { opacity: 0.75; }
 .tag.label { cursor: default; }
 .proj-short { font-size: 14.5px; color: var(--text-2); }
-.proj-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease; }
-.proj.open .proj-more { grid-template-rows: 1fr; }
-.proj-more-inner { overflow: hidden; min-height: 0; }
-.proj.open .proj-more-inner { overflow: visible; }
-.proj-points { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
-.proj-points li { font-size: 13.5px; color: var(--text-2); line-height: 1.5; padding-left: 14px; position: relative; }
-.proj-points li::before { content: ""; position: absolute; left: 1px; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.7; }
+.proj-rest { display: none; }
+.proj.open .proj-rest { display: inline; animation: proj-rest-in 0.3s ease; }
+@keyframes proj-rest-in { from { opacity: 0; } to { opacity: 1; } }
 .proj-papers { display: flex; flex-direction: column; gap: 3px; border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 10px; }
 .proj-paper { font-size: 13px; color: var(--muted); line-height: 1.45; }
 .proj-paper .pt { color: var(--text-2); }
@@ -411,7 +407,7 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
   .proj-media { max-width: 80%; }
   .proj-title { font-size: 16px; }
 }
-@media (prefers-reduced-motion: reduce) { .proj, .proj-more, .proj-more-btn svg, .tag { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .proj, .proj-more-btn svg, .tag { transition: none; } .proj.open .proj-rest { animation: none; } }
 </style>
 </head>
 <body>
@@ -553,13 +549,13 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
   const root = document.documentElement;
 
   /* ---------- selected projects (edit here) ----------
-     short: one or two sentences shown on the card. more: bullet points shown when the card is opened.
+     short: one or two sentences shown on the card. rest: the rest of the same paragraph, shown after short when 'Read more' is clicked.
      tags under 'Read more' come from each paper: arxiv, or else the published paper (pdf or doi, labelled with its venue), plus code.
      A paper with an arxiv link shows only the arXiv tag, never both. A venue with no link yet shows as a plain label.
      soon: ['arxiv', 'code'] shows dashed 'coming soon' tags for links you don't have yet; a real link replaces its soon tag.
      thumb: name of a drawing below; to use your own image, set img: 'images/file.png' instead,
      or video: 'images/clip.mp4' (with poster: 'images/frame.jpg' and size: [width, height]) for a looping clip shown uncropped.
-     Opening a card shows only the 'more' points. */
+     */
   const ME = 'A. H. Asadi';
   // Bump this whenever an image or video file is replaced, so browsers fetch the new copy.
   const ASSET_V = '2026-10-13d';
@@ -570,11 +566,7 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
       figAlt: 'Simulation of a bipedal robot recovering from pushes while walking, with a plot of how deep the state stays inside the safe set over time.',
       title: 'Push recovery under delay for bipedal walking',
       short: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking.',
-      more: [
-        'Reduces the delayed hybrid model, with detection delay, delayed ankle and swing actuation and a leg-travel budget shared by consecutive steps, to one planar reachability problem per stride.',
-        'Gives the walking region in closed form, with a sharp travel threshold and a latency law in which limited swing acceleration acts as extra delay.',
-        'With a 30 ms swing delay, a well-timed step keeps 86% of the push tolerance of instantaneous foot placement, versus 32% for a step fixed at the start of the stride.'
-      ],
+      rest: 'The delayed hybrid model, with detection delay, delayed ankle and swing actuation, and a leg-travel budget shared by consecutive steps, reduces to one planar reachability problem per stride. Solving it gives the walking region in closed form, with a sharp travel threshold and a latency law in which limited swing acceleration acts as extra delay. With a 30 ms swing delay, a well-timed step keeps 86% of the push tolerance of instantaneous foot placement, compared with 32% for a step fixed at the start of the stride.',
       soon: ['arxiv', 'code'],
       papers: [{ title: 'Reactive Stepping Under Delay: Analytical Reachability for Continued Walking', authors: ['A. H. Asadi'] }] },
 
@@ -583,51 +575,34 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
       figAlt: 'Simulation of a bipedal robot walking and stepping to recover from pushes.',
       title: 'Contraction–barrier recovery funnels for reactive stepping',
       short: 'One geometric certificate that tells a walking robot whether it can recover from a push without stepping, and if not, where to step.',
-      more: [
-        'Builds the safety barrier from the contraction metric of the walking orbit itself, propagating physical clearance backward through robust contraction and impact (saltation) sensitivity.',
-        'Certifies flow invariance, impact preservation and no-step recovery, ranks candidate footholds by the post-impact margin they create, and builds nested N-step recovery sets.'
-      ],
+      rest: 'The safety barrier is built from the contraction metric of the walking orbit itself, propagating physical clearance backward through robust contraction and impact (saltation) sensitivity. The certificate guarantees flow invariance, impact preservation and no-step recovery, ranks candidate footholds by the post-impact margin they create, and yields nested N-step recovery sets.',
       soon: ['arxiv', 'code'],
       papers: [{ title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion', authors: ['A. H. Asadi', 'N. Sharma'] }] },
 
     { thumb: 'safe',
       title: 'SafeShadow: balance certificates for hybrid exoskeletons',
       short: 'Certifying balance for exoskeletons that pair fast motors with slower, delayed muscle stimulation (FES), while letting stimulation do as much of the work as possible.',
-      more: [
-        'A relative-degree-aware safety filter: motors enforce a high-order control barrier function at their own relative degree, while FES enters as a committed signal already fixed by past commands.',
-        'Proves the balance set stays invariant for any FES command in a prescribed class, so stimulation can be allocated freely, with motors stepping in only when a scalar shadow gap turns negative.',
-        'Learns the balance-feasible set as a neural barrier function conditioned on stance, actuator limits and stimulation state.'
-      ],
+      rest: 'A relative-degree-aware safety filter lets the motors enforce a high-order control barrier function at their own relative degree, while FES enters as a committed signal already fixed by past commands. The balance set provably stays invariant for any FES command in a prescribed class, so stimulation can be allocated freely, and the motors step in only when a scalar shadow gap turns negative. The balance-feasible set itself is learned as a neural barrier function conditioned on stance, actuator limits and stimulation state.',
       soon: ['arxiv', 'code'],
       papers: [{ title: 'SafeShadow: Actuation-Aware Neural Barrier Certificates for Exoskeleton Balance under Heterogeneous Actuation', authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'] }] },
 
     { thumb: 'rank',
       title: 'Safety-aware reduced-order MPC',
       short: 'A model predictive controller that keeps its prediction model small for speed and grows it only when safety requires.',
-      more: [
-        'Orders reduced coordinates with dynamic active subspaces and certifies each candidate order with finite-horizon error bounds that robustly enforce discrete-time control barrier function constraints.',
-        'Selects the smallest order that keeps the safety-critical MPC feasible, with proofs of full-order horizon safety, recursive feasibility and closed-loop invariance.',
-        'On a 160-state nonlinear system, the order rises near the safety boundary and computation drops compared with fixed high-order or full-order MPC.'
-      ],
+      rest: 'Reduced coordinates are ordered with dynamic active subspaces, and each candidate order is certified with finite-horizon error bounds that robustly enforce discrete-time control barrier function constraints. The controller picks the smallest order that keeps the safety-critical MPC feasible, with proofs of full-order horizon safety, recursive feasibility and closed-loop invariance. On a 160-state nonlinear system, the order rises near the safety boundary, and computation drops compared with fixed high-order or full-order MPC.',
       soon: ['arxiv', 'code'],
       papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'] }] },
 
     { thumb: 'delay',
       title: 'Reduced-order backstepping for systems with input delay',
       short: 'Modeling actuator delay as a transport PDE and reducing it with Galerkin projection, so a backstepping controller can stabilize the system with guarantees.',
-      more: [
-        'Derives a Galerkin reduced-order representation of the delay for controller synthesis.',
-        'Designs a backstepping controller for nonlinear mechanical systems, proves closed-loop stability with Lyapunov analysis, and develops a command-filtered implementation.'
-      ],
+      rest: 'The design applies to nonlinear mechanical systems: closed-loop stability is proved with Lyapunov analysis, and the paper also develops a command-filtered implementation.',
       papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'CDC 2026' }] },
 
     { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
       short: 'Modeling and controlling a wheeled-legged robot whose wheels slip, from measuring slip with a camera to a controller tuned by reinforcement learning.',
-      more: [
-        'Derived the dynamics with the Gibbs–Appell formulation including wheel slip, measured slip with vision-based pose estimation, and validated against Webots/MATLAB simulation, IMU data and hardware experiments. Ignoring slip caused 5–11.5% modeling error.',
-        'Used DDPG to adapt the gains of a MIMO PID controller for the wheel-leg manipulator, with a neural network estimating longitudinal and side slip inside the model.'
-      ],
+      rest: 'I derived the dynamics with the Gibbs–Appell formulation including wheel slip, measured the slip with vision-based pose estimation, and validated the model against Webots/MATLAB simulation, IMU data and hardware experiments; ignoring slip caused 5–11.5% modeling error. For control, DDPG adapts the gains of a MIMO PID controller for the wheel-leg manipulator, while a neural network estimates longitudinal and side slip inside the model.',
       papers: [
         { title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation', authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'], venue: 'Robotica 2024',
           doi: 'https://doi.org/10.1017/S0263574724001644' },
@@ -687,20 +662,14 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
 
     const h = el('h3', 'proj-title');
     const tog = el('button', 'proj-toggle', p.title); tog.type = 'button';
-    const moreId = 'proj-more-' + idx;
+    const moreId = 'proj-rest-' + idx;
     tog.setAttribute('aria-expanded', 'false'); tog.setAttribute('aria-controls', moreId);
     h.appendChild(tog);
     body.appendChild(h);
-    body.appendChild(el('p', 'proj-short', p.short));
-
-    const more = el('div', 'proj-more'); more.id = moreId;
-    const inner = el('div', 'proj-more-inner');
-    const ul = el('ul', 'proj-points');
-    p.more.forEach(t => ul.appendChild(el('li', null, t)));
-    inner.appendChild(ul);
-
-    more.appendChild(inner);
-    body.appendChild(more);
+    // one paragraph: the short text, then the rest of it once the card is opened
+    const para = el('p', 'proj-short', p.short);
+    if (p.rest) { const rest = el('span', 'proj-rest', ' ' + p.rest); rest.id = moreId; para.appendChild(rest); }
+    body.appendChild(para);
 
     const moreBtn = el('button', 'proj-more-btn', '<span>Read more</span>' + ICONS.chev); moreBtn.type = 'button';
     moreBtn.setAttribute('aria-controls', moreId);
