@@ -364,6 +364,40 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   .pub { grid-template-columns: 84px minmax(0, 1fr); }
   .demo canvas { height: 170px; }
 }
+
+/* ---------- selected projects ---------- */
+.projs { display: flex; flex-direction: column; gap: 12px; }
+.proj {
+  display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 18px;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.proj:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: var(--shadow); }
+.proj-media { width: 100%; aspect-ratio: 16 / 11; border-radius: 8px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); align-self: start; }
+.proj-media svg, .proj-media img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.proj-body { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.proj-title { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--text); text-wrap: pretty; }
+.proj-tldr { font-size: 14.5px; color: var(--text-2); }
+.proj-points { display: flex; flex-direction: column; gap: 3px; margin: 2px 0 2px; }
+.proj-points li { font-size: 13.5px; color: var(--text-2); line-height: 1.5; padding-left: 14px; position: relative; }
+.proj-points li::before { content: ""; position: absolute; left: 1px; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.7; }
+.proj-papers { display: flex; flex-direction: column; gap: 3px; border-top: 1px dashed var(--line); padding-top: 7px; margin-top: 3px; }
+.proj-paper { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 8px; font-size: 13px; color: var(--muted); line-height: 1.45; }
+.proj-paper .lbl { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-top: 1px; }
+.proj-paper .pt { color: var(--text-2); }
+.proj-paper .me { color: var(--text); font-weight: 500; }
+.pill.accent { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.demo-box { padding: 12px; }
+.demo canvas { background: var(--surface); }
+@media (max-width: 760px) {
+  .proj { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .proj-paper { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}
+@media (max-width: 480px) {
+  .proj { grid-template-columns: minmax(0, 1fr); }
+  .proj-media { max-width: 200px; }
+}
+@media (prefers-reduced-motion: reduce) { .proj { transition: none; } }
 </style>
 </head>
 <body>
@@ -374,7 +408,6 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       <ul class="nav-links" id="nav-links">
         <li><a href="#about" data-nav="about" class="active">About</a></li>
         <li><a href="#news" data-nav="news">News</a></li>
-        <li><a href="#publications" data-nav="publications">Publications</a></li>
         <li><a href="#projects" data-nav="projects">Projects</a></li>
         <li><a href="#cv" data-nav="cv">CV</a></li>
       </ul>
@@ -429,7 +462,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     <div class="sec-head"><h2 id="news-h">News</h2></div>
     <ul class="news">
       <li><time datetime="2026-09">Sep 2026</time><p>Submitted <strong>Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control</strong> as a joint submission to <strong>IEEE L-CSS and ACC 2027</strong>.</p></li>
-      <li><time datetime="2026-07">Jul 2026</time><p>My paper on <strong>reduced-order backstepping control for nonlinear mechanical systems with input delay</strong> is accepted to <a href="#publications">IEEE CDC 2026</a> 🎉</p></li>
+      <li><time datetime="2026-07">Jul 2026</time><p>My paper on <strong>reduced-order backstepping control for nonlinear mechanical systems with input delay</strong> is accepted to <a href="#projects">IEEE CDC 2026</a> 🎉</p></li>
       <li><time datetime="2025-08">Aug 2025</time><p>Joined the Neuromuscular Control and Robotics Laboratory at NC State 🤖</p></li>
       <li><time datetime="2024-11">Nov 2024</time><p>Our paper on <strong>vision-based dynamic modeling of a wheeled-legged robot</strong> is published in <a href="https://doi.org/10.1017/S0263574724001644">Robotica</a>.</p></li>
       <li><time datetime="2024-08">Aug 2024</time><p>Started graduate school in Mechanical Engineering at NC State 🎓</p></li>
@@ -437,21 +470,11 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     </ul>
   </section>
 
-  <!-- ===================== PUBLICATIONS ===================== -->
-  <section id="publications" aria-labelledby="pubs-h">
-    <div class="sec-head"><h2 id="pubs-h">Publications</h2></div>
-    <div id="all-pubs"></div>
-  </section>
-
-  <!-- ===================== PROJECTS ===================== -->
+  <!-- ===================== SELECTED PROJECTS ===================== -->
   <section id="projects" aria-labelledby="proj-h">
-    <div class="sec-head"><h2 id="proj-h">Projects</h2></div>
-
-    <figure class="card demo">
-      <div class="demo-head">
-        <h3>Push recovery under step delay</h3>
-        <p class="eyebrow">Interactive · try it</p>
-      </div>
+    <div class="sec-head"><h2 id="proj-h">Selected Projects</h2></div>
+    <ol class="projs" id="projs"></ol>
+    <figure class="demo" id="demo-fig" hidden>
       <canvas id="walker" role="img" aria-label="Interactive balance-recovery simulation. Push the walker with the buttons or by clicking; it takes a recovery step to its capture point after the chosen delay."></canvas>
       <div class="demo-bar">
         <div class="demo-btns">
@@ -470,31 +493,8 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
         <span>steps <b id="r-n">0</b></span>
         <span>phase <b id="r-phase">standing</b></span>
       </div>
-      <figcaption>Push recovery on a linear inverted pendulum. A push moves the capture point ξ; while it stays over the foot, ankle torque is enough. Once ξ leaves the foot, the walker has to step, and the longer the delay τ before it can step, the farther it has to reach. This textbook capture-point model is here for intuition; my own work certifies recovery for richer models with delay.</figcaption>
+      <figcaption>Push recovery on a linear inverted pendulum. A push moves the capture point ξ; while it stays over the foot, ankle torque is enough. Once ξ leaves the foot, the walker has to step, and the longer the delay τ before it can step, the farther it has to reach. This textbook capture-point model is here for intuition; the paper certifies recovery for a richer delayed model.</figcaption>
     </figure>
-
-    <div class="projects">
-      <article class="card project">
-        <span class="where">NC State · 2024–present</span>
-        <h3>Lower-limb exoskeleton balance-recovery platform</h3>
-        <p>An exoskeleton framework for perturbation recovery that brings together rigid-body dynamics, contact constraints, actuator limits and center-of-mass regulation. It pairs robotic actuation with functional electrical stimulation, and I evaluate safety-critical controllers on it in simulation and in experimental balance-recovery trials.</p>
-      </article>
-      <article class="card project">
-        <span class="where">IUST</span>
-        <h3>Learning-based control of a flexible revolute–prismatic manipulator</h3>
-        <p>Dynamic models and MATLAB simulations for end-effector regulation and vibration suppression, comparing PID, fuzzy-PID, Q-learning and multi-agent RL, including RL-based tuning of PID gains and fuzzy rules.</p>
-      </article>
-      <article class="card project">
-        <span class="where">IUST</span>
-        <h3>Reinforcement learning for robot control</h3>
-        <p>SAC and DDPG agents trained in simulation for ball balancing with a 7-DoF manipulator, quadruped locomotion, and adaptive cruise control.</p>
-      </article>
-      <article class="card project">
-        <span class="where">IUST · RoboCup</span>
-        <h3>Autonomous mobile robot</h3>
-        <p>As team leader and programmer, I led the design and build of an autonomous mobile robot for the RoboCup Autonomous Cars League.</p>
-      </article>
-    </div>
   </section>
 
   <!-- ===================== CV ===================== -->
@@ -559,47 +559,81 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 (() => {
   const root = document.documentElement;
 
-  /* ---------- publications data (edit here to add papers) ----------
-     status: 'published' | 'review' | 'prep'. thumb: a drawing name, or omit and set tile. */
+  /* ---------- selected projects (edit here) ----------
+     status chips: { t: 'venue' | 'review' | 'prep', label: '...' }
+     thumb: name of a drawing below; to use your own image, set img: 'images/file.png' instead. */
   const ME = 'A. H. Asadi';
-  const PUBS = [
-    { group: '2026', status: 'published', short: 'CDC 2026', thumb: 'delay',
-      title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection',
-      authors: ['A. H. Asadi', 'N. Sharma'],
-      venue: 'IEEE Conference on Decision and Control (CDC), 2026',
-      summary: 'Models actuator delay as a transport PDE, derives a Galerkin reduced-order representation for controller synthesis, and designs a backstepping controller for nonlinear mechanical systems with Lyapunov-proven closed-loop stability and a command-filtered implementation.',
-      bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' },
-    { group: '2026', status: 'review', short: 'RA-L', thumb: 'safe',
-      title: 'SafeShadow: A Neural Barrier Safety Framework for Balance Recovery in Exoskeleton Systems',
-      authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'],
-      venue: 'IEEE Robotics and Automation Letters (RA-L), 2026',
-      summary: 'Trains a neural high-order control barrier function to learn posture- and actuation-dependent balance-feasible sets for lower-limb exoskeletons, and embeds it in a CLF–CBF quadratic program for real-time balance preservation and constrained allocation between motor actuation and functional electrical stimulation (FES).' },
-    { group: '2026', status: 'review', short: 'L-CSS + ACC 2027', thumb: 'rank',
-      title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control',
-      authors: ['A. H. Asadi', 'N. Sharma'],
-      venue: 'IEEE Control Systems Letters (L-CSS), with the ACC 2027 option',
-      summary: 'An adaptive-order MPC framework combining dynamic active subspaces, reduced-order prediction and discrete-time control barrier functions, with a safety-driven rank-selection rule that raises the prediction dimension only when needed to preserve finite-horizon safety and recursive feasibility.' },
-    { group: 'In preparation', status: 'prep', thumb: 'reach',
-      title: 'Reactive Stepping Under Delay: Hybrid Reach–Avoid Recovery for Bipedal Locomotion',
-      authors: ['A. H. Asadi', 'N. Sharma'],
-      summary: 'Formulates perturbation recovery as a delay-aware reach–avoid game, decomposes it into lower-dimensional pendular and swing-leg subproblems, and derives certified walking terminal sets and feasibility conditions for reactive steps under delayed control authority.' },
-    { group: 'In preparation', status: 'prep', thumb: 'funnel',
-      title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion',
-      authors: ['A. H. Asadi', 'N. Sharma'],
-      summary: 'Turns transverse contraction geometry and physical safety clearance into phase-dependent recovery funnels around a walking gait, and uses saltation-based impact sensitivity to certify hybrid recovery, trigger reactive steps, and choose footholds by post-impact recovery margin.' },
-    { group: 'Earlier work', status: 'published', short: 'Robotica 2024', tile: ['Robotica', 'Journal · 2024'],
-      title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation',
-      authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'],
-      venue: 'Robotica, 2024',
-      doi: 'https://doi.org/10.1017/S0263574724001644',
-      bib: '@article{korayem2024vision,\n  title   = {Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using {G}ibbs--{A}ppell Formulation},\n  author  = {Korayem, M. H. and Nikseresht, N. and Asadi, A. H.},\n  journal = {Robotica},\n  year    = {2024},\n  doi     = {10.1017/S0263574724001644}\n}' },
-    { group: 'Earlier work', status: 'published', short: 'ICRoM 2023', tile: ['ICRoM', 'Conference · 2023'],
-      title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning',
-      authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'],
-      venue: '11th RSI International Conference on Robotics and Mechatronics (ICRoM), IEEE, 2023, pp. 437–442',
-      summary: 'Uses deep deterministic policy gradient (DDPG) to adapt the gains of a MIMO PID controller for a wheeled-legged manipulator, with wheel slippage incorporated into the inverse-kinematic model for robustness to locomotion uncertainty.',
-      doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351',
-      bib: '@inproceedings{asadi2023adaptive,\n  title     = {Adaptive {MIMO} {PID} Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning},\n  author    = {Asadi, A. H. and Nikseresht, N. and Korayem, A. H.},\n  booktitle = {11th RSI International Conference on Robotics and Mechatronics (ICRoM)},\n  pages     = {437--442},\n  year      = {2023},\n  publisher = {IEEE},\n  doi       = {10.1109/ICRoM60803.2023.10412351}\n}' }
+  const PROJECTS = [
+    { thumb: 'reach', demo: true,
+      title: 'Push recovery under delay for bipedal walking',
+      chips: [{ t: 'prep', label: 'Preprint' }],
+      tldr: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking, and how much each millisecond of delay costs.',
+      points: [
+        'Reduces the delayed hybrid model, with detection delay, delayed ankle and swing actuation and a leg-travel budget shared by consecutive steps, to one planar reachability problem per stride.',
+        'Gives the walking region in closed form, with a sharp travel threshold and a latency law in which limited swing acceleration acts as extra delay.',
+        'With a 30 ms swing delay, a well-timed step keeps 86% of the push tolerance of instantaneous foot placement, versus 32% for a step fixed at the start of the stride.'
+      ],
+      papers: [{ title: 'Reactive Stepping Under Delay: Analytical Reachability for Continued Walking', authors: ['A. H. Asadi'], venue: 'Preprint, 2026' }] },
+
+    { thumb: 'funnel',
+      title: 'Contraction–barrier recovery funnels for reactive stepping',
+      chips: [{ t: 'prep', label: 'In preparation' }],
+      tldr: 'One geometric certificate that tells a walking robot whether it can recover from a push without stepping, and if not, where to step.',
+      points: [
+        'Builds the safety barrier from the contraction metric of the walking orbit itself, propagating physical clearance backward through robust contraction and impact (saltation) sensitivity.',
+        'Certifies flow invariance, impact preservation and no-step recovery, ranks candidate footholds by the post-impact margin they create, and builds nested N-step recovery sets.'
+      ],
+      papers: [{ title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'In preparation' }] },
+
+    { thumb: 'safe',
+      title: 'SafeShadow: balance certificates for hybrid exoskeletons',
+      chips: [{ t: 'review', label: 'Under review' }, { t: 'prep', label: 'IEEE RA-L' }],
+      tldr: 'Hybrid exoskeletons pair fast motors with slower, delayed muscle stimulation (FES). SafeShadow certifies balance while letting stimulation carry as much of the effort as possible.',
+      points: [
+        'A relative-degree-aware safety filter: motors enforce a high-order control barrier function at their own relative degree, while FES enters as a committed signal already fixed by past commands.',
+        'Proves the balance set stays invariant for any FES command in a prescribed class, so stimulation can be allocated freely, with motors stepping in only when a scalar shadow gap turns negative.',
+        'Learns the balance-feasible set as a neural barrier function conditioned on stance, actuator limits and stimulation state.'
+      ],
+      papers: [{ title: 'SafeShadow: Actuation-Aware Neural Barrier Certificates for Exoskeleton Balance under Heterogeneous Actuation', authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'], venue: 'IEEE Robotics and Automation Letters (RA-L), under review' }] },
+
+    { thumb: 'rank',
+      title: 'Safety-aware reduced-order MPC',
+      chips: [{ t: 'review', label: 'Under review' }, { t: 'prep', label: 'IEEE L-CSS + ACC 2027' }],
+      tldr: 'Reduced models make MPC fast, but a dimension chosen for performance can be too small near a safety boundary. This controller grows its prediction model only when safety requires it.',
+      points: [
+        'Orders reduced coordinates with dynamic active subspaces and certifies each candidate order with finite-horizon error bounds that robustly enforce discrete-time control barrier function constraints.',
+        'Selects the smallest order that keeps the safety-critical MPC feasible, with proofs of full-order horizon safety, recursive feasibility and closed-loop invariance.',
+        'On a 160-state nonlinear system, the order rises near the safety boundary and computation drops compared with fixed high-order or full-order MPC.'
+      ],
+      papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE Control Systems Letters (L-CSS) with the ACC 2027 option, under review' }] },
+
+    { thumb: 'delay',
+      title: 'Reduced-order backstepping for systems with input delay',
+      chips: [{ t: 'venue', label: 'CDC 2026' }],
+      tldr: 'Actuator delay is modeled as a transport PDE and reduced with Galerkin projection, giving a finite-dimensional model that a backstepping controller can stabilize with guarantees.',
+      points: [
+        'Derives a Galerkin reduced-order representation of the delay for controller synthesis.',
+        'Designs a backstepping controller for nonlinear mechanical systems, proves closed-loop stability with Lyapunov analysis, and develops a command-filtered implementation.'
+      ],
+      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE Conference on Decision and Control (CDC), 2026',
+        bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' }] },
+
+    { thumb: 'wheel',
+      title: 'Wheeled-legged robot: slip-aware modeling and RL control',
+      chips: [{ t: 'venue', label: 'Robotica 2024' }, { t: 'venue', label: 'ICRoM 2023' }],
+      tldr: 'Modeling and controlling a wheeled-legged robot whose wheels slip, from measuring slip with a camera to an adaptive controller tuned by reinforcement learning.',
+      points: [
+        'Derived the dynamics with the Gibbs–Appell formulation including wheel slip, measured slip with vision-based pose estimation, and validated against Webots/MATLAB simulation, IMU data and hardware experiments. Ignoring slip caused 5–11.5% modeling error.',
+        'Used DDPG to adapt the gains of a MIMO PID controller for the wheel-leg manipulator, with a neural network estimating longitudinal and side slip inside the model.'
+      ],
+      papers: [
+        { title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation', authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'], venue: 'Robotica, 2024',
+          doi: 'https://doi.org/10.1017/S0263574724001644',
+          bib: '@article{korayem2024vision,\n  title   = {Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using {G}ibbs--{A}ppell Formulation},\n  author  = {Korayem, M. H. and Nikseresht, N. and Asadi, A. H.},\n  journal = {Robotica},\n  volume  = {42},\n  number  = {11},\n  pages   = {3784--3802},\n  year    = {2024},\n  doi     = {10.1017/S0263574724001644}\n}' },
+        { title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning', authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'], venue: 'ICRoM, IEEE, 2023',
+          doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351',
+          bib: '@inproceedings{asadi2023adaptive,\n  title     = {Adaptive {MIMO} {PID} Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning},\n  author    = {Asadi, A. H. and Nikseresht, N. and Korayem, A. H.},\n  booktitle = {11th RSI International Conference on Robotics and Mechatronics (ICRoM)},\n  pages     = {437--442},\n  year      = {2023},\n  publisher = {IEEE},\n  doi       = {10.1109/ICRoM60803.2023.10412351}\n}' }
+      ] }
   ];
 
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -614,56 +648,59 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected · press Ctrl+C'; };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   }
-  function renderPub(p) {
-    const li = el('li', 'pub');
-    const media = el('div', 'pub-media' + (p.thumb ? '' : ' tile'));
-    if (p.thumb) media.innerHTML = '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
-    else media.innerHTML = '<div><span>' + p.tile[0] + '</span><small>' + p.tile[1] + '</small></div>';
-    const body = el('div', 'pub-body');
+  const ext = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2h6v6M10 2 3 9"/></svg>';
+  function renderProject(p) {
+    const li = el('li', 'proj');
+    const media = el('div', 'proj-media');
+    media.innerHTML = p.img ? '<img src="' + p.img + '" alt="" loading="lazy">' : '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
+    const body = el('div', 'proj-body');
     const chips = el('div', 'chips');
-    if (p.status === 'published' && p.short) chips.appendChild(el('span', 'chip venue', p.short));
-    if (p.status === 'review') { chips.appendChild(el('span', 'chip review', 'Under review')); chips.appendChild(el('span', 'chip prep', p.short)); }
-    if (p.status === 'prep') chips.appendChild(el('span', 'chip prep', 'In preparation'));
+    p.chips.forEach(c => chips.appendChild(el('span', 'chip ' + c.t, c.label)));
     body.appendChild(chips);
-    body.appendChild(el('h3', 'pub-title', p.title));
-    body.appendChild(el('p', 'pub-authors', authorLine(p.authors)));
-    if (p.venue) body.appendChild(el('p', 'pub-venue', p.venue));
+    body.appendChild(el('h3', 'proj-title', p.title));
+    body.appendChild(el('p', 'proj-tldr', p.tldr));
+    const ul = el('ul', 'proj-points');
+    p.points.forEach(t => ul.appendChild(el('li', null, t)));
+    body.appendChild(ul);
+    const papers = el('div', 'proj-papers');
+    const boxes = [], toggles = [];
     const actions = el('div', 'pub-actions');
-    const boxes = [];
-    const toggle = (label, box) => {
-      const b = el('button', 'pill', label); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+    const addToggle = (label, box, cls) => {
+      const b = el('button', 'pill' + (cls ? ' ' + cls : ''), label); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
       b.addEventListener('click', () => {
         const open = box.hidden;
         boxes.forEach(x => { x.hidden = true; });
-        actions.querySelectorAll('button').forEach(x => x.setAttribute('aria-expanded', 'false'));
+        toggles.forEach(x => x.setAttribute('aria-expanded', 'false'));
         box.hidden = !open; b.setAttribute('aria-expanded', String(open));
       });
-      actions.appendChild(b); boxes.push(box);
+      actions.appendChild(b); boxes.push(box); toggles.push(b);
     };
-    if (p.summary) { const box = el('div', 'pub-box', p.summary); box.hidden = true; toggle('Summary', box); }
-    if (p.bib) {
-      const box = el('div', 'pub-box'); box.hidden = true;
-      const pre = el('pre'); pre.textContent = p.bib; box.appendChild(pre);
-      const row = el('div', 'copy-row'); const cb = el('button', 'pill', 'Copy'); cb.type = 'button';
-      cb.addEventListener('click', () => copyText(p.bib, pre, cb)); row.appendChild(cb); box.appendChild(row);
-      toggle('BibTeX', box);
+    if (p.demo) {
+      const box = el('div', 'pub-box demo-box'); box.hidden = true;
+      const fig = document.getElementById('demo-fig'); fig.hidden = false; box.appendChild(fig);
+      addToggle('▶ Interactive demo', box, 'accent');
     }
-    if (p.doi) {
-      const a = el('a', 'pill', 'DOI <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2h6v6M10 2 3 9"/></svg>');
-      a.href = p.doi; actions.appendChild(a);
-    }
+    p.papers.forEach((pp, i) => {
+      const row = el('p', 'proj-paper', '<span class="lbl">' + (p.papers.length > 1 ? 'Paper ' + (i + 1) : 'Paper') + '</span><span><span class="pt">' + pp.title + '</span>. ' + authorLine(pp.authors) + ' · <i>' + pp.venue + '</i></span>');
+      papers.appendChild(row);
+      const tag = p.papers.length > 1 ? ' ' + (i + 1) : '';
+      if (pp.bib) {
+        const box = el('div', 'pub-box'); box.hidden = true;
+        const pre = el('pre'); pre.textContent = pp.bib; box.appendChild(pre);
+        const r = el('div', 'copy-row'); const cb = el('button', 'pill', 'Copy'); cb.type = 'button';
+        cb.addEventListener('click', () => copyText(pp.bib, pre, cb)); r.appendChild(cb); box.appendChild(r);
+        addToggle('BibTeX' + tag, box);
+      }
+      if (pp.doi) { const a = el('a', 'pill', 'DOI' + tag + ' ' + ext); a.href = pp.doi; actions.appendChild(a); }
+    });
+    body.appendChild(papers);
     if (actions.children.length) body.appendChild(actions);
     boxes.forEach(x => body.appendChild(x));
     li.appendChild(media); li.appendChild(body);
     return li;
   }
-  const all = document.getElementById('all-pubs');
-  [...new Set(PUBS.map(p => p.group))].forEach(g => {
-    all.appendChild(el('h3', 'pub-group', g));
-    const ol = el('ol', 'pubs');
-    PUBS.filter(p => p.group === g).forEach(p => ol.appendChild(renderPub(p)));
-    all.appendChild(ol);
-  });
+  const projList = document.getElementById('projs');
+  PROJECTS.forEach(p => projList.appendChild(renderProject(p)));
 
   /* ---------- publication drawings ---------- */
   const NS = 'http://www.w3.org/2000/svg';
@@ -705,6 +742,15 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       mk(svg, 'circle', { cx: 18, cy: 70, r: 2.6, fill: 'var(--ink)' });
       label(svg, 78, 94, 'avoid', 'middle');
       label(svg, 128, 102, 'reach', 'middle');
+    },
+    wheel(svg) {
+      mk(svg, 'line', { x1: 8, y1: 92, x2: 152, y2: 92, stroke: 'var(--rule)' });
+      mk(svg, 'rect', { x: 46, y: 30, width: 68, height: 18, rx: 4, fill: 'var(--accent-soft)', stroke: 'var(--accent)', 'stroke-width': 1.4 });
+      mk(svg, 'path', { d: 'M56 48 L46 66 L40 80 M104 48 L114 66 L120 80', fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+      [[40, 80], [120, 80]].forEach(([x, y]) => { mk(svg, 'circle', { cx: x, cy: y, r: 11, fill: 'var(--panel)', stroke: 'var(--ink)', 'stroke-width': 1.6 }); mk(svg, 'circle', { cx: x, cy: y, r: 2, fill: 'var(--ink)' }); });
+      mk(svg, 'path', { d: 'M114 40 L124 22 L140 18', fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+      mk(svg, 'path', { d: 'M24 100 L52 100 M48 97 L52 100 L48 103', fill: 'none', stroke: 'var(--signal)', 'stroke-width': 1.3 });
+      label(svg, 56, 103, 'slip');
     },
     funnel(svg) {
       const y = t => 55 - 22 * Math.sin(t * Math.PI * 2 / 68);
