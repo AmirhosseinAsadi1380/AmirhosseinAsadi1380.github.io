@@ -368,7 +368,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 /* ---------- selected projects ---------- */
 .projs { display: flex; flex-direction: column; gap: 10px; }
 .proj {
-  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; align-items: start;
+  display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 20px; align-items: start;
   padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
   cursor: pointer; transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -380,7 +380,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 .proj-media.photo.dark-img img { object-fit: cover; padding: 0; }
 .proj-fig.dark-img { background: #1b2433; padding: 0; overflow: hidden; }
 .proj-fig.dark-img img { max-width: 480px; margin: 0 auto; }
-.proj-media.photo img { object-fit: contain; padding: 2px; }
+.proj-media.photo img { object-fit: contain; padding: 4px; }
 .proj-fig { margin: 10px 0 0; background: #ffffff; border: 1px solid var(--line); border-radius: 10px; padding: 8px; }
 .proj-fig img { width: 100%; height: auto; display: block; }
 .proj-body { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
@@ -426,12 +426,13 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 .demo-box { padding: 12px; }
 .demo canvas { background: var(--surface); }
 @media (max-width: 760px) {
-  .proj { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .proj { grid-template-columns: 150px minmax(0, 1fr); gap: 14px; padding: 12px; }
   .proj-head { flex-direction: column; gap: 6px; }
   .proj-icons { margin-top: 0; }
 }
 @media (max-width: 420px) {
-  .proj { grid-template-columns: 84px minmax(0, 1fr); }
+  .proj { grid-template-columns: minmax(0, 1fr); }
+  .proj-media { max-width: 100%; }
   .proj-title { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .proj, .proj-more, .proj-more-btn svg, .ico { transition: none; } }
@@ -652,7 +653,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE CDC 2026',
         bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' }] },
 
-    { thumb: 'wheel', img: 'images/wheeled-legged-thumb.jpg', figure: 'images/wheeled-legged.jpg',
+    { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg', figure: 'images/wheeled-legged.jpg',
       figAlt: 'Control architecture: a DDPG agent tunes the gains of eight PID controllers; an MLP network estimates wheel slip inside the inverse kinematic model of the wheeled-legged robot.',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
       short: 'Modeling and controlling a wheeled-legged robot whose wheels slip, from measuring slip with a camera to a controller tuned by reinforcement learning.',
