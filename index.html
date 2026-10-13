@@ -378,14 +378,11 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
 .tag svg { width: 13px; height: 13px; flex-shrink: 0; }
-a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
+a.tag:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); text-decoration: none; }
 .tag:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .tag.soon { border-style: dashed; background: transparent; color: var(--muted); cursor: default; }
 .tag.soon svg { opacity: 0.75; }
-.tag-tip {
-  position: absolute; bottom: calc(100% + 6px); left: 0; white-space: nowrap; pointer-events: none;
-  font-size: 12px; font-weight: 400; background: var(--text); color: var(--bg); padding: 4px 8px; border-radius: 6px;
-}
+.tag.label { cursor: default; }
 .proj-short { font-size: 14.5px; color: var(--text-2); }
 .proj-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease; }
 .proj.open .proj-more { grid-template-rows: 1fr; }
@@ -406,7 +403,6 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
 .proj.open .proj-more-btn svg { transform: rotate(180deg); }
 .proj-more-btn:hover span { text-decoration: underline; text-underline-offset: 3px; }
 .proj-more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-.proj .pub-box { margin-top: 10px; cursor: auto; }
 @media (max-width: 760px) {
   .proj { grid-template-columns: 176px minmax(0, 1fr); gap: 14px; }
 }
@@ -558,8 +554,9 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
 
   /* ---------- selected projects (edit here) ----------
      short: one or two sentences shown on the card. more: bullet points shown when the card is opened.
-     tags under 'Read more' come from each paper: pdf or doi (Paper), arxiv, code, bib (any you have).
-     soon: ['paper', 'arxiv', 'code'] shows dashed 'coming soon' tags for links you don't have yet; a real link replaces its soon tag.
+     tags under 'Read more' come from each paper: arxiv, or else the published paper (pdf or doi, labelled with its venue), plus code.
+     A paper with an arxiv link shows only the arXiv tag, never both. A venue with no link yet shows as a plain label.
+     soon: ['arxiv', 'code'] shows dashed 'coming soon' tags for links you don't have yet; a real link replaces its soon tag.
      thumb: name of a drawing below; to use your own image, set img: 'images/file.png' instead,
      or video: 'images/clip.mp4' (with poster: 'images/frame.jpg' and size: [width, height]) for a looping clip shown uncropped.
      Opening a card shows only the 'more' points. */
@@ -578,7 +575,7 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
         'Gives the walking region in closed form, with a sharp travel threshold and a latency law in which limited swing acceleration acts as extra delay.',
         'With a 30 ms swing delay, a well-timed step keeps 86% of the push tolerance of instantaneous foot placement, versus 32% for a step fixed at the start of the stride.'
       ],
-      soon: ['paper', 'arxiv', 'code'],
+      soon: ['arxiv', 'code'],
       papers: [{ title: 'Reactive Stepping Under Delay: Analytical Reachability for Continued Walking', authors: ['A. H. Asadi'] }] },
 
     { thumb: 'funnel', dark: true,
@@ -590,7 +587,7 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
         'Builds the safety barrier from the contraction metric of the walking orbit itself, propagating physical clearance backward through robust contraction and impact (saltation) sensitivity.',
         'Certifies flow invariance, impact preservation and no-step recovery, ranks candidate footholds by the post-impact margin they create, and builds nested N-step recovery sets.'
       ],
-      soon: ['paper', 'arxiv', 'code'],
+      soon: ['arxiv', 'code'],
       papers: [{ title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion', authors: ['A. H. Asadi', 'N. Sharma'] }] },
 
     { thumb: 'safe',
@@ -601,7 +598,7 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
         'Proves the balance set stays invariant for any FES command in a prescribed class, so stimulation can be allocated freely, with motors stepping in only when a scalar shadow gap turns negative.',
         'Learns the balance-feasible set as a neural barrier function conditioned on stance, actuator limits and stimulation state.'
       ],
-      soon: ['paper', 'arxiv', 'code'],
+      soon: ['arxiv', 'code'],
       papers: [{ title: 'SafeShadow: Actuation-Aware Neural Barrier Certificates for Exoskeleton Balance under Heterogeneous Actuation', authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'] }] },
 
     { thumb: 'rank',
@@ -612,7 +609,7 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
         'Selects the smallest order that keeps the safety-critical MPC feasible, with proofs of full-order horizon safety, recursive feasibility and closed-loop invariance.',
         'On a 160-state nonlinear system, the order rises near the safety boundary and computation drops compared with fixed high-order or full-order MPC.'
       ],
-      soon: ['paper', 'arxiv', 'code'],
+      soon: ['arxiv', 'code'],
       papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'] }] },
 
     { thumb: 'delay',
@@ -622,9 +619,7 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
         'Derives a Galerkin reduced-order representation of the delay for controller synthesis.',
         'Designs a backstepping controller for nonlinear mechanical systems, proves closed-loop stability with Lyapunov analysis, and develops a command-filtered implementation.'
       ],
-      soon: ['paper', 'arxiv'],
-      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE CDC 2026',
-        bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' }] },
+      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'CDC 2026' }] },
 
     { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
@@ -635,11 +630,9 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
       ],
       papers: [
         { title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation', authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'], venue: 'Robotica 2024',
-          doi: 'https://doi.org/10.1017/S0263574724001644',
-          bib: '@article{korayem2024vision,\n  title   = {Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using {G}ibbs--{A}ppell Formulation},\n  author  = {Korayem, M. H. and Nikseresht, N. and Asadi, A. H.},\n  journal = {Robotica},\n  volume  = {42},\n  number  = {11},\n  pages   = {3784--3802},\n  year    = {2024},\n  doi     = {10.1017/S0263574724001644}\n}' },
+          doi: 'https://doi.org/10.1017/S0263574724001644' },
         { title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning', authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'], venue: 'ICRoM 2023',
-          doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351',
-          bib: '@inproceedings{asadi2023adaptive,\n  title     = {Adaptive {MIMO} {PID} Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning},\n  author    = {Asadi, A. H. and Nikseresht, N. and Korayem, A. H.},\n  booktitle = {11th RSI International Conference on Robotics and Mechatronics (ICRoM)},\n  pages     = {437--442},\n  year      = {2023},\n  publisher = {IEEE},\n  doi       = {10.1109/ICRoM60803.2023.10412351}\n}' }
+          doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351' }
       ] }
   ];
 
@@ -653,7 +646,6 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
     paper: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 12h6M9.5 15h6M9.5 18h4"/></svg>',
     arxiv: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l14 16M19 4L5 20"/></svg>',
     code: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>',
-    bib: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4c-2 0-3 1-3 3v2.5c0 1-.6 2-1.6 2.5 1 .5 1.6 1.5 1.6 2.5V17c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2.5c0 1 .6 2 1.6 2.5-1 .5-1.6 1.5-1.6 2.5V17c0 2-1 3-3 3"/></svg>',
     play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
     chev: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5 6 7.5 9 4.5"/></svg>'
   };
@@ -666,10 +658,6 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
     const t = el('span', 'tag soon', ICONS[kind] + '<span>' + TAG_NAMES[kind] + '</span>');
     t.title = TAG_NAMES[kind] + ' link coming soon'; return t;
   };
-  function flash(btn, text) {
-    const t = el('span', 'tag-tip', text); btn.appendChild(t);
-    setTimeout(() => t.remove(), 1300);
-  }
 
   function renderProject(p, idx) {
     const li = el('li', 'proj');
@@ -711,8 +699,6 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
     p.more.forEach(t => ul.appendChild(el('li', null, t)));
     inner.appendChild(ul);
 
-    const bibBox = el('div', 'pub-box'); bibBox.hidden = true;
-    const bibPre = el('pre'); bibBox.appendChild(bibPre); inner.appendChild(bibBox);
     more.appendChild(inner);
     body.appendChild(more);
 
@@ -735,35 +721,19 @@ a.tag:hover, button.tag:hover { color: var(--accent); border-color: var(--accent
       toggleCard();
     });
 
-    // tags under "Read more": Paper, arXiv, Code (real links, or dashed "coming soon" ones listed in p.soon), then BibTeX
+    // tags under "Read more": per paper, arXiv if it has one, otherwise the published paper (labelled with its venue); then Code
     const tags = el('div', 'proj-tags');
     const multi = p.papers.length > 1;
-    const short = pp => (pp.venue || '').replace(/\s*\d{4}$/, '');
-    ['paper', 'arxiv', 'code'].forEach(kind => {
-      let n = 0;
-      p.papers.forEach(pp => {
-        const href = kind === 'paper' ? (pp.pdf || pp.doi) : pp[kind];
-        if (!href) return;
-        n++;
-        let label = TAG_NAMES[kind], hint = '';
-        if (multi && pp.venue) {
-          label = kind === 'paper' ? short(pp) : label + ' (' + short(pp) + ')';
-          hint = TAG_NAMES[kind] + ': ' + pp.title + ' (' + pp.venue + ')';
-        }
-        tags.appendChild(tagLink(kind, href, label, hint));
-      });
-      if (!n && p.soon && p.soon.includes(kind)) tags.appendChild(tagSoon(kind));
+    let hasArxiv = false, hasCode = false;
+    p.papers.forEach(pp => {
+      const of = multi && pp.venue ? ' (' + pp.venue + ')' : '';
+      if (pp.arxiv) { hasArxiv = true; tags.appendChild(tagLink('arxiv', pp.arxiv, 'arXiv' + of, pp.title)); }
+      else if (pp.pdf || pp.doi) tags.appendChild(tagLink('paper', pp.pdf || pp.doi, pp.venue || 'Paper', pp.title));
+      else if (pp.venue) { const t = el('span', 'tag label', ICONS.paper + '<span>' + pp.venue + '</span>'); t.title = pp.title + ' (link coming soon)'; tags.appendChild(t); }
     });
-    const bibs = p.papers.filter(pp => pp.bib).map(pp => pp.bib);
-    if (bibs.length) {
-      const b = el('button', 'tag', ICONS.bib + '<span>BibTeX</span>'); b.type = 'button'; b.title = 'Copy BibTeX';
-      const text = bibs.join('\n\n');
-      b.addEventListener('click', () => {
-        const fallback = () => { bibPre.textContent = text; bibBox.hidden = false; setOpen(true); const r = document.createRange(); r.selectNodeContents(bibPre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => flash(b, 'BibTeX copied'), fallback); else fallback();
-      });
-      tags.appendChild(b);
-    }
+    if (!hasArxiv && p.soon && p.soon.includes('arxiv')) tags.appendChild(tagSoon('arxiv'));
+    p.papers.forEach(pp => { if (pp.code) { hasCode = true; tags.appendChild(tagLink('code', pp.code, 'Code' + (multi && pp.venue ? ' (' + pp.venue + ')' : ''))); } });
+    if (!hasCode && p.soon && p.soon.includes('code')) tags.appendChild(tagSoon('code'));
     if (tags.children.length) body.appendChild(tags);
 
     li.appendChild(media); li.appendChild(body);
