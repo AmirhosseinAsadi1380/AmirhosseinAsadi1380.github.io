@@ -358,6 +358,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 .proj-media.photo { background: #ffffff; }
 .proj-media.photo.dark-img { background: #1b2433; border-color: transparent; }
 .proj-media.photo.dark-img img { object-fit: cover; padding: 0; }
+.proj-media.vid video, .proj-media.vid img { object-fit: contain; padding: 0; height: 100%; width: 100%; }
 .proj-fig.dark-img { background: #1b2433; padding: 0; overflow: hidden; }
 .proj-fig.dark-img img, .proj-fig.dark-img video { max-width: 480px; margin: 0 auto; }
 .proj-fig video { width: 100%; height: auto; display: block; }
@@ -559,12 +560,12 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
      short: one or two sentences shown on the card. more: bullet points shown when the card is opened.
      links next to the title come from each paper: pdf, arxiv, doi, code, bib (any you have).
      thumb: name of a drawing below; to use your own image, set img: 'images/file.png' instead,
-     or video: 'images/clip.mp4' (with poster: 'images/frame.jpg') for a looping clip.
+     or video: 'images/clip.mp4' (with poster: 'images/frame.jpg' and size: [width, height]) for a looping clip shown uncropped.
      Paper links appear as icons next to the title; opening a card shows only the 'more' points. */
   const ME = 'A. H. Asadi';
   const PROJECTS = [
     { thumb: 'reach', dark: true,
-      video: 'images/reactive-stepping-loop.mp4', anim: 'images/reactive-stepping-loop.webp', poster: 'images/reactive-stepping-poster.jpg',
+      video: 'images/reactive-stepping-loop.mp4', anim: 'images/reactive-stepping-loop.webp', poster: 'images/reactive-stepping-poster.jpg', size: [480, 384],
       figAlt: 'Simulation of a bipedal robot recovering from pushes while walking, with a plot of how deep the state stays inside the safe set over time.',
       title: 'Push recovery under delay for bipedal walking',
       short: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking.',
@@ -576,7 +577,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       papers: [{ title: 'Reactive Stepping Under Delay: Analytical Reachability for Continued Walking', authors: ['A. H. Asadi'] }] },
 
     { thumb: 'funnel', dark: true,
-      video: 'images/contraction-loop.mp4', anim: 'images/contraction-loop.webp', poster: 'images/contraction-poster.jpg',
+      video: 'images/contraction-loop.mp4', anim: 'images/contraction-loop.webp', poster: 'images/contraction-poster.jpg', size: [480, 360],
       figAlt: 'Simulation of a bipedal robot walking and stepping to recover from pushes.',
       title: 'Contraction–barrier recovery funnels for reactive stepping',
       short: 'One geometric certificate that tells a walking robot whether it can recover from a push without stepping, and if not, where to step.',
@@ -656,11 +657,13 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 
   function renderProject(p, idx) {
     const li = el('li', 'proj');
-    const media = el('div', 'proj-media' + (p.img || p.video ? ' photo' : '') + (p.dark ? ' dark-img' : ''));
+    const media = el('div', 'proj-media' + (p.img || p.video ? ' photo' : '') + (p.video ? ' vid' : '') + (p.dark ? ' dark-img' : ''));
+    if (p.size) media.style.aspectRatio = p.size[0] + ' / ' + p.size[1];
     if (p.video) {
       // Muted looping clip that always plays. If the browser blocks video autoplay
       // (e.g. phone battery saver), swap in the animated WebP version instead.
       const v = el('video'); if (p.poster) v.poster = p.poster;
+      if (p.size) { v.width = p.size[0]; v.height = p.size[1]; }
       ['muted', 'loop', 'autoplay', 'playsinline'].forEach(a => v.setAttribute(a, ''));
       v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.preload = 'auto';
       v.setAttribute('aria-label', p.figAlt || '');
@@ -669,7 +672,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       let swapped = false;
       const fallback = () => {
         if (swapped || !p.anim) return; swapped = true;
-        const im = el('img'); im.src = p.anim; im.alt = p.figAlt || ''; v.replaceWith(im);
+        const im = el('img'); im.src = p.anim; im.alt = p.figAlt || ''; if (p.size) { im.width = p.size[0]; im.height = p.size[1]; } v.replaceWith(im);
       };
       const tryPlay = () => { const r = v.play(); if (r && r.catch) r.catch(fallback); };
       v.addEventListener('loadeddata', tryPlay, { once: true });
