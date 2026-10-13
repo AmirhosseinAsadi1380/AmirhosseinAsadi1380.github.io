@@ -366,38 +366,67 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 }
 
 /* ---------- selected projects ---------- */
-.projs { display: flex; flex-direction: column; gap: 12px; }
+.projs { display: flex; flex-direction: column; gap: 10px; }
 .proj {
-  display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 18px;
+  display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; align-items: start;
   padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer; transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.proj:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: var(--shadow); }
-.proj-media { width: 100%; aspect-ratio: 16 / 11; border-radius: 8px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); align-self: start; }
+.proj:hover, .proj.open { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: var(--shadow); }
+.proj-media { width: 100%; aspect-ratio: 16 / 11; border-radius: 8px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
 .proj-media svg, .proj-media img { width: 100%; height: 100%; display: block; object-fit: cover; }
-.proj-body { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
-.proj-title { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--text); text-wrap: pretty; }
-.proj-tldr { font-size: 14.5px; color: var(--text-2); }
-.proj-points { display: flex; flex-direction: column; gap: 3px; margin: 2px 0 2px; }
+.proj-body { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.proj-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.proj-title { font-size: 17px; font-weight: 600; line-height: 1.3; min-width: 0; }
+.proj-toggle { all: unset; cursor: pointer; color: var(--text); text-wrap: pretty; }
+.proj-toggle:hover { color: var(--accent); }
+.proj-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.proj-icons { display: flex; gap: 6px; flex-shrink: 0; margin-top: -2px; }
+.ico {
+  position: relative; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text-2); cursor: pointer; padding: 0;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.ico:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+.ico svg { width: 15px; height: 15px; }
+.ico-accent { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.ico-tip {
+  position: absolute; bottom: calc(100% + 6px); right: 0; white-space: nowrap; pointer-events: none;
+  font-size: 12px; background: var(--text); color: var(--bg); padding: 3px 8px; border-radius: 6px;
+}
+.proj-short { font-size: 14.5px; color: var(--text-2); }
+.proj-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease; }
+.proj.open .proj-more { grid-template-rows: 1fr; }
+.proj-more-inner { overflow: hidden; min-height: 0; }
+.proj.open .proj-more-inner { overflow: visible; }
+.proj-points { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
 .proj-points li { font-size: 13.5px; color: var(--text-2); line-height: 1.5; padding-left: 14px; position: relative; }
 .proj-points li::before { content: ""; position: absolute; left: 1px; top: 0.62em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.7; }
-.proj-papers { display: flex; flex-direction: column; gap: 3px; border-top: 1px dashed var(--line); padding-top: 7px; margin-top: 3px; }
-.proj-paper { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 8px; font-size: 13px; color: var(--muted); line-height: 1.45; }
-.proj-paper .lbl { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-top: 1px; }
+.proj-papers { display: flex; flex-direction: column; gap: 3px; border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 10px; }
+.proj-paper { font-size: 13px; color: var(--muted); line-height: 1.45; }
 .proj-paper .pt { color: var(--text-2); }
 .proj-paper .me { color: var(--text); font-weight: 500; }
-.pill.accent { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.proj-more-btn {
+  all: unset; cursor: pointer; align-self: flex-start; display: inline-flex; align-items: center; gap: 4px;
+  font-size: 13px; color: var(--accent); margin-top: 2px;
+}
+.proj-more-btn svg { width: 12px; height: 12px; transition: transform 0.2s ease; }
+.proj.open .proj-more-btn svg { transform: rotate(180deg); }
+.proj-more-btn:hover span { text-decoration: underline; text-underline-offset: 3px; }
+.proj-more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.proj .pub-box { margin-top: 10px; cursor: auto; }
 .demo-box { padding: 12px; }
 .demo canvas { background: var(--surface); }
 @media (max-width: 760px) {
-  .proj { grid-template-columns: 112px minmax(0, 1fr); gap: 12px; padding: 12px; }
-  .proj-paper { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .proj { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 12px; }
+  .proj-head { flex-direction: column; gap: 6px; }
+  .proj-icons { margin-top: 0; }
 }
-@media (max-width: 480px) {
-  .proj { grid-template-columns: minmax(0, 1fr); }
-  .proj-media { max-width: 200px; }
+@media (max-width: 420px) {
+  .proj { grid-template-columns: 84px minmax(0, 1fr); }
+  .proj-title { font-size: 16px; }
 }
-@media (prefers-reduced-motion: reduce) { .proj { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .proj, .proj-more, .proj-more-btn svg, .ico { transition: none; } }
 </style>
 </head>
 <body>
@@ -560,77 +589,72 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   const root = document.documentElement;
 
   /* ---------- selected projects (edit here) ----------
-     status chips: { t: 'venue' | 'review' | 'prep', label: '...' }
+     short: one or two sentences shown on the card. more: bullet points shown when the card is opened.
+     links next to the title come from each paper: pdf, arxiv, doi, code, bib (any you have).
      thumb: name of a drawing below; to use your own image, set img: 'images/file.png' instead. */
   const ME = 'A. H. Asadi';
   const PROJECTS = [
     { thumb: 'reach', demo: true,
       title: 'Push recovery under delay for bipedal walking',
-      chips: [{ t: 'prep', label: 'Preprint' }],
-      tldr: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking, and how much each millisecond of delay costs.',
-      points: [
+      short: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking.',
+      more: [
         'Reduces the delayed hybrid model, with detection delay, delayed ankle and swing actuation and a leg-travel budget shared by consecutive steps, to one planar reachability problem per stride.',
         'Gives the walking region in closed form, with a sharp travel threshold and a latency law in which limited swing acceleration acts as extra delay.',
         'With a 30 ms swing delay, a well-timed step keeps 86% of the push tolerance of instantaneous foot placement, versus 32% for a step fixed at the start of the stride.'
       ],
-      papers: [{ title: 'Reactive Stepping Under Delay: Analytical Reachability for Continued Walking', authors: ['A. H. Asadi'], venue: 'Preprint, 2026' }] },
+      papers: [{ title: 'Reactive Stepping Under Delay: Analytical Reachability for Continued Walking', authors: ['A. H. Asadi'] }] },
 
     { thumb: 'funnel',
       title: 'Contraction–barrier recovery funnels for reactive stepping',
-      chips: [{ t: 'prep', label: 'In preparation' }],
-      tldr: 'One geometric certificate that tells a walking robot whether it can recover from a push without stepping, and if not, where to step.',
-      points: [
+      short: 'One geometric certificate that tells a walking robot whether it can recover from a push without stepping, and if not, where to step.',
+      more: [
         'Builds the safety barrier from the contraction metric of the walking orbit itself, propagating physical clearance backward through robust contraction and impact (saltation) sensitivity.',
         'Certifies flow invariance, impact preservation and no-step recovery, ranks candidate footholds by the post-impact margin they create, and builds nested N-step recovery sets.'
       ],
-      papers: [{ title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'In preparation' }] },
+      papers: [{ title: 'Contraction–Barrier Recovery Funnels for Safe Reactive Stepping in Bipedal Locomotion', authors: ['A. H. Asadi', 'N. Sharma'] }] },
 
     { thumb: 'safe',
       title: 'SafeShadow: balance certificates for hybrid exoskeletons',
-      chips: [{ t: 'review', label: 'Under review' }, { t: 'prep', label: 'IEEE RA-L' }],
-      tldr: 'Hybrid exoskeletons pair fast motors with slower, delayed muscle stimulation (FES). SafeShadow certifies balance while letting stimulation carry as much of the effort as possible.',
-      points: [
+      short: 'Certifying balance for exoskeletons that pair fast motors with slower, delayed muscle stimulation (FES), while letting stimulation do as much of the work as possible.',
+      more: [
         'A relative-degree-aware safety filter: motors enforce a high-order control barrier function at their own relative degree, while FES enters as a committed signal already fixed by past commands.',
         'Proves the balance set stays invariant for any FES command in a prescribed class, so stimulation can be allocated freely, with motors stepping in only when a scalar shadow gap turns negative.',
         'Learns the balance-feasible set as a neural barrier function conditioned on stance, actuator limits and stimulation state.'
       ],
-      papers: [{ title: 'SafeShadow: Actuation-Aware Neural Barrier Certificates for Exoskeleton Balance under Heterogeneous Actuation', authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'], venue: 'IEEE Robotics and Automation Letters (RA-L), under review' }] },
+      papers: [{ title: 'SafeShadow: Actuation-Aware Neural Barrier Certificates for Exoskeleton Balance under Heterogeneous Actuation', authors: ['A. H. Asadi', 'K. Lambeth', 'N. Sharma'] }] },
 
     { thumb: 'rank',
       title: 'Safety-aware reduced-order MPC',
-      chips: [{ t: 'review', label: 'Under review' }, { t: 'prep', label: 'IEEE L-CSS + ACC 2027' }],
-      tldr: 'Reduced models make MPC fast, but a dimension chosen for performance can be too small near a safety boundary. This controller grows its prediction model only when safety requires it.',
-      points: [
+      short: 'A model predictive controller that keeps its prediction model small for speed and grows it only when safety requires.',
+      more: [
         'Orders reduced coordinates with dynamic active subspaces and certifies each candidate order with finite-horizon error bounds that robustly enforce discrete-time control barrier function constraints.',
         'Selects the smallest order that keeps the safety-critical MPC feasible, with proofs of full-order horizon safety, recursive feasibility and closed-loop invariance.',
         'On a 160-state nonlinear system, the order rises near the safety boundary and computation drops compared with fixed high-order or full-order MPC.'
       ],
-      papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE Control Systems Letters (L-CSS) with the ACC 2027 option, under review' }] },
+      papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'] }] },
 
     { thumb: 'delay',
       title: 'Reduced-order backstepping for systems with input delay',
-      chips: [{ t: 'venue', label: 'CDC 2026' }],
-      tldr: 'Actuator delay is modeled as a transport PDE and reduced with Galerkin projection, giving a finite-dimensional model that a backstepping controller can stabilize with guarantees.',
-      points: [
+      short: 'Modeling actuator delay as a transport PDE and reducing it with Galerkin projection, so a backstepping controller can stabilize the system with guarantees.',
+      more: [
         'Derives a Galerkin reduced-order representation of the delay for controller synthesis.',
         'Designs a backstepping controller for nonlinear mechanical systems, proves closed-loop stability with Lyapunov analysis, and develops a command-filtered implementation.'
       ],
-      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE Conference on Decision and Control (CDC), 2026',
+      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE CDC 2026',
         bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' }] },
 
     { thumb: 'wheel',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
-      chips: [{ t: 'venue', label: 'Robotica 2024' }, { t: 'venue', label: 'ICRoM 2023' }],
-      tldr: 'Modeling and controlling a wheeled-legged robot whose wheels slip, from measuring slip with a camera to an adaptive controller tuned by reinforcement learning.',
-      points: [
+      short: 'Modeling and controlling a wheeled-legged robot whose wheels slip, from measuring slip with a camera to a controller tuned by reinforcement learning.',
+      more: [
         'Derived the dynamics with the Gibbs–Appell formulation including wheel slip, measured slip with vision-based pose estimation, and validated against Webots/MATLAB simulation, IMU data and hardware experiments. Ignoring slip caused 5–11.5% modeling error.',
         'Used DDPG to adapt the gains of a MIMO PID controller for the wheel-leg manipulator, with a neural network estimating longitudinal and side slip inside the model.'
       ],
       papers: [
-        { title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation', authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'], venue: 'Robotica, 2024',
+        { title: 'Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using Gibbs–Appell Formulation', authors: ['M. H. Korayem', 'N. Nikseresht', 'A. H. Asadi'], venue: 'Robotica 2024',
           doi: 'https://doi.org/10.1017/S0263574724001644',
           bib: '@article{korayem2024vision,\n  title   = {Vision-Based Dynamic Modeling of Wheeled-Legged Robot Considering Slippage Using {G}ibbs--{A}ppell Formulation},\n  author  = {Korayem, M. H. and Nikseresht, N. and Asadi, A. H.},\n  journal = {Robotica},\n  volume  = {42},\n  number  = {11},\n  pages   = {3784--3802},\n  year    = {2024},\n  doi     = {10.1017/S0263574724001644}\n}' },
-        { title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning', authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'], venue: 'ICRoM, IEEE, 2023',
+        { title: 'Adaptive MIMO PID Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning', authors: ['A. H. Asadi', 'N. Nikseresht', 'A. H. Korayem'], venue: 'ICRoM 2023',
           doi: 'https://doi.org/10.1109/ICRoM60803.2023.10412351',
           bib: '@inproceedings{asadi2023adaptive,\n  title     = {Adaptive {MIMO} {PID} Control of a Wheel-Leg Manipulator by Considering the Slippage Based on Deep Reinforcement Learning},\n  author    = {Asadi, A. H. and Nikseresht, N. and Korayem, A. H.},\n  booktitle = {11th RSI International Conference on Robotics and Mechatronics (ICRoM)},\n  pages     = {437--442},\n  year      = {2023},\n  publisher = {IEEE},\n  doi       = {10.1109/ICRoM60803.2023.10412351}\n}' }
       ] }
@@ -642,65 +666,110 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     if (parts.length <= 1) return parts.join('');
     return parts.slice(0, -1).join(', ') + (parts.length > 2 ? ',' : '') + ' and ' + parts[parts.length - 1];
   }
-  function copyText(text, el, btn) {
-    const label = btn.textContent;
-    const done = () => { btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = label; }, 1400); };
-    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected · press Ctrl+C'; };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  const ICONS = {
+    paper: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 12h6M9.5 15h6M9.5 18h4"/></svg>',
+    arxiv: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l14 16M19 4L5 20"/></svg>',
+    code: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>',
+    bib: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4c-2 0-3 1-3 3v2.5c0 1-.6 2-1.6 2.5 1 .5 1.6 1.5 1.6 2.5V17c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2.5c0 1 .6 2 1.6 2.5-1 .5-1.6 1.5-1.6 2.5V17c0 2-1 3-3 3"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',
+    chev: '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5 6 7.5 9 4.5"/></svg>'
+  };
+  const iconLink = (kind, href, label) => { const a = el('a', 'ico', ICONS[kind]); a.href = href; a.title = label; a.setAttribute('aria-label', label); return a; };
+  const iconBtn = (kind, label) => { const b = el('button', 'ico', ICONS[kind]); b.type = 'button'; b.title = label; b.setAttribute('aria-label', label); return b; };
+  function flash(btn, text) {
+    const t = el('span', 'ico-tip', text); btn.appendChild(t);
+    setTimeout(() => t.remove(), 1300);
   }
-  const ext = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 2h6v6M10 2 3 9"/></svg>';
-  function renderProject(p) {
+
+  function renderProject(p, idx) {
     const li = el('li', 'proj');
     const media = el('div', 'proj-media');
     media.innerHTML = p.img ? '<img src="' + p.img + '" alt="" loading="lazy">' : '<svg data-thumb="' + p.thumb + '" viewBox="0 0 160 110" aria-hidden="true"></svg>';
     const body = el('div', 'proj-body');
-    const chips = el('div', 'chips');
-    p.chips.forEach(c => chips.appendChild(el('span', 'chip ' + c.t, c.label)));
-    body.appendChild(chips);
-    body.appendChild(el('h3', 'proj-title', p.title));
-    body.appendChild(el('p', 'proj-tldr', p.tldr));
+
+    const head = el('div', 'proj-head');
+    const h = el('h3', 'proj-title');
+    const tog = el('button', 'proj-toggle', p.title); tog.type = 'button';
+    const moreId = 'proj-more-' + idx;
+    tog.setAttribute('aria-expanded', 'false'); tog.setAttribute('aria-controls', moreId);
+    h.appendChild(tog); head.appendChild(h);
+    const icons = el('div', 'proj-icons');
+    head.appendChild(icons);
+    body.appendChild(head);
+    body.appendChild(el('p', 'proj-short', p.short));
+
+    const more = el('div', 'proj-more'); more.id = moreId;
+    const inner = el('div', 'proj-more-inner');
     const ul = el('ul', 'proj-points');
-    p.points.forEach(t => ul.appendChild(el('li', null, t)));
-    body.appendChild(ul);
+    p.more.forEach(t => ul.appendChild(el('li', null, t)));
+    inner.appendChild(ul);
     const papers = el('div', 'proj-papers');
-    const boxes = [], toggles = [];
-    const actions = el('div', 'pub-actions');
-    const addToggle = (label, box, cls) => {
-      const b = el('button', 'pill' + (cls ? ' ' + cls : ''), label); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
-      b.addEventListener('click', () => {
-        const open = box.hidden;
-        boxes.forEach(x => { x.hidden = true; });
-        toggles.forEach(x => x.setAttribute('aria-expanded', 'false'));
-        box.hidden = !open; b.setAttribute('aria-expanded', String(open));
-      });
-      actions.appendChild(b); boxes.push(box); toggles.push(b);
-    };
-    if (p.demo) {
-      const box = el('div', 'pub-box demo-box'); box.hidden = true;
-      const fig = document.getElementById('demo-fig'); fig.hidden = false; box.appendChild(fig);
-      addToggle('▶ Interactive demo', box, 'accent');
-    }
-    p.papers.forEach((pp, i) => {
-      const row = el('p', 'proj-paper', '<span class="lbl">' + (p.papers.length > 1 ? 'Paper ' + (i + 1) : 'Paper') + '</span><span><span class="pt">' + pp.title + '</span>. ' + authorLine(pp.authors) + ' · <i>' + pp.venue + '</i></span>');
-      papers.appendChild(row);
-      const tag = p.papers.length > 1 ? ' ' + (i + 1) : '';
-      if (pp.bib) {
-        const box = el('div', 'pub-box'); box.hidden = true;
-        const pre = el('pre'); pre.textContent = pp.bib; box.appendChild(pre);
-        const r = el('div', 'copy-row'); const cb = el('button', 'pill', 'Copy'); cb.type = 'button';
-        cb.addEventListener('click', () => copyText(pp.bib, pre, cb)); r.appendChild(cb); box.appendChild(r);
-        addToggle('BibTeX' + tag, box);
-      }
-      if (pp.doi) { const a = el('a', 'pill', 'DOI' + tag + ' ' + ext); a.href = pp.doi; actions.appendChild(a); }
+    p.papers.forEach(pp => {
+      papers.appendChild(el('p', 'proj-paper', '<span class="pt">' + pp.title + '</span>. ' + authorLine(pp.authors) + (pp.venue ? ' · <i>' + pp.venue + '</i>' : '')));
     });
-    body.appendChild(papers);
-    if (actions.children.length) body.appendChild(actions);
-    boxes.forEach(x => body.appendChild(x));
+    inner.appendChild(papers);
+
+    let demoBox = null;
+    if (p.demo) {
+      demoBox = el('div', 'pub-box demo-box'); demoBox.hidden = true;
+      const fig = document.getElementById('demo-fig'); fig.hidden = false; demoBox.appendChild(fig);
+      inner.appendChild(demoBox);
+    }
+    const bibBox = el('div', 'pub-box'); bibBox.hidden = true;
+    const bibPre = el('pre'); bibBox.appendChild(bibPre); inner.appendChild(bibBox);
+    more.appendChild(inner);
+    body.appendChild(more);
+
+    const moreBtn = el('button', 'proj-more-btn', '<span>Read more</span>' + ICONS.chev); moreBtn.type = 'button';
+    moreBtn.setAttribute('aria-controls', moreId);
+    body.appendChild(moreBtn);
+
+    function setOpen(open) {
+      li.classList.toggle('open', open);
+      tog.setAttribute('aria-expanded', String(open));
+      moreBtn.setAttribute('aria-expanded', String(open));
+      moreBtn.querySelector('span').textContent = open ? 'Show less' : 'Read more';
+    }
+    const toggleCard = () => setOpen(!li.classList.contains('open'));
+    tog.addEventListener('click', toggleCard);
+    moreBtn.addEventListener('click', toggleCard);
+    li.addEventListener('click', e => {
+      if (e.target.closest('a, button, input, label, canvas, pre, .demo-box')) return;
+      if (getSelection && String(getSelection())) return;
+      toggleCard();
+    });
+
+    // icons next to the title
+    if (p.demo) {
+      const b = iconBtn('play', 'Interactive demo'); b.classList.add('ico-accent');
+      b.addEventListener('click', () => { setOpen(true); demoBox.hidden = false; });
+      icons.appendChild(b);
+    }
+    const multi = p.papers.length > 1;
+    p.papers.forEach(pp => {
+      const tag = multi && pp.venue ? ' (' + pp.venue + ')' : '';
+      if (pp.pdf) icons.appendChild(iconLink('paper', pp.pdf, 'Paper' + tag));
+      else if (pp.doi) icons.appendChild(iconLink('paper', pp.doi, 'Paper' + tag));
+      if (pp.arxiv) icons.appendChild(iconLink('arxiv', pp.arxiv, 'arXiv' + tag));
+      if (pp.code) icons.appendChild(iconLink('code', pp.code, 'Code' + tag));
+    });
+    const bibs = p.papers.filter(pp => pp.bib).map(pp => pp.bib);
+    if (bibs.length) {
+      const b = iconBtn('bib', 'Copy BibTeX');
+      const text = bibs.join('\n\n');
+      b.addEventListener('click', () => {
+        const fallback = () => { bibPre.textContent = text; bibBox.hidden = false; setOpen(true); const r = document.createRange(); r.selectNodeContents(bibPre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => flash(b, 'BibTeX copied'), fallback); else fallback();
+      });
+      icons.appendChild(b);
+    }
+    if (!icons.children.length) icons.remove();
+
     li.appendChild(media); li.appendChild(body);
     return li;
   }
   const projList = document.getElementById('projs');
-  PROJECTS.forEach(p => projList.appendChild(renderProject(p)));
+  PROJECTS.forEach((p, i) => projList.appendChild(renderProject(p, i)));
 
   /* ---------- publication drawings ---------- */
   const NS = 'http://www.w3.org/2000/svg';
