@@ -215,19 +215,6 @@ section { scroll-margin-top: 84px; }
 
 /* ---------- projects ---------- */
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-.demo { display: flex; flex-direction: column; gap: 14px; margin: 0; }
-.demo-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.demo-head h3 { font-size: 18px; font-weight: 600; }
-.demo-head .eyebrow { margin: 0; font-size: 11.5px; }
-.demo canvas { width: 100%; height: 250px; display: block; cursor: pointer; touch-action: manipulation; background: var(--bg-2); border-radius: 10px; }
-.demo-bar { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
-.demo-btns { display: flex; gap: 6px; flex-wrap: wrap; }
-.delay { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-2); }
-.delay input { width: 130px; accent-color: var(--accent); }
-.delay output { min-width: 4.5em; font-family: var(--f-mono); font-size: 13px; color: var(--text); font-variant-numeric: tabular-nums; }
-.readout { font-family: var(--f-mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; display: flex; gap: 6px 18px; flex-wrap: wrap; }
-.readout b { color: var(--text); font-weight: 500; }
-.demo figcaption { font-size: 14.5px; color: var(--text-2); max-width: 75ch; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
 .project { display: flex; flex-direction: column; gap: 8px; transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
 .project:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); }
@@ -288,7 +275,6 @@ footer .wrap {
   .hero h1 { font-size: 36px; }
   .news li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .sec-head h2 { font-size: 26px; }
-  .demo canvas { height: 220px; }
   .card { padding: 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -326,10 +312,6 @@ main { padding-block: 36px 8px; gap: 48px; }
 .pill { font-size: 12px; padding: 5px 11px; }
 .pub-box { font-size: 13.5px; padding: 10px 14px; }
 .card { padding: 16px 18px; border-radius: 12px; }
-.demo { gap: 10px; }
-.demo-head h3 { font-size: 16px; }
-.demo canvas { height: 190px; }
-.demo figcaption { font-size: 13.5px; }
 .projects { gap: 12px; margin-top: 12px; }
 .project { gap: 5px; }
 .project h3 { font-size: 15.5px; }
@@ -362,21 +344,19 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   .hero h1 { font-size: 32px; }
   .news li { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .pub { grid-template-columns: 84px minmax(0, 1fr); }
-  .demo canvas { height: 170px; }
 }
 
 /* ---------- selected projects ---------- */
-.projs { display: flex; flex-direction: column; gap: 10px; }
+.projs { display: flex; flex-direction: column; gap: 26px; }
 .proj {
-  display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 20px; align-items: start;
-  padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
-  cursor: pointer; transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 22px; align-items: start;
+  padding: 0; border: 0; background: none; cursor: pointer;
 }
-.proj:hover, .proj.open { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: var(--shadow); }
-.proj-media { width: 100%; aspect-ratio: 16 / 11; border-radius: 8px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
+.proj:hover .proj-toggle { color: var(--accent); }
+.proj-media { width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); }
 .proj-media svg, .proj-media img, .proj-media video { width: 100%; height: 100%; display: block; object-fit: cover; }
 .proj-media.photo { background: #ffffff; }
-.proj-media.photo.dark-img { background: #1b2433; }
+.proj-media.photo.dark-img { background: #1b2433; border-color: transparent; }
 .proj-media.photo.dark-img img { object-fit: cover; padding: 0; }
 .proj-fig.dark-img { background: #1b2433; padding: 0; overflow: hidden; }
 .proj-fig.dark-img img, .proj-fig.dark-img video { max-width: 480px; margin: 0 auto; }
@@ -424,10 +404,8 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 .proj-more-btn:hover span { text-decoration: underline; text-underline-offset: 3px; }
 .proj-more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 .proj .pub-box { margin-top: 10px; cursor: auto; }
-.demo-box { padding: 12px; }
-.demo canvas { background: var(--surface); }
 @media (max-width: 760px) {
-  .proj { grid-template-columns: 150px minmax(0, 1fr); gap: 14px; padding: 12px; }
+  .proj { grid-template-columns: 150px minmax(0, 1fr); gap: 14px; }
   .proj-head { flex-direction: column; gap: 6px; }
   .proj-icons { margin-top: 0; }
 }
@@ -513,27 +491,6 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   <section id="projects" aria-labelledby="proj-h">
     <div class="sec-head"><h2 id="proj-h">Selected Projects</h2></div>
     <ol class="projs" id="projs"></ol>
-    <figure class="demo" id="demo-fig" hidden>
-      <canvas id="walker" role="img" aria-label="Interactive balance-recovery simulation. Push the walker with the buttons or by clicking; it takes a recovery step to its capture point after the chosen delay."></canvas>
-      <div class="demo-bar">
-        <div class="demo-btns">
-          <button class="pill" type="button" data-push="-1">← Push</button>
-          <button class="pill" type="button" data-push="1">Push →</button>
-          <button class="pill" type="button" id="reset">Reset</button>
-        </div>
-        <label class="delay" for="delay">Step delay τ
-          <input type="range" id="delay" min="0" max="300" step="25" value="100">
-          <output id="delay-out" for="delay">100 ms</output>
-        </label>
-      </div>
-      <div class="readout">
-        <span>ξ − p <b id="r-err">0.00 m</b></span>
-        <span>last step <b id="r-step">—</b></span>
-        <span>steps <b id="r-n">0</b></span>
-        <span>phase <b id="r-phase">standing</b></span>
-      </div>
-      <figcaption>Push recovery on a linear inverted pendulum. A push moves the capture point ξ; while it stays over the foot, ankle torque is enough. Once ξ leaves the foot, the walker has to step, and the longer the delay τ before it can step, the farther it has to reach. This textbook capture-point model is here for intuition; the paper certifies recovery for a richer delayed model.</figcaption>
-    </figure>
   </section>
 
   <!-- ===================== CV ===================== -->
@@ -607,9 +564,8 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   const ME = 'A. H. Asadi';
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PROJECTS = [
-    { thumb: 'reach', demo: true, dark: true,
+    { thumb: 'reach', dark: true,
       video: 'images/reactive-stepping-loop.mp4', poster: 'images/reactive-stepping-poster.jpg',
-      figureVideo: 'images/reactive-stepping.mp4',
       figAlt: 'Simulation of a bipedal robot recovering from pushes while walking, with a plot of how deep the state stays inside the safe set over time.',
       title: 'Push recovery under delay for bipedal walking',
       short: 'A pushed biped detects the push late and its legs respond late. I derive in closed form which recovery steps still keep it walking.',
@@ -743,12 +699,6 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     });
     inner.appendChild(papers);
 
-    let demoBox = null;
-    if (p.demo) {
-      demoBox = el('div', 'pub-box demo-box'); demoBox.hidden = true;
-      const fig = document.getElementById('demo-fig'); fig.hidden = false; demoBox.appendChild(fig);
-      inner.appendChild(demoBox);
-    }
     const bibBox = el('div', 'pub-box'); bibBox.hidden = true;
     const bibPre = el('pre'); bibBox.appendChild(bibPre); inner.appendChild(bibBox);
     more.appendChild(inner);
@@ -775,17 +725,12 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
     tog.addEventListener('click', toggleCard);
     moreBtn.addEventListener('click', toggleCard);
     li.addEventListener('click', e => {
-      if (e.target.closest('a, button, input, label, canvas, pre, .demo-box')) return;
+      if (e.target.closest('a, button, input, label, pre, video[controls]')) return;
       if (getSelection && String(getSelection())) return;
       toggleCard();
     });
 
     // icons next to the title
-    if (p.demo) {
-      const b = iconBtn('play', 'Interactive demo'); b.classList.add('ico-accent');
-      b.addEventListener('click', () => { setOpen(true); demoBox.hidden = false; });
-      icons.appendChild(b);
-    }
     const multi = p.papers.length > 1;
     p.papers.forEach(pp => {
       const tag = multi && pp.venue ? ' (' + pp.venue + ')' : '';
@@ -912,160 +857,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
   window.addEventListener('scroll', () => { spy(); updateProgress(); }, { passive: true });
   window.addEventListener('resize', () => { spy(); updateProgress(); });
 
-  /* ---------- push-recovery demo: linear inverted pendulum with capture-point stepping ---------- */
-  const G = 9.81, Z0 = 0.9, OM = Math.sqrt(G / Z0), FOOT = 0.09, LMAX = 0.75, TSWING = 0.24, DT = 0.005, PUSH = 0.6;
-  const canvas = document.getElementById('walker'), ctx = canvas.getContext('2d');
-  const delayIn = document.getElementById('delay'), delayOut = document.getElementById('delay-out');
-  const rErr = document.getElementById('r-err'), rStep = document.getElementById('r-step'), rN = document.getElementById('r-n'), rPhase = document.getElementById('r-phase');
-  let tau = 0.1, st, autoPushed = false;
-  delayIn.addEventListener('input', () => { tau = delayIn.value / 1000; delayOut.textContent = delayIn.value + ' ms'; });
-
-  function reset() {
-    st = { x: 0, xd: 0, p: 0, feet: [0, -0.03], stance: 0, phase: 'standing', t: 0, swingFrom: 0, steps: 0, lastStep: null,
-           settled: 0, join: null, fallen: 0, camX: 0, pushFx: null };
-  }
-  reset();
-  const xi = () => st.x + st.xd / OM;
-  const swingFoot = () => 1 - st.stance;
-  function predictedTarget() {
-    const pf = st.feet[st.stance];
-    const remaining = st.phase === 'delay' ? (tau - st.t) + TSWING : st.phase === 'swing' ? TSWING - st.t : 0;
-    const xiTd = st.p + (xi() - st.p) * Math.exp(OM * Math.max(0, remaining));
-    return pf + Math.max(-LMAX, Math.min(LMAX, xiTd - pf));
-  }
-  function push(dir) {
-    if (st.fallen) return;
-    st.xd += PUSH * dir;
-    st.pushFx = { dir, age: 0 };
-    if (st.join) { st.feet[swingFoot()] = st.join.pos; st.join = null; }
-  }
-  function step() {
-    if (st.fallen) { st.fallen -= DT; if (st.fallen <= 0) reset(); return; }
-    const pf = st.feet[st.stance], c = xi();
-    if (st.phase === 'standing' && Math.abs(c - pf) > FOOT) { st.phase = 'delay'; st.t = 0; }
-    st.p = Math.max(pf - FOOT, Math.min(pf + FOOT, c + 1.0 * (c - pf)));
-    if (st.phase === 'delay' && st.t >= tau) { st.phase = 'swing'; st.t = 0; st.swingFrom = st.feet[swingFoot()]; }
-    if (st.phase === 'swing' && st.t >= TSWING) {
-      const d = Math.max(-LMAX, Math.min(LMAX, c - pf)), sw = swingFoot();
-      st.feet[sw] = pf + d; st.stance = sw;
-      st.steps += 1; st.lastStep = Math.abs(d);
-      st.phase = 'standing'; st.t = 0;
-      if (Math.abs(c - st.feet[st.stance]) > FOOT) st.phase = 'delay';
-    }
-    const xdd = OM * OM * (st.x - st.p);
-    st.x += st.xd * DT; st.xd += xdd * DT; st.t += DT;
-    if (st.pushFx) { st.pushFx.age += DT; if (st.pushFx.age > 0.5) st.pushFx = null; }
-    if (st.phase === 'standing' && Math.abs(xi() - st.feet[st.stance]) < 0.01 && Math.abs(st.xd) < 0.03) st.settled += DT; else st.settled = 0;
-    const sw = swingFoot(), gap = st.feet[st.stance] - 0.03 * Math.sign(st.feet[st.stance] - st.feet[sw] || 1);
-    if (!st.join && st.settled > 0.5 && Math.abs(st.feet[sw] - st.feet[st.stance]) > 0.06) st.join = { from: st.feet[sw], to: gap, t: 0, pos: st.feet[sw] };
-    if (st.join) { st.join.t += DT; const s = Math.min(1, st.join.t / 0.3); st.join.pos = st.join.from + (st.join.to - st.join.from) * s; if (s >= 1) { st.feet[sw] = st.join.to; st.join = null; } }
-    if (Math.abs(st.x - st.feet[st.stance]) > 0.6) { st.fallen = 1.2; st.phase = 'fell'; }
-  }
-
-  const css = n => getComputedStyle(root).getPropertyValue(n).trim();
-  function draw() {
-    const dpr = window.devicePixelRatio || 1, W = canvas.clientWidth, H = canvas.clientHeight;
-    if (!W || !H) return;
-    if (canvas.width !== Math.round(W * dpr) || canvas.height !== Math.round(H * dpr)) { canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); }
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, W, H);
-    const ink = css('--text'), muted = css('--muted'), rule = css('--line'), accent = css('--accent'), soft = css('--accent-soft'), signal = css('--signal'), panel = css('--surface');
-    ctx.font = '11px ' + css('--f-mono');
-    const groundY = H - 40;
-    const scale = Math.min(W / 3.0, (groundY - 34) / (Z0 + 0.32));
-    st.camX += ((st.x + st.feet[st.stance]) / 2 - st.camX) * 0.06;
-    const X = wx => W / 2 + (wx - st.camX) * scale;
-    const Y = wz => groundY - wz * scale;
-
-    ctx.strokeStyle = rule; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(0, groundY + 0.5); ctx.lineTo(W, groundY + 0.5); ctx.stroke();
-    ctx.fillStyle = muted; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
-    const left = st.camX - W / 2 / scale, right = st.camX + W / 2 / scale;
-    for (let m = Math.ceil(left * 2) / 2; m <= right; m += 0.5) {
-      const tx = Math.round(X(m)) + 0.5;
-      ctx.beginPath(); ctx.moveTo(tx, groundY); ctx.lineTo(tx, groundY + (Number.isInteger(m) ? 6 : 3)); ctx.stroke();
-      if (Number.isInteger(m)) ctx.fillText(m + ' m', tx, groundY + 9);
-    }
-
-    const pf = st.feet[st.stance];
-    ctx.fillStyle = soft; ctx.fillRect(X(pf - FOOT), groundY - 5, 2 * FOOT * scale, 5);
-    const c = xi(), outside = Math.abs(c - pf) > FOOT;
-    if (st.phase === 'delay' || st.phase === 'swing') {
-      const tgt = predictedTarget();
-      ctx.strokeStyle = muted; ctx.setLineDash([3, 3]);
-      ctx.strokeRect(X(tgt - FOOT) + 0.5, groundY - 5.5, 2 * FOOT * scale, 5);
-      ctx.setLineDash([]);
-    }
-    const cx = Math.max(4, Math.min(W - 4, X(c)));
-    ctx.fillStyle = outside ? signal : accent;
-    ctx.beginPath(); ctx.moveTo(cx, groundY - 13); ctx.lineTo(cx + 5, groundY - 8); ctx.lineTo(cx, groundY - 3); ctx.lineTo(cx - 5, groundY - 8); ctx.closePath(); ctx.fill();
-    ctx.textBaseline = 'bottom'; ctx.fillText('ξ', cx, groundY - 15);
-
-    const sw = swingFoot();
-    let swPos = st.feet[sw], swLift = 0;
-    if (st.phase === 'swing') {
-      const s = Math.min(1, st.t / TSWING), e = s * s * (3 - 2 * s);
-      swPos = st.swingFrom + (predictedTarget() - st.swingFrom) * e; swLift = 0.09 * Math.sin(Math.PI * s);
-    } else if (st.join) {
-      const s = Math.min(1, st.join.t / 0.3);
-      swPos = st.join.pos; swLift = 0.05 * Math.sin(Math.PI * s);
-    }
-    const fallTilt = st.fallen ? (1.2 - st.fallen) * 0.9 * Math.sign(st.x - pf || 1) : 0;
-    const hipX = X(st.x) + Math.sin(fallTilt) * Z0 * scale * 0.4, hipY = Y(Z0) + (1 - Math.cos(fallTilt)) * Z0 * scale * 0.4;
-    const footY = groundY - 3;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = muted; ctx.lineWidth = 4;
-    ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(X(swPos), footY - swLift * scale); ctx.stroke();
-    ctx.fillStyle = muted; ctx.fillRect(X(swPos) - 7, footY - swLift * scale - 2, 14, 4);
-    ctx.strokeStyle = ink; ctx.lineWidth = 4;
-    ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(X(pf), footY); ctx.stroke();
-    ctx.fillStyle = ink; ctx.fillRect(X(pf) - 8, footY - 2, 16, 4);
-    const tLen = 0.42 * scale, hx = hipX + Math.sin(fallTilt) * tLen, hy = hipY - Math.cos(fallTilt) * tLen;
-    ctx.strokeStyle = accent; ctx.lineWidth = 5;
-    ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(hx, hy); ctx.stroke();
-    ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(hx + Math.sin(fallTilt) * 11, hy - Math.cos(fallTilt) * 11, 9, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = panel; ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.arc(hipX, hipY, 5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
-
-    if (st.pushFx) {
-      const a = 1 - st.pushFx.age / 0.5, d = st.pushFx.dir, ay = hipY - tLen * 0.6;
-      const x0 = hipX - d * (34 + 18 * (1 - a)), x1 = hipX - d * 12;
-      ctx.globalAlpha = Math.max(0, a); ctx.strokeStyle = signal; ctx.fillStyle = signal; ctx.lineWidth = 2.5;
-      ctx.beginPath(); ctx.moveTo(x0, ay); ctx.lineTo(x1, ay); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(x1 + d * 6, ay); ctx.lineTo(x1, ay - 5); ctx.lineTo(x1, ay + 5); ctx.fill();
-      ctx.globalAlpha = 1;
-    }
-    ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.fillStyle = muted;
-    const msg = st.fallen ? 'fell over, resetting' : st.phase === 'delay' ? 'ξ left the foot, waiting τ before stepping' : st.phase === 'swing' ? 'stepping to the capture point' : 'standing';
-    ctx.fillText(msg, 10, 10);
-
-    rErr.textContent = (c - pf).toFixed(2) + ' m';
-    rStep.textContent = st.lastStep === null ? '—' : st.lastStep.toFixed(2) + ' m';
-    rN.textContent = st.steps;
-    rPhase.textContent = st.fallen ? 'fell' : st.phase;
-  }
-  document.querySelectorAll('[data-push]').forEach(b => b.addEventListener('click', () => push(+b.dataset.push)));
-  document.getElementById('reset').addEventListener('click', reset);
-  canvas.addEventListener('click', e => { const r = canvas.getBoundingClientRect(); push(e.clientX - r.left < r.width / 2 ? 1 : -1); });
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => {
-      if (es.some(e => e.isIntersecting) && !autoPushed) { autoPushed = true; io.disconnect(); setTimeout(() => { if (st.steps === 0 && !st.pushFx) push(1); }, 700); }
-    }, { threshold: 0.5 });
-    io.observe(canvas);
-  }
-  let last = null, acc = 0;
-  function frame(t) {
-    if (last === null) last = t;
-    const dt = Math.min(0.1, (t - last) / 1000); last = t;
-    acc += dt;
-    while (acc >= DT) { step(); acc -= DT; }
-    draw();
-    requestAnimationFrame(frame);
-  }
   spy(); updateProgress();
-  requestAnimationFrame(frame);
 })();
 </script>
 </body>
