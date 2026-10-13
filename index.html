@@ -560,7 +560,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
      links next to the title come from each paper: pdf, arxiv, doi, code, bib (any you have).
      thumb: name of a drawing below; to use your own image, set img: 'images/file.png' instead,
      or video: 'images/clip.mp4' (with poster: 'images/frame.jpg') for a looping clip.
-     figure / figureVideo: a larger image or video shown when the card is opened. */
+     Paper links appear as icons next to the title; opening a card shows only the 'more' points. */
   const ME = 'A. H. Asadi';
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PROJECTS = [
@@ -615,8 +615,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'IEEE CDC 2026',
         bib: '@inproceedings{asadi2026reduced,\n  title     = {Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via {G}alerkin Projection},\n  author    = {Asadi, Amirhossein and Sharma, Nitin},\n  booktitle = {IEEE Conference on Decision and Control (CDC)},\n  year      = {2026}\n}' }] },
 
-    { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg', figure: 'images/wheeled-legged.jpg',
-      figAlt: 'Control architecture: a DDPG agent tunes the gains of eight PID controllers; an MLP network estimates wheel slip inside the inverse kinematic model of the wheeled-legged robot.',
+    { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
       short: 'Modeling and controlling a wheeled-legged robot whose wheels slip, from measuring slip with a camera to a controller tuned by reinforcement learning.',
       more: [
@@ -681,23 +680,9 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 
     const more = el('div', 'proj-more'); more.id = moreId;
     const inner = el('div', 'proj-more-inner');
-    let figVideo = null;
-    if (p.figureVideo) {
-      const fig = el('figure', 'proj-fig' + (p.dark ? ' dark-img' : ''));
-      figVideo = el('video'); figVideo.muted = true; figVideo.loop = true; figVideo.playsInline = true; figVideo.setAttribute('playsinline', '');
-      figVideo.controls = true; figVideo.preload = 'none'; figVideo.dataset.src = p.figureVideo; figVideo.dataset.loaded = ''; figVideo.setAttribute('aria-label', p.figAlt || '');
-      fig.appendChild(figVideo); inner.appendChild(fig);
-    } else if (p.figure) {
-      const fig = el('figure', 'proj-fig' + (p.dark ? ' dark-img' : '')); const im = el('img'); im.src = p.figure; im.alt = p.figAlt || ''; im.loading = 'lazy'; fig.appendChild(im); inner.appendChild(fig);
-    }
     const ul = el('ul', 'proj-points');
     p.more.forEach(t => ul.appendChild(el('li', null, t)));
     inner.appendChild(ul);
-    const papers = el('div', 'proj-papers');
-    p.papers.forEach(pp => {
-      papers.appendChild(el('p', 'proj-paper', '<span class="pt">' + pp.title + '</span>. ' + authorLine(pp.authors) + (pp.venue ? ' · <i>' + pp.venue + '</i>' : '')));
-    });
-    inner.appendChild(papers);
 
     const bibBox = el('div', 'pub-box'); bibBox.hidden = true;
     const bibPre = el('pre'); bibBox.appendChild(bibPre); inner.appendChild(bibBox);
@@ -713,13 +698,6 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
       tog.setAttribute('aria-expanded', String(open));
       moreBtn.setAttribute('aria-expanded', String(open));
       moreBtn.querySelector('span').textContent = open ? 'Show less' : 'Read more';
-      if (figVideo) {
-        if (open) {
-          if (!figVideo.dataset.loaded) { const u = figVideo.dataset.src; figVideo.innerHTML = '<source src="' + u.replace(/\.mp4$/, '.webm') + '" type="video/webm"><source src="' + u + '" type="video/mp4">'; figVideo.dataset.loaded = '1'; figVideo.load(); }
-          if (!reduceMotion) figVideo.play().catch(() => {});
-        }
-        else figVideo.pause();
-      }
     }
     const toggleCard = () => setOpen(!li.classList.contains('open'));
     tog.addEventListener('click', toggleCard);
