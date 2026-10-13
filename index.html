@@ -349,7 +349,7 @@ footer .wrap { padding-block: 16px calc(16px + env(safe-area-inset-bottom, 0px))
 /* ---------- selected projects ---------- */
 .projs { display: flex; flex-direction: column; gap: 26px; }
 .proj {
-  display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 22px; align-items: start;
+  display: grid; grid-template-columns: 192px minmax(0, 1fr); gap: 22px; align-items: start;
   padding: 0; border: 0; background: none; cursor: pointer;
 }
 .proj:hover .proj-toggle { color: var(--accent); }
@@ -400,11 +400,11 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
 .proj-more-btn:hover span { text-decoration: underline; text-underline-offset: 3px; }
 .proj-more-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 @media (max-width: 760px) {
-  .proj { grid-template-columns: 176px minmax(0, 1fr); gap: 14px; }
+  .proj { grid-template-columns: 141px minmax(0, 1fr); gap: 14px; }
 }
 @media (max-width: 420px) {
   .proj { grid-template-columns: minmax(0, 1fr); }
-  .proj-media { max-width: 80%; }
+  .proj-media { max-width: 64%; }
   .proj-title { font-size: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .proj, .proj-more-btn svg, .tag { transition: none; } .proj.open .proj-rest { animation: none; } }
