@@ -605,7 +605,7 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
       title: 'Reduced-order backstepping for systems with input delay',
       short: 'Modeling actuator delay as a transport PDE and reducing it with Galerkin projection, so a backstepping controller can stabilize the system with guarantees.',
       rest: 'The design applies to nonlinear mechanical systems: closed-loop stability is proved with Lyapunov analysis, and the paper also develops a command-filtered implementation.',
-      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'CDC 2026', arxiv: 'https://arxiv.org/abs/2610.17272' }] },
+      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'CDC 2026', arxiv: 'https://arxiv.org/abs/2610.17272', arxivAsVenue: true }] },
 
     { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
@@ -704,7 +704,8 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
     let hasArxiv = false, hasCode = false;
     p.papers.forEach(pp => {
       const of = multi && pp.venue ? ' (' + pp.venue + ')' : '';
-      if (pp.arxiv) { hasArxiv = true; tags.appendChild(tagLink('arxiv', pp.arxiv, 'arXiv' + of, pp.title)); }
+      if (pp.arxiv && pp.arxivAsVenue) { hasArxiv = true; tags.appendChild(tagLink('paper', pp.arxiv, pp.venue, pp.title)); }
+      else if (pp.arxiv) { hasArxiv = true; tags.appendChild(tagLink('arxiv', pp.arxiv, 'arXiv' + of, pp.title)); }
       else if (pp.pdf || pp.doi) tags.appendChild(tagLink('paper', pp.pdf || pp.doi, pp.venue || 'Paper', pp.title));
       else if (pp.venue) { const t = el('span', 'tag label', ICONS.paper + '<span>' + pp.venue + '</span>'); t.title = pp.title + ' (link coming soon)'; tags.appendChild(t); }
     });
