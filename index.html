@@ -591,7 +591,7 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
       short: 'A model predictive controller that keeps its prediction model small for speed and grows it only when safety requires.',
       rest: 'Reduced coordinates are ordered with dynamic active subspaces, and each candidate order is certified with finite-horizon error bounds that robustly enforce discrete-time control barrier function constraints. The controller picks the smallest order that keeps the safety-critical MPC feasible, with proofs of full-order horizon safety, recursive feasibility and closed-loop invariance. On a 160-state nonlinear system, the order rises near the safety boundary, and computation drops compared with fixed high-order or full-order MPC.',
       soon: ['arxiv', 'code'],
-      papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'] }] },
+      papers: [{ title: 'Safety-Aware Dimension Selection for Reduced-Order Model Predictive Control', authors: ['A. H. Asadi', 'N. Sharma'], arxiv: 'https://arxiv.org/abs/2610.17274' }] },
 
     { dark: true,
       video: 'images/perturbation-platform.mp4', anim: 'images/perturbation-platform.webp', poster: 'images/perturbation-platform-poster.jpg', size: [480, 466],
@@ -605,7 +605,7 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); background: var
       title: 'Reduced-order backstepping for systems with input delay',
       short: 'Modeling actuator delay as a transport PDE and reducing it with Galerkin projection, so a backstepping controller can stabilize the system with guarantees.',
       rest: 'The design applies to nonlinear mechanical systems: closed-loop stability is proved with Lyapunov analysis, and the paper also develops a command-filtered implementation.',
-      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'CDC 2026' }] },
+      papers: [{ title: 'Reduced-Order Backstepping Control of Nonlinear Mechanical Systems with Input Delay via Galerkin Projection', authors: ['A. H. Asadi', 'N. Sharma'], venue: 'CDC 2026', arxiv: 'https://arxiv.org/abs/2610.17272' }] },
 
     { thumb: 'wheel', img: 'images/wheeled-legged-model.jpg',
       title: 'Wheeled-legged robot: slip-aware modeling and RL control',
